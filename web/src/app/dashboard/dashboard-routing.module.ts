@@ -3,17 +3,41 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { HomeComponent } from './home/home.component';
 
 const dashboardRoutes: Routes = [
 
   {
-    path: 'home', component: DashboardComponent,
-    canActivate: [AuthGuard],
+    path: '',
+    component: DashboardComponent,
     data: {
-      title: 'home',
-      rolesPermitidos: []
+      title: 'Inicio'
     },
-    loadChildren: './usuarios/usuarios.module#UsuariosdModule',
+    children: [
+      {
+        path: 'home',
+        data: {
+          title: ''
+        },
+        component: HomeComponent,
+      },
+      {
+        path: 'usuarios',
+        data: {
+          title: ''
+        },
+        loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosdModule ),
+      },
+      {
+        path: 'colegiados',
+        data: {
+          title: ''
+        },
+        loadChildren: () => import('./colegiados/colegiados.module').then(m => m.ColegiadosdModule ),
+      },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    ]
   }
 ];
 

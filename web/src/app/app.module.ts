@@ -1,18 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // rutas
 import { AppRoutingModule } from './app-routing.module';
 
 // modulos
-import { AuthModule } from './auth/auth.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 
 // componentes
 import { AppComponent } from './app.component';
+import { TokenInterceptor } from './dashboard/token.interceptor';
 
 
 @NgModule({
@@ -25,11 +24,11 @@ import { AppComponent } from './app.component';
     CommonModule,
     HttpClientModule,
     AppRoutingModule,
-    AuthModule,
-    DashboardModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

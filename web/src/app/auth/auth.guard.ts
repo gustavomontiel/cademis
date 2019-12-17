@@ -1,11 +1,11 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, CanActivateChild } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate  {
+export class AuthGuard implements CanActivate, CanActivateChild  {
 
   constructor(
     private authService: AuthService,
@@ -20,9 +20,13 @@ export class AuthGuard implements CanActivate  {
       return true;
     } else {
       console.log( 'Bloqueado por LoginGuard' );
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
+  }
+
+  canActivateChild() {
+    return this.canActivateChild();
   }
 
 }

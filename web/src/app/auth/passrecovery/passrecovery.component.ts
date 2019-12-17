@@ -41,7 +41,7 @@ export class PassrecoveryComponent implements OnInit {
       correcto => {
         this.cargando = false;
         console.log(correcto);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
       },
       error => {
         this.cargando = false;

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './auth.component';
+// import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PassrecoveryComponent } from './passrecovery/passrecovery.component';
@@ -8,7 +8,7 @@ import { PassrecoveryComponent } from './passrecovery/passrecovery.component';
 
 const authRoutes: Routes = [
   {
-    path: '', component: AuthComponent,
+    path: '',
     data: {
       title: ''
     },
@@ -24,7 +24,7 @@ const authRoutes: Routes = [
       { path: 'passrecovery', component: PassrecoveryComponent, data: {
         title: 'Recuperar contraseña'
       } },
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     ]
   }
 ];

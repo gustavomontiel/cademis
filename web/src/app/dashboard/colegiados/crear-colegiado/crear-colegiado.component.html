@@ -1,0 +1,218 @@
+<h4>Crear Colegiado</h4>
+<div class="col-12">
+  <div class="card card-primary mt-2 container">
+    <!-- form start -->
+    <form role="form" ngNativeValidate [formGroup]="forma" (ngSubmit)="crearColegiado()" action="" method="post">
+      <div class="card-body form-row">
+        <div class="row">
+          <div class="col-10">
+            <div class="row border-bottom">
+              <div class="form-group col-2">
+                <label for="numMatricula">Matricula</label>
+                <input formControlName="numMatricula" name="numMatricula" type="text"
+                  class="form-control form-control-sm" placeholder="Nro Matricula" required>
+              </div>
+
+              <div class="form-group col-3">
+                <label for="fechaMatricula">Fecha Matricula</label>
+                <input formControlName="fechaMatricula" name="fechaMatricula" type="date"
+                  class="form-control form-control-sm" required>
+              </div>
+
+              <div class="form-group col-1">
+                <label for="folio">Folio</label>
+                <input formControlName="folio" name="folio" type="text" class="form-control form-control-sm"
+                  placeholder="Folio" required>
+              </div>
+              <div class="form-group col-1">
+                <label for="libro">libro</label>
+                <input formControlName="libro" name="libro" type="text" class="form-control form-control-sm"
+                  placeholder="Libro" required>
+              </div>
+
+              <div class="form-group col-1">
+                <label for="legajo">legajo</label>
+                <input formControlName="legajo" name="legajo" type="text" class="form-control form-control-sm"
+                  placeholder="Legajo" required>
+              </div>
+
+              <div class="form-group col-4">
+                <label for="cisrcunscripcion">Cisrcunscripcion</label>
+                <input formControlName="cisrcunscripcion" name="cisrcunscripcion" type="text"
+                  class="form-control form-control-sm" placeholder="Cisrcunscripcion" required>
+              </div>
+            </div>
+            <div class="row border-bottom" formGroupName="persona">
+              <div class="form-group col-md-3">
+                <label for="nombre">Nombres</label>
+                <input formControlName="nombres" name="nombres" type="text" class="form-control form-control-sm"
+                  placeholder="Nombre completo" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="apellidos">Apellidos</label>
+                <input formControlName="apellidos" name="apellidos" type="text" class="form-control form-control-sm"
+                  placeholder="Nombre completo" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="tipoDoc">Tipo doc.</label>
+                <select class="form-control form-control-sm" formControlName="tipoDoc" name="tipoDoc">
+                  <option value="DNI">DNI</option>
+                  <option value="Cedula">Cedula</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="numDoc">Número</label>
+                <input formControlName="numDoc" name="numDoc" type="number" class="form-control form-control-sm"
+                  placeholder="Número" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="cuitCuil">CUIT/CUIL</label>
+                <input formControlName="cuitCuil" name="cuitCuil" type="number" class="form-control form-control-sm"
+                  placeholder="CUIT/CUIL" required>
+              </div>
+              <div class="form-group col-2">
+                <label for="fechaNacimiento">Fecha Nac.</label>
+                <input formControlName="fechaNacimiento" name="fechaNacimiento" type="date"
+                  class="form-control form-control-sm" style="font-size: 0.70em !important;" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="localidadNac">Localidad</label>
+                <input formControlName="localidadNac" name="localidadNac" type="text"
+                  class="form-control form-control-sm" placeholder="Localidad" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="provinciaNac">Provincia</label>
+                <input formControlName="provinciaNac" name="provinciaNac" type="text"
+                  class="form-control form-control-sm" placeholder="Provincia" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="paisNac">Pais</label>
+                <input formControlName="paisNac" name="paisNac" type="text" class="form-control form-control-sm"
+                  placeholder="Pais" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="nombre" class="col-12">Sexo</label>
+                <div class="form-check form-check-inline">
+                  <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="m">
+                  <label class="form-check-label" for="inlineRadio1">&nbsp;M</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="F">
+                  <label class="form-check-label" for="inlineRadio1">&nbsp;F</label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-2  border-bottom">
+            <div class="row bg-light" style="height: 150px;">
+              foto
+            </div>
+            <div class="row">
+              <div class="form-group mt-2">
+                <label for="email">Email</label>
+                <input formControlName="email" name="email" type="email" class="form-control form-control-sm"
+                  placeholder="email" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row border-bottom" formGroupName="domicilioLegal">
+              <div class="form-group col-md-1">
+                <label for="tipo">Dirección</label>
+                <input formControlName="tipo" name="tipo" type="text" class="form-control form-control-sm"
+                  placeholder="Tipo" required readonly>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="calle">Calle</label>
+                <input formControlName="calle" name="calle" type="text" class="form-control form-control-sm"
+                  placeholder="Calle" required>
+              </div>
+              <div class="form-group col-md-1">
+                <label for="numero">Número</label>
+                <input formControlName="numero" name="numero" type="text" class="form-control form-control-sm"
+                  placeholder="Número" required>
+              </div>
+              <div class="form-group col-md-1">
+                <label for="piso">Piso</label>
+                <input formControlName="piso" name="piso" type="text" class="form-control form-control-sm"
+                  placeholder="Piso" required>
+              </div>
+              <div class="form-group col-md-1">
+                <label for="departamento">Dpto</label>
+                <input formControlName="departamento" name="departamento" type="text" class="form-control form-control-sm"
+                  placeholder="Dpto" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="localidad">Localidad</label>
+                <input formControlName="localidad" name="localidad" type="text" class="form-control form-control-sm"
+                  placeholder="Localidad" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="provincia">Provincia</label>
+                <input formControlName="provincia" name="provincia" type="text" class="form-control form-control-sm"
+                  placeholder="Provincia" required>
+              </div>
+              <div class="form-group col-2">
+                <label for="fecha">Fecha</label>
+                <input formControlName="fecha" name="fecha" type="date"
+                  class="form-control form-control-sm" style="font-size: 0.70em !important;" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row border-bottom" formGroupName="domicilioReal">
+              <div class="form-group col-md-1">
+                <label for="tipo">Dirección</label>
+                <input formControlName="tipo" name="tipo" type="text" class="form-control form-control-sm"
+                  placeholder="Tipo" required readonly>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="calle">Calle</label>
+                <input formControlName="calle" name="calle" type="text" class="form-control form-control-sm"
+                  placeholder="Calle" required>
+              </div>
+              <div class="form-group col-md-1">
+                <label for="numero">Número</label>
+                <input formControlName="numero" name="numero" type="text" class="form-control form-control-sm"
+                  placeholder="Número" required>
+              </div>
+              <div class="form-group col-md-1">
+                <label for="piso">Piso</label>
+                <input formControlName="piso" name="piso" type="text" class="form-control form-control-sm"
+                  placeholder="Piso" required>
+              </div>
+              <div class="form-group col-md-1">
+                <label for="departamento">Dpto</label>
+                <input formControlName="departamento" name="departamento" type="text" class="form-control form-control-sm"
+                  placeholder="Dpto" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="localidad">Localidad</label>
+                <input formControlName="localidad" name="localidad" type="text" class="form-control form-control-sm"
+                  placeholder="Localidad" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="provincia">Provincia</label>
+                <input formControlName="provincia" name="provincia" type="text" class="form-control form-control-sm"
+                  placeholder="Provincia" required>
+              </div>
+              <div class="form-group col-2">
+                <label for="fecha">Fecha</label>
+                <input formControlName="fecha" name="fecha" type="date"
+                  class="form-control form-control-sm" style="font-size: 0.70em !important;" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer row justify-content-end">
+        <a routerLink="usuarios" type="button" class="btn btn-secondary mr-2">Cancelar</a>
+        <button [disabled]="forma.invalid" type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

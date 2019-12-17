@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         correcto => {
           console.log(correcto);
-          this.router.navigate(['/login']);
+          this.router.navigate(['/auth/login']);
         },
         error => {
 

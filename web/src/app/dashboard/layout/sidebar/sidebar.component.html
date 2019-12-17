@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a routerLink="/home" class="brand-link">
+    <a routerLink="/dashboard/home" class="brand-link">
       <img src="/assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">{{ nombreApp }}</span>
@@ -24,6 +24,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a routerLink="colegiados" class="nav-link" routerLinkActive="active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Colegiados</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a routerLink="usuarios" class="nav-link" routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>

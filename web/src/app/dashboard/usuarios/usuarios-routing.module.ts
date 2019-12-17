@@ -10,8 +10,8 @@ import { ProfileComponent } from './profile/profile.component';
 
 const usuariosRoutes: Routes = [
   {
-    path: 'usuarios',
-    component: UsuariosComponent,
+    path: '',
+    // component: UsuariosComponent,
     data: {
       title: 'Usuarios',
       rolesPermitidos: []
@@ -24,7 +24,8 @@ const usuariosRoutes: Routes = [
           title: 'Listado usuario',
           rolesPermitidos: []
         }
-      },{
+      },
+      {
         path: 'crear-usuario',
         component: CrearUsuarioComponent,
         data: {
@@ -48,6 +49,7 @@ const usuariosRoutes: Routes = [
           rolesPermitidos: []
         }
       },
+      { path: '', redirectTo: 'lista-usuarios'},
       { path: '**', redirectTo: 'lista-usuarios'}
 
     ]

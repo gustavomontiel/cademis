@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   navegar() {
 
     if ( this.authService.estaLogueado() === true) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard/home']);
     }
   }
 
