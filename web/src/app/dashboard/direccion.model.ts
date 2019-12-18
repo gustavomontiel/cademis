@@ -1,4 +1,4 @@
-export class Persona {
+export class Direccion {
 
   public tipo: string;
   public calle: string;

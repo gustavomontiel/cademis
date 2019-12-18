@@ -13,52 +13,55 @@
                   <div class="form-group col-2">
                     <label for="num_matricula">Matricula</label>
                     <input formControlName="num_matricula" name="num_matricula" type="text"
-                      class="form-control form-control-sm" placeholder="Nro Matricula" required>
+                      class="form-control form-control-sm" placeholder="Nro Matricula" required readonly>
+
                   </div>
 
                   <div class="form-group col-3">
                     <label for="fecha_matricula">Fecha Matricula</label>
                     <input formControlName="fecha_matricula" name="fecha_matricula" type="date"
-                      class="form-control form-control-sm" required>
+                      class="form-control form-control-sm" required readonly>
+                  </div>
+
+                  <div class="form-group col-1">
+                    <label for="libro">libro</label>
+                    <input formControlName="libro" name="libro" type="text" class="form-control form-control-sm"
+                      placeholder="Libro" required readonly>
                   </div>
 
                   <div class="form-group col-1">
                     <label for="folio">Folio</label>
                     <input formControlName="folio" name="folio" type="text" class="form-control form-control-sm"
-                      placeholder="Folio" required>
-                  </div>
-                  <div class="form-group col-1">
-                    <label for="libro">libro</label>
-                    <input formControlName="libro" name="libro" type="text" class="form-control form-control-sm"
-                      placeholder="Libro" required>
+                      placeholder="Folio" required readonly>
                   </div>
 
                   <div class="form-group col-1">
                     <label for="legajo">legajo</label>
                     <input formControlName="legajo" name="legajo" type="text" class="form-control form-control-sm"
-                      placeholder="Legajo" required>
+                      placeholder="Legajo" readonly>
                   </div>
 
                   <div class="form-group col-4">
                     <label for="circunscripcion">Circunscripcion</label>
                     <input formControlName="circunscripcion" name="circunscripcion" type="text"
-                      class="form-control form-control-sm" placeholder="Circunscripcion" required>
+                      class="form-control form-control-sm" placeholder="Circunscripcion" required readonly>
                   </div>
                 </div>
                 <div class="row border-bottom mt-2" formGroupName="persona">
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombres</label>
                     <input formControlName="nombres" name="nombres" type="text" class="form-control form-control-sm"
-                      placeholder="Nombre completo" required>
+                      placeholder="Nombre completo" required readonly>
+
                   </div>
                   <div class="form-group col-md-3">
                     <label for="apellidos">Apellidos</label>
                     <input formControlName="apellidos" name="apellidos" type="text" class="form-control form-control-sm"
-                      placeholder="Nombre completo" required>
+                      placeholder="Nombre completo" required readonly>
                   </div>
                   <div class="form-group col-md-2">
                     <label for="tipo_doc">Tipo doc.</label>
-                    <select class="form-control form-control-sm" formControlName="tipo_doc" name="tipo_doc">
+                    <select class="form-control form-control-sm" formControlName="tipo_doc" name="tipo_doc" readonly>
                       <option value="DNI">DNI</option>
                       <option value="Cedula">Cedula</option>
                       <option value="Otro">Otro</option>
@@ -67,41 +70,41 @@
                   <div class="form-group col-md-2">
                     <label for="numero_doc">Número</label>
                     <input formControlName="numero_doc" name="numero_doc" type="number" class="form-control form-control-sm"
-                      placeholder="Número" required>
+                      placeholder="Número" required readonly>
                   </div>
                   <div class="form-group col-md-2">
                     <label for="cuit_cuil">CUIT/CUIL</label>
                     <input formControlName="cuit_cuil" name="cuit_cuil" type="number" class="form-control form-control-sm"
-                      placeholder="CUIT/CUIL" required>
+                      placeholder="CUIT/CUIL" required readonly>
                   </div>
                   <div class="form-group col-3">
                     <label for="fecha_nac">Fecha Nac.</label>
                     <input formControlName="fecha_nac" name="fecha_nac" type="date"
-                      class="form-control form-control-sm" required>
+                      class="form-control form-control-sm" required readonly>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="localidadNac">localidad_nac</label>
                     <input formControlName="localidad_nac" name="localidad_nac" type="text"
-                      class="form-control form-control-sm" placeholder="Localidad" required>
+                      class="form-control form-control-sm" placeholder="Localidad" required readonly>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="provincia_nac">Provincia</label>
                     <input formControlName="provincia_nac" name="provincia_nac" type="text"
-                      class="form-control form-control-sm" placeholder="Provincia" required>
+                      class="form-control form-control-sm" placeholder="Provincia" required readonly>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="pais_nac">Pais</label>
                     <input formControlName="pais_nac" name="pais_nac" type="text" class="form-control form-control-sm"
-                      placeholder="Pais" required>
+                      placeholder="Pais" required readonly>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="nombre" class="col-1">Sexo</label>
                     <div class="form-check form-check-inline">
-                      <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="m">
+                      <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="m" readonly>
                       <label class="form-check-label" for="inlineRadio1">&nbsp;Masculino</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="F">
+                      <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="F" readonly>
                       <label class="form-check-label" for="inlineRadio1">&nbsp;Femenino</label>
                     </div>
                   </div>
@@ -110,20 +113,20 @@
                   <label for="nombre" class="col-2">Telefonos</label>
                   <div class="form-group col-md-2">
                     <input formControlName="telefono1" name="telefono1" type="text" class="form-control form-control-sm"
-                      placeholder="Telefono 1" required>
+                      placeholder="Telefono 1" required readonly>
                   </div>
                   <div class="form-group col-md-2">
                     <input formControlName="telefono2" name="telefono2" type="text" class="form-control form-control-sm"
-                      placeholder="Telefono 2" required>
+                      placeholder="Telefono 2" required readonly>
                   </div>
                   <div class="form-group col-md-2">
                     <input formControlName="telefono3" name="telefono3" type="text" class="form-control form-control-sm"
-                      placeholder="Telefono 3" required>
+                      placeholder="Telefono 3" required readonly>
                   </div>
                   <label for="email" class="form-group col-md-1">Email</label>
                   <div class="form-group col-md-3">
                     <input formControlName="email" name="email" type="email" class="form-control form-control-sm"
-                      placeholder="email" required>
+                      placeholder="email" required readonly>
                   </div>
                 </div>
               </div>
@@ -140,136 +143,134 @@
           <mat-tab label="Dirección">
 
             <div class="col-12 mt-2">
-              <div class="row border-bottom" formGroupName="domicilioLegal">
+              <div class="row border-bottom" formGroupName="domicilio_legal">
                 <div class="form-group col-md-1">
                   <label for="tipo">Dirección</label>
                   <input formControlName="tipo" name="tipo" type="text" class="form-control form-control-sm"
-                    placeholder="Tipo" required readonly>
+                    placeholder="Tipo" readonly readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="calle">Calle</label>
                   <input formControlName="calle" name="calle" type="text" class="form-control form-control-sm"
-                    placeholder="Calle" required>
+                    placeholder="Calle" required readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="numero">Número</label>
                   <input formControlName="numero" name="numero" type="text" class="form-control form-control-sm"
-                    placeholder="Número" required>
+                    placeholder="Número" required readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="piso">Piso</label>
                   <input formControlName="piso" name="piso" type="text" class="form-control form-control-sm"
-                    placeholder="Piso" required>
+                    placeholder="Piso" readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="departamento">Dpto</label>
                   <input formControlName="departamento" name="departamento" type="text"
-                    class="form-control form-control-sm" placeholder="Dpto" required>
+                    class="form-control form-control-sm" placeholder="Dpto" required readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="localidad">Localidad</label>
                   <input formControlName="localidad" name="localidad" type="text" class="form-control form-control-sm"
-                    placeholder="Localidad" required>
+                    placeholder="Localidad" required readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="provincia">Provincia</label>
                   <input formControlName="provincia" name="provincia" type="text" class="form-control form-control-sm"
-                    placeholder="Provincia" required>
+                    placeholder="Provincia" required readonly>
                 </div>
+
                 <div class="form-group col-2">
                   <label for="fecha">Fecha</label>
-                  <input formControlName="fecha" name="fecha" type="date" class="form-control form-control-sm"
-                    style="font-size: 0.70em !important;" required>
+                  <input name="fecha" type="date" class="form-control form-control-sm" readonly>
                 </div>
               </div>
             </div>
             <div class="col-12">
-              <div class="row border-bottom" formGroupName="domicilioReal">
+              <div class="row border-bottom" formGroupName="domicilio_real">
                 <div class="form-group col-md-1">
                   <label for="tipo">Dirección</label>
-                  <input formControlName="tipo" name="tipo" type="text" class="form-control form-control-sm"
-                    placeholder="Tipo" required readonly>
+                  <input formControlName="tipo" name="tipo" type="text" class="form-control form-control-sm disabled"
+                    placeholder="Tipo" readonly readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="calle">Calle</label>
                   <input formControlName="calle" name="calle" type="text" class="form-control form-control-sm"
-                    placeholder="Calle" required>
+                    placeholder="Calle" required readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="numero">Número</label>
                   <input formControlName="numero" name="numero" type="text" class="form-control form-control-sm"
-                    placeholder="Número" required>
+                    placeholder="Número" required readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="piso">Piso</label>
                   <input formControlName="piso" name="piso" type="text" class="form-control form-control-sm"
-                    placeholder="Piso" required>
+                    placeholder="Piso" required readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="departamento">Dpto</label>
                   <input formControlName="departamento" name="departamento" type="text"
-                    class="form-control form-control-sm" placeholder="Dpto" required>
+                    class="form-control form-control-sm" placeholder="Dpto" required readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="localidad">Localidad</label>
                   <input formControlName="localidad" name="localidad" type="text" class="form-control form-control-sm"
-                    placeholder="Localidad" required>
+                    placeholder="Localidad" required readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="provincia">Provincia</label>
                   <input formControlName="provincia" name="provincia" type="text" class="form-control form-control-sm"
-                    placeholder="Provincia" required>
+                    placeholder="Provincia" required readonly>
                 </div>
                 <div class="form-group col-2">
                   <label for="fecha">Fecha</label>
-                  <input formControlName="fecha" name="fecha" type="date" class="form-control form-control-sm"
-                    style="font-size: 0.70em !important;" required>
+                  <input name="fecha" type="date" class="form-control form-control-sm" readonly>
                 </div>
               </div>
             </div>
             <h5>Direcciones anteriores</h5>
             <div class="col-12">
 
-              <div class="row border-bottom" formGroupName="domicilioAnterior">
+              <div class="row border-bottom">
                 <div class="form-group col-md-1">
                   <label for="tipo">Dirección</label>
-                  <input formControlName="tipo" name="tipo" type="text" class="form-control form-control-sm"
-                    placeholder="Tipo" required readonly>
+                  <input name="tipo" type="text" class="form-control form-control-sm disabled"
+                    placeholder="Tipo" readonly readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="calle">Calle</label>
-                  <input formControlName="calle" name="calle" type="text" class="form-control form-control-sm"
-                    placeholder="Calle" required>
+                  <input  name="calle" type="text" class="form-control form-control-sm"
+                    placeholder="Calle" readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="numero">Número</label>
-                  <input formControlName="numero" name="numero" type="text" class="form-control form-control-sm"
-                    placeholder="Número" required>
+                  <input  name="numero" type="text" class="form-control form-control-sm"
+                    placeholder="Número" readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="piso">Piso</label>
-                  <input formControlName="piso" name="piso" type="text" class="form-control form-control-sm"
-                    placeholder="Piso" required>
+                  <input name="piso" type="text" class="form-control form-control-sm"
+                    placeholder="Piso" readonly>
                 </div>
                 <div class="form-group col-md-1">
                   <label for="departamento">Dpto</label>
-                  <input formControlName="departamento" name="departamento" type="text"
-                    class="form-control form-control-sm" placeholder="Dpto" required>
+                  <input name="departamento" type="text"
+                    class="form-control form-control-sm" placeholder="Dpto" readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="localidad">Localidad</label>
-                  <input formControlName="localidad" name="localidad" type="text" class="form-control form-control-sm"
-                    placeholder="Localidad" required>
+                  <input name="localidad" type="text" class="form-control form-control-sm"
+                    placeholder="Localidad" readonly>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="provincia">Provincia</label>
-                  <input formControlName="provincia" name="provincia" type="text" class="form-control form-control-sm"
-                    placeholder="Provincia" required>
+                  <input name="provincia" type="text" class="form-control form-control-sm"
+                    placeholder="Provincia" readonly>
                 </div>
                 <div class="form-group col-2">
                   <label for="fecha">Fecha</label>
-                  <input formControlName="fecha" name="fecha" type="date" class="form-control form-control-sm"
-                    style="font-size: 0.70em !important;" required>
+                  <input name="fecha" type="date" class="form-control form-control-sm" readonly>
                 </div>
               </div>
             </div>
@@ -282,11 +283,11 @@
                 <div class="col-12">
                   <div class="form-group col-12 border-bottom">
                     <label for="exampleFormControlTextarea1">Observaciones</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly></textarea>
                   </div>
                   <div class="form-group col-12">
                     <label for="exampleFormControlTextarea1">Denuncias</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly></textarea>
                   </div>
                 </div>
               </div>
@@ -297,13 +298,8 @@
       <!-- /.card-body -->
       <div class="card-footer row justify-content-end">
         <a routerLink="usuarios" type="button" class="btn btn-secondary mr-2">Cancelar</a>
-        <!--
-        <button [disabled]="forma.invalid" type="submit" class="btn btn-primary">Guardar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        -->
       </div>
 
     </form>
   </div>
 </div>
-

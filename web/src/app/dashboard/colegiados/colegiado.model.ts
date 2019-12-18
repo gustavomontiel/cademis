@@ -1,3 +1,4 @@
+import { Direccion } from './../direccion.model';
 import { Persona } from '../persona.model';
 
 export class Colegiado {
@@ -26,5 +27,9 @@ export class Colegiado {
   // tslint:disable-next-line: variable-name
   public updated_at?: Date;
   public id?: number;
+  // tslint:disable-next-line: variable-name
+  public domicilio_real?: Direccion;
+  // tslint:disable-next-line: variable-name
+  public domicilio_Legal?: Direccion;
 
 }
