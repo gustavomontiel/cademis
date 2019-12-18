@@ -8,9 +8,14 @@
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Nro </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <ng-container matColumnDef="num_matricula">
+      <th mat-header-cell *matHeaderCellDef> Matricula </th>
+      <td mat-cell *matCellDef="let element"> {{element.num_matricula}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="circunscripcion">
+      <th mat-header-cell *matHeaderCellDef> Circunscripcion </th>
+      <td mat-cell *matCellDef="let element"> {{element.circunscripcion}} </td>
     </ng-container>
 
     <ng-container matColumnDef="email">

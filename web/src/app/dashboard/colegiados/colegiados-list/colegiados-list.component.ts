@@ -14,7 +14,7 @@ export class ColegiadosListComponent implements OnInit {
 
   tableData: Colegiado[];
   dataSource: any;
-  displayedColumns: string[] = ['id', 'email', 'acciones'];
+  displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'email', 'acciones'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -24,6 +24,7 @@ export class ColegiadosListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getTableData();
   }
 
   getTableData() {
@@ -95,4 +96,5 @@ export class ColegiadosListComponent implements OnInit {
       }
     });
   }
+
 }

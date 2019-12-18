@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Colegiado } from '../colegiado.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-colegiado',
@@ -27,21 +28,21 @@ export class CrearColegiadoComponent implements OnInit {
       persona: new FormGroup({
         nombres: new FormControl(null, [Validators.required]),
         apellidos: new FormControl(null, [Validators.required]),
-        tipoDoc: new FormControl(null, [Validators.required]),
-        numDoc: new FormControl(null, [Validators.required]),
-        cuitCuil: new FormControl(null, [Validators.required]),
-        fechaNacimiento: new FormControl(null, [Validators.required]),
-        localidadNac: new FormControl(null, [Validators.required]),
-        provinciaNac: new FormControl(null, [Validators.required]),
-        paisNac: new FormControl(null, [Validators.required]),
+        tipo_doc: new FormControl(null, [Validators.required]),
+        numero_doc: new FormControl(null, [Validators.required]),
+        cuit_cuil: new FormControl(null, [Validators.required]),
+        fecha_nac: new FormControl(null, [Validators.required]),
+        localidad_nac: new FormControl(null, [Validators.required]),
+        provincia_nac: new FormControl(null, [Validators.required]),
+        pais_nac: new FormControl(null, [Validators.required]),
         sexo: new FormControl(null, [Validators.required])
       }),
-      numMatricula: new FormControl(null, Validators.required),
-      fechaMatricula: new FormControl(null, Validators.required),
+      num_matricula: new FormControl(null, Validators.required),
+      fecha_matricula: new FormControl(null, Validators.required),
       folio: new FormControl(null, Validators.required),
       libro: new FormControl(null, Validators.required),
       legajo: new FormControl(null, Validators.required),
-      cisrcunscripcion: new FormControl(null, Validators.required),
+      circunscripcion: new FormControl(null, Validators.required),
       domicilioLegal: new FormGroup({
         tipo: new FormControl('Legal', Validators.required),
         calle: new FormControl(null, Validators.required),
@@ -75,13 +76,55 @@ export class CrearColegiadoComponent implements OnInit {
       telefono1: new FormControl(null, Validators.required),
       telefono2: new FormControl(null, Validators.required),
       telefono3: new FormControl(null, Validators.required),
+      fecha_recibido: new FormControl('2015-07-12', Validators.required),
+      facultad: new FormControl(null, Validators.required),
+      observacion: new FormControl('', Validators.required),
       email: new FormControl(null, [ Validators.required, Validators.email ] ),
+      estado_id: new FormControl(null, Validators.required),
     });
 
   }
 
   crearColegiado() {
-    console.log();
+
+    Swal.fire({
+      title: 'Guardar datos?',
+      text: 'Confirma los datos?',
+      icon: 'question',
+      showCancelButton: true,
+    }).then((result) => {
+
+      if (result.value) {
+        const item = { ... this.forma.value };
+        console.log(JSON.stringify(item));
+
+        this.colegiadosService.createItem(item).subscribe(
+          resp => {
+
+            Swal.fire({
+              title: 'Guardado!',
+              html: 'Los datos fueron guardados correctamente.',
+              icon: 'success',
+              timer: 2000
+            }).then(res => {
+              const url = this.router.url.split('/');
+              url.pop();
+              url.push('editar-usuario');
+              this.router.navigateByUrl(url.join('/'));
+              console.log(url);
+            });
+          },
+          err => {
+            console.log(err);
+            Swal.fire(
+              'Error!',
+              'Los cambios no fueron guardados.',
+              'error'
+            );
+          }
+        );
+      }
+    });
   }
 
 }
