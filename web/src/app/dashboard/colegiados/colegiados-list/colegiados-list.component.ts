@@ -14,7 +14,7 @@ export class ColegiadosListComponent implements OnInit {
 
   tableData: Colegiado[];
   dataSource: any;
-  displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'email', 'acciones'];
+  displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'persona.apellidos', 'persona.nombres', 'acciones'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 

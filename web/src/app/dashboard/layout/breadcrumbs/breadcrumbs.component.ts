@@ -33,7 +33,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     if (this.authService.estaLogueado()) {
-      this.breadcrumbs = JSON.parse(sessionStorage.getItem('breadcrumbs')) || [{ label: 'home', url: '/home/' }];
+      this.breadcrumbs = JSON.parse(sessionStorage.getItem('breadcrumbs')) || [{ label: 'Inicio', url: '/home/' }];
     }
 
     /*
