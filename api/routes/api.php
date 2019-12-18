@@ -1,9 +1,11 @@
 <?php
+
 /** @var Router $router */
 
 use Laravel\Lumen\Routing\Router;
 
 /* Public Routes */
+
 $router->get('/', function () {
     return response()->json(['message' => 'Welcome to Lumen API Starter']);
 });
@@ -46,6 +48,28 @@ $router->group(['prefix' => 'auth', 'as' => 'auth'], function (Router $router) {
 /* Protected Routes */
 $router->group(['middleware' => 'auth'], function (Router $router) {
 
+    /* Colegiados Routes */
+
+    $router->get('/colegiados', [
+        'as' => 'colegiados.index',
+        'uses' => 'ColegiadoController@index'
+    ]);
+
+    $router->post('/colegiados', [
+        'as' => 'colegiados.store',
+        'uses' => 'ColegiadoController@store'
+    ]);
+
+    $router->get('/colegiados/{id}', [
+        'as' => 'colegiados.show',
+        'uses' => 'ColegiadoController@show'
+    ]);
+
+    $router->delete('/colegiados/{id}', [
+        'as' => 'colegiados.destroy',
+        'uses' => 'ColegiadoController@destroy'
+    ]);
+
     $router->group(['middleware' => 'role:administrador'], function (Router $router) {
 
         $router->get('/admin', function () {
@@ -77,7 +101,5 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
             'as' => 'users.destroy',
             'uses' => 'UserController@destroy'
         ]);
-
     });
-
 });
