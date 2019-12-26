@@ -3,15 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UsuariosListComponent } from './usuarios-list/usuarios-list.component';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
-import { UsuariosComponent } from './usuarios.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CanDeactivateGuard } from '../../shared/services/can-deactivate.guard';
 
 
 const usuariosRoutes: Routes = [
   {
     path: '',
-    // component: UsuariosComponent,
     data: {
       title: 'Usuarios',
       rolesPermitidos: []
@@ -28,6 +27,7 @@ const usuariosRoutes: Routes = [
       {
         path: 'crear-usuario',
         component: CrearUsuarioComponent,
+        canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Crear usuario',
           rolesPermitidos: []
@@ -36,6 +36,7 @@ const usuariosRoutes: Routes = [
       {
         path: 'editar-usuario/:id',
         component: EditarUsuarioComponent,
+        canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Editar usuario',
           rolesPermitidos: []

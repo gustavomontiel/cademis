@@ -20,13 +20,13 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
       return true;
     } else {
       console.log( 'Bloqueado por LoginGuard' );
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/auth', 'login']);
       return false;
     }
   }
 
   canActivateChild() {
-    return this.canActivateChild();
+    return this.canActivate();
   }
 
 }

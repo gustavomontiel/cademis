@@ -6,12 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Angular Material
-import { MaterialModule } from 'src/app/material.module';
+import { MaterialModule } from 'src/app/shared/material.module';
 
 // rutas
 import { ColegiadosRoutingModule } from './colegiados-routing.module';
 
-import { ColegiadosComponent } from './colegiados.component';
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
 import { CrearColegiadoComponent } from './crear-colegiado/crear-colegiado.component';
 import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.component';
@@ -20,7 +19,6 @@ import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.co
 
 @NgModule({
   declarations: [
-    ColegiadosComponent,
     ColegiadosListComponent,
     CrearColegiadoComponent,
     EditarColegiadoComponent

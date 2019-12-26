@@ -1,16 +1,17 @@
 import { UsuariosService } from './../usuarios.service';
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../usuario.model';
+import { Usuario } from '../../models/usuario.model';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { PuedeDesactivar } from '../../../shared/services/can-deactivate.guard';
 
 @Component({
   selector: 'app-crear-usuario',
   templateUrl: './crear-usuario.component.html',
   styleUrls: ['./crear-usuario.component.scss']
 })
-export class CrearUsuarioComponent implements OnInit {
+export class CrearUsuarioComponent implements OnInit, PuedeDesactivar {
 
   usuario: Usuario;
   forma: FormGroup;
@@ -53,6 +54,7 @@ export class CrearUsuarioComponent implements OnInit {
               icon: 'success',
               timer: 2000
             }).then(res => {
+              this.forma.markAsPristine();
               const url = this.router.url.split('/');
               url.pop();
               url.push('editar-usuario');
@@ -73,5 +75,24 @@ export class CrearUsuarioComponent implements OnInit {
     });
 
   }
+
+  permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
+
+    if ( this.forma.dirty ) {
+      return Swal.fire({
+        title: 'Salir',
+        text: 'Confirma salir y perder los cambios?',
+        icon: 'question',
+        showCancelButton: true,
+      }).then(( result ) => {
+        console.log('result', result.value);
+        return result.value ? result.value : false;
+      });
+    } else {
+      return true;
+    }
+
+  }
+
 
 }

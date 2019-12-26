@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { URL_SERVICIOS } from './../config/config';
+import { URL_SERVICIOS } from '../../config/config';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';

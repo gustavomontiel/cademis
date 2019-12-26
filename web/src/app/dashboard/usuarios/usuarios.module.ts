@@ -6,13 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Angular Material
-import { MaterialModule } from 'src/app/material.module';
+import { MaterialModule } from 'src/app/shared/material.module';
 
 // rutas
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 
 import { UsuariosListComponent } from './usuarios-list/usuarios-list.component';
-import { UsuariosComponent } from './usuarios.component';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -21,7 +20,6 @@ import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
-    UsuariosComponent,
     UsuariosListComponent,
     CrearUsuarioComponent,
     EditarUsuarioComponent,

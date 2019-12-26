@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // componentes
 import { AppComponent } from './app.component';
-import { TokenInterceptor } from './dashboard/token.interceptor';
+import { TokenInterceptor } from './shared/services/token.interceptor';
 
 
 @NgModule({
@@ -23,8 +23,8 @@ import { TokenInterceptor } from './dashboard/token.interceptor';
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

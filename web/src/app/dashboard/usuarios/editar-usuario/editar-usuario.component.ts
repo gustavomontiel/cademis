@@ -1,8 +1,9 @@
+import { PuedeDesactivar } from '../../../shared/services/can-deactivate.guard';
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../usuarios.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Usuario } from '../usuario.model';
+import { Usuario } from '../../models/usuario.model';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
   templateUrl: './editar-usuario.component.html',
   styleUrls: ['./editar-usuario.component.scss']
 })
-export class EditarUsuarioComponent implements OnInit {
+export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
 
   usuario: Usuario;
   forma: FormGroup;
@@ -24,11 +25,11 @@ export class EditarUsuarioComponent implements OnInit {
   ngOnInit() {
 
     this.forma = new FormGroup({
-      name: new FormControl( null, Validators.required ),
-      username: new FormControl( null, Validators.required ),
-      email: new FormControl( null, [Validators.required, Validators.email] ),
+      name: new FormControl(null, Validators.required),
+      username: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       // rol: new FormControl(null, [Validators.required]),
-      password: new FormControl( null ),
+      password: new FormControl(null),
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -52,7 +53,7 @@ export class EditarUsuarioComponent implements OnInit {
           // roleNames: this.usuario.roleNames[0] ? this.usuario.roleNames[0] : '',
         });
       }
-    );
+      );
   }
 
   updateItem() {
@@ -69,13 +70,14 @@ export class EditarUsuarioComponent implements OnInit {
         const item = { ... this.forma.value, id: this.usuario.id } as Usuario;
         item.password = item.password.length < 3 ? null : item.password;
 
-        this.usuariosService.updateItem( item ).subscribe(
+        this.usuariosService.updateItem(item).subscribe(
           resp => {
             Swal.fire(
               'Guardado!',
               'Los cambios fueron guardados correctamente.',
               'success'
             );
+            this.forma.markAsPristine();
           },
           err => {
             console.log(err);
@@ -90,4 +92,23 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
   }
+
+  permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
+
+    if ( this.forma.dirty ) {
+      return Swal.fire({
+        title: 'Salir',
+        text: 'Confirma salir y perder los cambios?',
+        icon: 'question',
+        showCancelButton: true,
+      }).then(( result ) => {
+        console.log('result', result.value);
+        return result.value ? result.value : false;
+      });
+    } else {
+      return true;
+    }
+
+  }
+
 }

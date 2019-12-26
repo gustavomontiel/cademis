@@ -1,5 +1,5 @@
-import { Direccion } from './../direccion.model';
-import { Persona } from '../persona.model';
+import { Direccion } from './direccion.model';
+import { Persona } from './persona.model';
 
 export class Colegiado {
 

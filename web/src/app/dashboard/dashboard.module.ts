@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // Angular Material
-import { MaterialModule } from './../material.module';
+import { MaterialModule } from '../shared/material.module';
 
 // rutas
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -16,7 +16,7 @@ import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { ToastComponent } from './toasts/toast.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './token.interceptor';
+import { TokenInterceptor } from '../shared/services/token.interceptor';
 
 
 

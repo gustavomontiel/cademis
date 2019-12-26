@@ -16,7 +16,9 @@ export class ToastService {
   }
 }
 
-/********** COMO USAR **********
+/************ COMO USAR ************
+
+public toastService: ToastService // <<---- En el constructor
 
 this.toastService.show('I am a standard toast', {
       delay: 3000,
@@ -64,4 +66,5 @@ this.toastService.show('I am a info toast', {
       autohide: true,
       headertext: 'Información'
     });
- */
+
+ **************************************************/

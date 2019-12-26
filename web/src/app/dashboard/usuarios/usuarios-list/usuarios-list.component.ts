@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Usuario } from '../usuario.model';
+import { Usuario } from '../../models/usuario.model';
 import { UsuariosService } from '../usuarios.service';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Colegiado } from '../colegiado.model';
+import { Colegiado } from '../../models/colegiado.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ColegiadosService } from '../colegiados.service';
 import { Router, ActivatedRoute } from '@angular/router';

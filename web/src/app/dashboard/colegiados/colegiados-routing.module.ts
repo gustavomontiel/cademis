@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
 import { CrearColegiadoComponent } from './crear-colegiado/crear-colegiado.component';
-// import { ColegiadosComponent } from './colegiados.component';
 import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.component';
 
 
@@ -11,7 +10,6 @@ import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.co
 const colegiadosRoutes: Routes = [
   {
     path: '',
-    // component: ColegiadosComponent,
     data: {
       title: 'Colegiados',
       rolesPermitidos: []
