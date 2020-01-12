@@ -70,6 +70,33 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'ColegiadoController@destroy'
     ]);
 
+    /* Cuentas Corrientes Routes */
+
+    $router->get('/cuentascorrientes', [
+        'as' => 'cuentascorrientes.index',
+        'uses' => 'CuentaCorrienteController@index'
+    ]);
+
+    $router->post('/cuentascorrientes', [
+        'as' => 'cuentascorrientes.store',
+        'uses' => 'CuentaCorrienteController@store'
+    ]);
+
+    $router->get('/cuentascorrientes/{id}', [
+        'as' => 'cuentascorrientes.show',
+        'uses' => 'CuentaCorrienteController@show'
+    ]);
+
+    $router->put('/cuentascorrientes/{id}', [
+        'as' => 'cuentascorrientes.update',
+        'uses' => 'CuentaCorrienteController@update'
+    ]);
+
+    $router->delete('/cuentascorrientes/{id}', [
+        'as' => 'cuentascorrientes.destroy',
+        'uses' => 'CuentaCorrienteController@destroy'
+    ]);
+
     $router->group(['middleware' => 'role:administrador'], function (Router $router) {
 
         $router->get('/admin', function () {
@@ -100,6 +127,12 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         $router->delete('/users/{id}', [
             'as' => 'users.destroy',
             'uses' => 'UserController@destroy'
+        ]);
+
+         /* Colegiados Routes */
+         $router->post('/importarcolegiados', [
+            'as' => 'colegiados.importarcolegiados',
+            'uses' => 'ColegiadoController@importarcolegiados'
         ]);
     });
 });

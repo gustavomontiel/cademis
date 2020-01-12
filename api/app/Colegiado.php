@@ -47,4 +47,28 @@ class Colegiado extends Model
     {
         return $this->hasOne('App\Direccion');
     }
+
+    /**
+     * Obtener las direcciones anteriores asociadas al Colegiado
+     */
+    public function domiciliosAnteriores()
+    {
+        return $this->hasMany('App\Direccion');
+    }
+
+    /**
+     * Obtener el estado del Colegiado
+     */
+    public function estado()
+    {
+        return $this->belongsTo('App\Estado');
+    }
+
+    /**
+     * Obtener las cuentas corrientes asociadas al Colegiado
+     */
+    public function cuentasCorrientes()
+    {
+        return $this->hasMany('App\CuentaCorriente');
+    }
 }
