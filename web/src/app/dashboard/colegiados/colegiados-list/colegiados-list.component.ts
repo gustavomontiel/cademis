@@ -35,11 +35,37 @@ export class ColegiadosListComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.tableData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+        this.dataSource.filterPredicate =
+          (data: Colegiado, filtersJson: string) => {
+            const matchFilter = [];
+            const filters = JSON.parse(filtersJson);
+
+            filters.forEach(filter => {
+              matchFilter.push(
+                String(data.num_matricula).toLowerCase().includes(filter.value)
+                ||
+                data.circunscripcion.toLowerCase().includes(filter.value)
+                ||
+                data.persona.apellidos.toLowerCase().includes(filter.value)
+                ||
+                data.persona.nombres.toLowerCase().includes(filter.value)
+                );
+            });
+            return matchFilter.every(Boolean);
+          };
       });
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    const tableFilters = [
+      {
+        value: filterValue.trim().toLowerCase()
+      }
+    ];
+
+    this.dataSource.filter = JSON.stringify(tableFilters);
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -58,7 +84,7 @@ export class ColegiadosListComponent implements OnInit {
     const url = this.route.url.split('/');
     url.pop();
     url.push('editar-colegiado');
-    this.route.navigateByUrl( url.join('/') + '/' + id );
+    this.route.navigateByUrl(url.join('/') + '/' + id);
   }
 
   borrarItem(item) {
