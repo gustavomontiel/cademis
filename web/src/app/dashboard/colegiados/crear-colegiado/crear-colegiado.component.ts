@@ -4,13 +4,14 @@ import { Colegiado } from '../../models/colegiado.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { PuedeDesactivar } from 'src/app/shared/services/can-deactivate.guard';
 
 @Component({
   selector: 'app-crear-colegiado',
   templateUrl: './crear-colegiado.component.html',
   styleUrls: ['./crear-colegiado.component.scss']
 })
-export class CrearColegiadoComponent implements OnInit {
+export class CrearColegiadoComponent implements OnInit, PuedeDesactivar {
 
   colegiado: Colegiado;
   forma: FormGroup;
@@ -125,6 +126,24 @@ export class CrearColegiadoComponent implements OnInit {
         );
       }
     });
+  }
+
+  permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
+
+    if ( this.forma.dirty ) {
+      return Swal.fire({
+        title: 'Salir',
+        text: 'Confirma salir y perder los cambios?',
+        icon: 'question',
+        showCancelButton: true,
+      }).then(( result ) => {
+        console.log('result', result.value);
+        return result.value ? result.value : false;
+      });
+    } else {
+      return true;
+    }
+
   }
 
 }

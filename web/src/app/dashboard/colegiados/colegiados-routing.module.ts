@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
 import { CrearColegiadoComponent } from './crear-colegiado/crear-colegiado.component';
 import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.component';
+import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
 
 
 
@@ -26,6 +27,7 @@ const colegiadosRoutes: Routes = [
       {
         path: 'crear-colegiado',
         component: CrearColegiadoComponent,
+        canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Crear colegiado',
           rolesPermitidos: []
@@ -34,6 +36,7 @@ const colegiadosRoutes: Routes = [
       {
         path: 'editar-colegiado/:id',
         component: EditarColegiadoComponent,
+        canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Editar colegiado',
           rolesPermitidos: []

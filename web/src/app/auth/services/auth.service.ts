@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { URL_SERVICIOS } from '../../config/config';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class AuthService {
 
   registrarUsuario(usuario: any) {
 
-    const url = URL_SERVICIOS + '/auth/register';
+    const url = environment.urlApiServices + '/auth/register';
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
         console.log(resp);
@@ -50,7 +50,7 @@ export class AuthService {
 
   recuperarPassword(email: string) {
 
-    const url = URL_SERVICIOS + '/auth/passrecovery';
+    const url = environment.urlApiServices + '/auth/passrecovery';
     return this.http.post(url, email).pipe(
       map((resp: any) => {
         console.log(resp);
@@ -66,7 +66,7 @@ export class AuthService {
 
   login(usuario: any) {
 
-    const url = URL_SERVICIOS + '/auth/login';
+    const url = environment.urlApiServices + '/auth/login';
 
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
@@ -107,7 +107,7 @@ export class AuthService {
 
   renuevaToken() {
 
-    let url = URL_SERVICIOS + '/login/renuevatoken';
+    let url = environment.urlApiServices + '/login/renuevatoken';
     url += '?token=' + this.token;
 
     return this.http.get( url ).pipe(

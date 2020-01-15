@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlApiServices: 'http://cademis-api.grupo-sim.com.ar'
 };

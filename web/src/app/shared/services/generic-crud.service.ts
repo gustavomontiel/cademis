@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { URL_SERVICIOS } from 'src/app/config/config';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class GenericCrudService {
       }
     });
 
-    const urlApi = URL_SERVICIOS + url;
+    const urlApi = environment.urlApiServices + url;
 
     return this.http.get( urlApi ).pipe(
       map( ( resp: any ) => {
@@ -43,7 +44,7 @@ export class GenericCrudService {
       }
     });
 
-    const urlApi = URL_SERVICIOS + url + '/' + id;
+    const urlApi = environment.urlApiServices + url + '/' + id;
 
     return this.http.get( urlApi ).pipe(
       map( ( resp: any ) => {
@@ -62,7 +63,7 @@ export class GenericCrudService {
       }
     });
 
-    const urlApi = URL_SERVICIOS + url;
+    const urlApi = environment.urlApiServices + url;
 
     return this.http.post( urlApi, item )
       .pipe(
@@ -89,7 +90,7 @@ export class GenericCrudService {
         }
       });
 
-      const urlApi = URL_SERVICIOS + url + '/' + item.id;
+      const urlApi = environment.urlApiServices + url + '/' + item.id;
 
       return this.http.put( urlApi, item )
       .pipe(
@@ -118,7 +119,7 @@ export class GenericCrudService {
       }
     });
 
-    const urlApi = URL_SERVICIOS + url + '/' + id;
+    const urlApi = environment.urlApiServices + url + '/' + id;
 
     return this.http.delete( urlApi )
       .pipe(
