@@ -75,13 +75,19 @@ export class CrearColegiadoComponent implements OnInit, PuedeDesactivar {
         fecha: new FormControl(null, Validators.required),
       }),
       telefono1: new FormControl(null, Validators.required),
-      telefono2: new FormControl(null, Validators.required),
-      telefono3: new FormControl(null, Validators.required),
-      fecha_recibido: new FormControl('2015-07-12', Validators.required),
-      facultad: new FormControl(null, Validators.required),
-      observacion: new FormControl('', Validators.required),
+      telefono2: new FormControl(null),
+      telefono3: new FormControl(null),
+      fecha_recibido: new FormControl('2020-01-01', null),
+      facultad: new FormControl(null),
+      observacion: new FormControl(''),
+      denuncias: new FormControl(''),
       email: new FormControl(null, [ Validators.required, Validators.email ] ),
-      estado_id: new FormControl(null, Validators.required),
+      estado_id: new FormControl(null),
+      num_mat_fed: new FormControl('0'),
+    });
+
+    this.forma.valueChanges.subscribe(() => {
+      console.log(this.forma);
     });
 
   }
@@ -145,5 +151,6 @@ export class CrearColegiadoComponent implements OnInit, PuedeDesactivar {
     }
 
   }
+
 
 }
