@@ -30,12 +30,12 @@ class CreateColegiadosTable extends Migration
             $table->string('telefono3')->nullable();
             $table->string('email')->nullable();
             $table->date('fecha_mat_fed')->nullable();
-            $table->bigInteger('num_mat_fed');
+            $table->bigInteger('num_mat_fed')->nullable();
             $table->bigInteger('libro_mat_fed')->nullable();
             $table->bigInteger('folio_mat_fed')->nullable();
             $table->bigInteger('estado_id')->nullable();
             $table->date('fecha_inactividad')->nullable();
-            $table->string('cargo');
+            $table->string('cargo')->nullable();
             $table->date('fecha_cargo')->nullable();
             $table->string('observacion', 5000)->nullable();
             $table->timestamps();
