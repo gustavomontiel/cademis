@@ -7,7 +7,7 @@ use Laravel\Lumen\Routing\Router;
 /* Public Routes */
 
 $router->get('/', function () {
-    return response()->json(['message' => 'Welcome to Lumen API Starter']);
+    return response()->json(['message' => 'Bienvenidos al backend del sistema de Cademis.']);
 });
 
 /* Auth Routes */
@@ -95,6 +95,33 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
     $router->delete('/cuentascorrientes/{id}', [
         'as' => 'cuentascorrientes.destroy',
         'uses' => 'CuentaCorrienteController@destroy'
+    ]);
+
+    /* Tipos de Matriculados Routes */
+
+    $router->get('/tiposmatriculados', [
+        'as' => 'tiposmatriculados.index',
+        'uses' => 'TipoMatriculadoController@index'
+    ]);
+
+    $router->post('/tiposmatriculados', [
+        'as' => 'tiposmatriculados.store',
+        'uses' => 'TipoMatriculadoController@store'
+    ]);
+
+    $router->get('/tiposmatriculados/{id}', [
+        'as' => 'tiposmatriculados.show',
+        'uses' => 'TipoMatriculadoController@show'
+    ]);
+
+    $router->put('/tiposmatriculados/{id}', [
+        'as' => 'tiposmatriculados.update',
+        'uses' => 'TipoMatriculadoController@update'
+    ]);
+
+    $router->delete('/tiposmatriculados/{id}', [
+        'as' => 'tiposmatriculados.destroy',
+        'uses' => 'TipoMatriculadoController@destroy'
     ]);
 
     $router->group(['middleware' => 'role:administrador'], function (Router $router) {

@@ -61,6 +61,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * Create a user
      *
      * @param $name
+     * @param $username
      * @param $email
      * @param $password
      * @return User|bool
