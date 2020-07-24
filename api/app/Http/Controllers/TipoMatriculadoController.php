@@ -74,7 +74,28 @@ class TipoMatriculadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $tipo = TipoMatriculado::find($id);
+
+        if (is_null($tipo)) {
+            return response()->json(['error' => 'true', 'message' => 'Tipo de matriculado no encontrado.'], 404);
+        }
+
+        $validator = Validator::make($input, [
+            'nombre' => 'required|string|unique:tipos_matriculados,nombre',
+            'descripcion' => 'string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
+        }
+
+        if (isset($input['nombre'])) $tipo->nombre = $input['nombre'];
+        if (isset($input['descripcion'])) $tipo->descripcion = $input['descripcion'];
+
+        $tipo->save();
+
+        return response()->json(['error' => 'false', 'data' => $tipo, 'message' => 'Tipo de matriculado actualizado correctamente.']);
     }
 
     /**
@@ -85,6 +106,14 @@ class TipoMatriculadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tipo = TipoMatriculado::find($id);
+
+        if (is_null($tipo)) {
+            return response()->json(['error' => 'true', 'message' => 'Tipo de matriculado no encontrado.'], 404);
+        }
+
+        $tipo->delete();
+
+        return response()->json(['error' => 'false', 'message' => 'Tipo de matriculado eliminado correctamente.']);
     }
 }
