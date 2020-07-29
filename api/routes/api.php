@@ -124,6 +124,33 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'TipoMatriculadoController@destroy'
     ]);
 
+    /* Obra Social Routes */
+
+    $router->get('/obrassociales', [
+        'as' => 'obrassociales.index',
+        'uses' => 'ObraSocialController@index'
+    ]);
+
+    $router->post('/obrassociales', [
+        'as' => 'obrassociales.store',
+        'uses' => 'ObraSocialController@store'
+    ]);
+
+    $router->get('/obrassociales/{id}', [
+        'as' => 'obrassociales.show',
+        'uses' => 'ObraSocialController@show'
+    ]);
+
+    $router->put('/obrassociales/{id}', [
+        'as' => 'obrassociales.update',
+        'uses' => 'ObraSocialController@update'
+    ]);
+
+    $router->delete('/obrassociales/{id}', [
+        'as' => 'obrassociales.destroy',
+        'uses' => 'ObraSocialController@destroy'
+    ]);
+
     $router->group(['middleware' => 'role:administrador'], function (Router $router) {
 
         $router->get('/admin', function () {
