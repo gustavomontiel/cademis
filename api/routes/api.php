@@ -151,6 +151,87 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'ObraSocialController@destroy'
     ]);
 
+     /* Planes Routes */
+
+     $router->get('/planes', [
+        'as' => 'planes.index',
+        'uses' => 'PlanController@index'
+    ]);
+
+    $router->post('/planes', [
+        'as' => 'planes.store',
+        'uses' => 'PlanController@store'
+    ]);
+
+    $router->get('/planes/{id}', [
+        'as' => 'planes.show',
+        'uses' => 'PlanController@show'
+    ]);
+
+    $router->put('/planes/{id}', [
+        'as' => 'planes.update',
+        'uses' => 'PlanController@update'
+    ]);
+
+    $router->delete('/planes/{id}', [
+        'as' => 'planes.destroy',
+        'uses' => 'PlanController@destroy'
+    ]);
+
+      /* Concepto Routes */
+
+      $router->get('/conceptos', [
+        'as' => 'conceptos.index',
+        'uses' => 'ConceptoController@index'
+    ]);
+
+    $router->post('/conceptos', [
+        'as' => 'conceptos.store',
+        'uses' => 'ConceptoController@store'
+    ]);
+
+    $router->get('/conceptos/{id}', [
+        'as' => 'conceptos.show',
+        'uses' => 'ConceptoController@show'
+    ]);
+
+    $router->put('/conceptos/{id}', [
+        'as' => 'conceptos.update',
+        'uses' => 'ConceptoController@update'
+    ]);
+
+    $router->delete('/conceptos/{id}', [
+        'as' => 'conceptos.destroy',
+        'uses' => 'ConceptoController@destroy'
+    ]);
+
+      /* Tipo de Comprobante Routes */
+
+      $router->get('/tiposdecomprobantes', [
+        'as' => 'tiposdecomprobantes.index',
+        'uses' => 'TipoDeComprobanteController@index'
+    ]);
+
+    $router->post('/tiposdecomprobantes', [
+        'as' => 'tiposdecomprobantes.store',
+        'uses' => 'TipoDeComprobanteController@store'
+    ]);
+
+    $router->get('/tiposdecomprobantes/{id}', [
+        'as' => 'tiposdecomprobantes.show',
+        'uses' => 'TipoDeComprobanteController@show'
+    ]);
+
+    $router->put('/tiposdecomprobantes/{id}', [
+        'as' => 'tiposdecomprobantes.update',
+        'uses' => 'TipoDeComprobanteController@update'
+    ]);
+
+    $router->delete('/tiposdecomprobantes/{id}', [
+        'as' => 'tiposdecomprobantes.destroy',
+        'uses' => 'TipoDeComprobanteController@destroy'
+    ]);
+
     $router->group(['middleware' => 'role:administrador'], function (Router $router) {
 
         $router->get('/admin', function () {

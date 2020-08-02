@@ -38,7 +38,7 @@ class ObraSocialController extends Controller
         $validator = Validator::make($input, [
             'nombre' => 'required|string|unique:obras_sociales,nombre',
             'sigla' => 'required|string',
-            'estado_id' => 'long'
+            'estado_id' => 'numeric'
         ]);
 
         if ($validator->fails()) {
@@ -87,7 +87,7 @@ class ObraSocialController extends Controller
         $validator = Validator::make($input, [
             'nombre' => 'required|string|unique:obras_sociales,nombre',
             'sigla' => 'required|string',
-            'estado_id'=> 'long'
+            'estado_id'=> 'numeric'
         ]);
 
         if ($validator->fails()) {
