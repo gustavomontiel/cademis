@@ -1,0 +1,155 @@
+<h4>Crear Colegiado</h4>
+<div class="col-12">
+  <div class="card card-primary mt-2 container">
+    <!-- form start -->
+    <form role="form" ngNativeValidate [formGroup]="forma" (ngSubmit)="createItem()" action="" method="post">
+      <div class="card-body form-row">
+        <div class="row mt-2 mr-1">
+          <div class="col-10">
+            <div class="row border-bottom">
+
+              <div class="form-group col-2">
+                <label for="num_matricula">Matricula</label>
+                <input formControlName="num_matricula" name="num_matricula" type="text"
+                  class="form-control form-control-sm" placeholder="Nro Matricula" required
+                  [ngClass]="{'is-invalid': forma.controls['num_matricula'].errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.controls['num_matricula'].errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-3">
+                <label for="fecha_matricula">Fecha Matricula</label>
+                <input formControlName="fecha_matricula" name="fecha_matricula" type="date"
+                  class="form-control form-control-sm" required
+                  [ngClass]="{'is-invalid': forma.controls['fecha_matricula'].errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.controls['fecha_matricula'].errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-1">
+                <label for="libro">libro</label>
+                <input formControlName="libro" name="libro" type="text" class="form-control form-control-sm"
+                  placeholder="Libro" required
+                  [ngClass]="{'is-invalid': forma.controls['libro'].errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.controls['libro'].errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-1">
+                <label for="folio">Folio</label>
+                <input formControlName="folio" name="folio" type="text" class="form-control form-control-sm"
+                  placeholder="Folio" required
+                  [ngClass]="{'is-invalid': forma.controls['folio'].errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.controls['folio'].errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-1">
+                <label for="legajo">legajo</label>
+                <input formControlName="legajo" name="legajo" type="text" class="form-control form-control-sm"
+                  placeholder="Legajo" [ngClass]="{'is-invalid': forma.controls['legajo'].errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.controls['legajo'].errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-4">
+                <label for="circunscripcion">Circunscripcion</label>
+                <input formControlName="circunscripcion" name="circunscripcion" type="text"
+                  class="form-control form-control-sm" placeholder="Circunscripcion" required
+                  [ngClass]="{'is-invalid': forma.controls['circunscripcion'].errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.controls['circunscripcion'].errors?.customMsgError }}
+                </div>
+              </div>
+
+            </div>
+            <div class="row border-bottom mt-2" formGroupName="persona">
+
+              <div class="form-group col-md-3">
+                <label for="nombre">Nombres</label>
+                <input formControlName="nombres" name="nombres" type="text" class="form-control form-control-sm"
+                  placeholder="Nombre completo" required
+                  [ngClass]="{'is-invalid': forma.get('persona').get('nombres').errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.get('persona').get('nombres').errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="apellidos">Apellidos</label>
+                <input formControlName="apellidos" name="apellidos" type="text" class="form-control form-control-sm"
+                  placeholder="Apellidos" required
+                  [ngClass]="{'is-invalid': forma.get('persona').get('apellidos').errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.get('persona').get('apellidos').errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="tipo_doc">Tipo doc.</label>
+                <select class="form-control form-control-sm" formControlName="tipo_doc" name="tipo_doc"
+                  [ngClass]="{'is-invalid': forma.get('persona').get('tipo_doc').errors?.customMsgError}">
+                  <option value="DNI">DNI</option>
+                  <option value="Cedula">Cedula</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                <div class="invalid-feedback">
+                  {{ forma.get('persona').get('tipo_doc').errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="numero_doc">Número</label>
+                <input formControlName="numero_doc" name="numero_doc" type="number" class="form-control form-control-sm"
+                  placeholder="Número" required
+                  [ngClass]="{'is-invalid': forma.get('persona').get('numero_doc').errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.get('persona').get('numero_doc').errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="cuit_cuil">CUIT/CUIL</label>
+                <input formControlName="cuit_cuil" name="cuit_cuil" type="number" class="form-control form-control-sm"
+                  placeholder="CUIT/CUIL" required
+                  [ngClass]="{'is-invalid': forma.get('persona').get('cuit_cuil').errors?.customMsgError}">
+                <div class="invalid-feedback">
+                  {{ forma.get('persona').get('cuit_cuil').errors?.customMsgError }}
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <input id="file-upload" type="file" class="custom-file-input"
+                  (change)="onFileChange($event, 'persona.foto')" name="foto" lang="es" />
+                <label id="file-upload-filename" class="custom-file-label" for="customFileLang">Agregar foto</label>
+              </div>
+
+
+            </div>
+
+          </div>
+          <div class="col-2">
+            <img [src]="imgURL ? imgURL : '/assets/img/user.png' " width="180">
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- /.card-body -->
+      <div class="card-footer row justify-content-end">
+        <a routerLink="usuarios" type="button" class="btn btn-secondary mr-2">Cancelar</a>
+        <!--
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        -->
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+
+    </form>
+  </div>
+</div>
