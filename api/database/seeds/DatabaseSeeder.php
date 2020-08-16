@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             EstadosSeeder::class,
         ]);
-        User::createFromValues('Administrador', 'admin', 'admin@cademis.com', '123456')->assignRole('administrador');
-        User::createFromValues('Usuario', 'user', 'user@cademis.com', '123456');
+        User::createFromValues('Administrador', 'admin', 'admin@cademis.com', 'password')->assignRole('administrador');
+        User::createFromValues('Usuario', 'user', 'user@cademis.com', 'password');
     }
 }

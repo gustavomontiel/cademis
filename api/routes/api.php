@@ -65,6 +65,11 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'ColegiadoController@show'
     ]);
 
+    $router->put('/colegiados/{id}', [
+        'as' => 'colegiados.update',
+        'uses' => 'ColegiadoController@update'
+    ]);
+
     $router->delete('/colegiados/{id}', [
         'as' => 'colegiados.destroy',
         'uses' => 'ColegiadoController@destroy'

@@ -9,6 +9,7 @@ use App\Persona;
 use DateTime;
 use Illuminate\Http\Request;
 use Validator;
+use GrahamCampbell\Flysystem\Facades\Flysystem;
 
 class ColegiadoController extends Controller
 {
@@ -41,20 +42,18 @@ class ColegiadoController extends Controller
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'fecha_matricula' => 'required|date',
+            'fecha_matricula' => 'date',
             'num_matricula' => 'required|unique:colegiados,num_matricula',
-            'libro' => 'numeric',
-            'folio' => 'numeric',
-            'legajo' => 'numeric',
-            'fecha_recibido' => 'date',
-            'email' => 'email',
-            'observacion' => 'string|max:5000',
-            /*
-        'persona_id',
-        'circunscripcion',
-        'facultad',
-        'estado_id',
-*/
+            'libro' => 'string',
+            'folio' => 'string',
+            'legajo' => 'string',
+            'circunscripcion' => 'string',
+            'estado_id' => 'required|numeric|exists:estados,id',
+            'persona.nombres' => 'string',
+            'persona.apellidos' => 'string',
+            'persona.tipo_doc' => 'string',
+            'persona.numero_doc' => 'required|numeric',
+            'persona.cuit_cuil' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -63,16 +62,18 @@ class ColegiadoController extends Controller
 
         $persona = new Persona($input['persona']);
         unset($input['persona']);
-        $domicilioReal = new Direccion($input['domicilio_real']);
-        unset($input['domicilio_real']);
-        $domicilioLegal = new Direccion($input['domicilio_legal']);
-        unset($input['domicilio_legal']);
+        // $domicilioReal = new Direccion($input['domicilio_real']);
+        // unset($input['domicilio_real']);
+        // $domicilioLegal = new Direccion($input['domicilio_legal']);
+        // unset($input['domicilio_legal']);
 
         $colegiado = Colegiado::create($input);
 
         $colegiado->persona()->save($persona);
-        $colegiado->domicilioReal()->save($domicilioReal);
-        $colegiado->domicilioLegal()->save($domicilioLegal);
+        // $colegiado->domicilioReal()->save($domicilioReal);
+        // $colegiado->domicilioLegal()->save($domicilioLegal);
+
+        $this->uploadFoto($colegiado, $request);
 
         return response()->json(['error' => 'false', 'data' => $colegiado, 'message' => 'Colegiado creado correctamente.']);
     }
@@ -117,7 +118,43 @@ class ColegiadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $colegiado = Colegiado::find($id);
+
+        if (is_null($colegiado)) {
+            return response()->json(['error' => 'true', 'message' => 'Colegiado no encontrado.']);
+        }
+        
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'fecha_matricula' => 'date',
+            'num_matricula' => 'unique:colegiados,num_matricula,'.$id,
+            'libro' => 'string',
+            'folio' => 'string',
+            'legajo' => 'string',
+            'circunscripcion' => 'string',
+            'estado_id' => 'numeric|exists:estados,id',
+            'persona.nombres' => 'string',
+            'persona.apellidos' => 'string',
+            'persona.tipo_doc' => 'string',
+            'persona.numero_doc' => 'numeric',
+            'persona.cuit_cuil' => 'string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
+        }
+
+        $persona = $input['persona'];
+        unset($input['persona']);
+        
+        $colegiado->fill($input);
+
+        $colegiado->persona->fill($persona);
+
+        $this->uploadFoto($colegiado, $request);
+
+        return response()->json(['error' => 'false', 'data' => $colegiado, 'message' => 'Colegiado actualizado correctamente.']);
     }
 
     /**
@@ -137,6 +174,34 @@ class ColegiadoController extends Controller
         $colegiado->delete();
 
         return response()->json(['error' => 'false', 'message' => 'Colegiado eliminado correctamente.']);
+    }
+
+    /**
+     * Guardar la foto del colegiado en el servidor.
+     *
+     * @param Colegiado $colegiado
+     * @param Request  $request
+     * @return Response
+     */
+    public function uploadFoto(Colegiado $colegiado, Request $request)
+    {
+
+
+        // IMAGEN PRINCIPAL
+        $file = $request->file('persona.foto');
+        if ($file) {
+            $stream = fopen($file->getRealPath(), 'r+');
+            Flysystem::putStream(
+                'uploads/persona/' . $colegiado->persona->id . '/foto.' . $file->clientExtension(),
+                $stream
+            );
+            fclose($stream);
+            $colegiado->persona['foto'] = 'uploads/persona/' . $colegiado->persona->id . '/foto.' . $file->clientExtension();
+        }
+
+        $colegiado->persona->save();
+
+        return response()->json(['error' => 'false', 'message' => 'Imagenes guardadas correctamente']);
     }
 
     /**

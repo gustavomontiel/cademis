@@ -17,8 +17,8 @@ class CreateColegiadosTable extends Migration
             $table->bigIncrements('id');
             $table->date('fecha_matricula')->nullable();
             $table->bigInteger('num_matricula');
-            $table->bigInteger('libro')->nullable();
-            $table->bigInteger('folio')->nullable();
+            $table->string('libro')->nullable();
+            $table->string('folio')->nullable();
             $table->string('legajo')->nullable();
             $table->string('circunscripcion')->nullable();
             $table->date('fecha_recibido')->nullable();
