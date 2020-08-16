@@ -7,7 +7,7 @@ export class Persona {
   // tslint:disable-next-line: variable-name
   public numero_doc: number;
   // tslint:disable-next-line: variable-name
-  public cuit_cuil: number;
+  public cuit_cuil: string;
   // tslint:disable-next-line: variable-name
   public fecha_nac: Date;
   // tslint:disable-next-line: variable-name
@@ -24,5 +24,6 @@ export class Persona {
   public id?: number;
   // tslint:disable-next-line: variable-name
   public colegiado_id?: number;
+  public foto?: string|any;
 
 }

@@ -109,6 +109,36 @@ export class GenericCrudService {
     }
   }
 
+  updateItemWithPost( url: string, item: any, id: string ) {
+
+    if ( id ) {
+
+      Swal.fire({
+        text: 'Actualizando Datos',
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      const urlApi = environment.urlApiServices + url + '/' + id;
+
+      return this.http.post( urlApi, item )
+      .pipe(
+        map((resp: any) => {
+          Swal.close();
+          return resp;
+        }),
+        catchError( err => {
+          console.log( 'Error:', err );
+          Swal.close();
+          return throwError( err );
+        })
+      );
+    } else {
+      console.log('no se puede actualizar un objeto sin id');
+    }
+  }
+
 
   deleteItem( url: string, id: string ) {
 
@@ -130,4 +160,9 @@ export class GenericCrudService {
       );
 
   }
+
+  getApiUrl() {
+    return environment.urlApiServices;
+  }
+
 }

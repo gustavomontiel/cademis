@@ -9,7 +9,7 @@ export class ColegiadosService {
   urlModel = '/colegiados';
 
   constructor(
-    private crudService: GenericCrudService
+    public crudService: GenericCrudService
   ) { }
 
   getItems() {
@@ -30,5 +30,9 @@ export class ColegiadosService {
 
   deleteItem(item: any) {
     return this.crudService.deleteItem( this.urlModel, item.id );
+  }
+
+  updateItemWithPost(item: any, id: string) {
+    return this.crudService.updateItemWithPost( this.urlModel, item, id );
   }
 }

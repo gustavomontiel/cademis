@@ -1,3 +1,6 @@
+import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.component';
+import { ColegiadosUpdateComponent } from './colegiados-update/colegiados-update.component';
+import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -17,7 +20,7 @@ const colegiadosRoutes: Routes = [
     },
     children: [
       {
-        path: 'lista-colegiados',
+        path: 'colegiados-list',
         component: ColegiadosListComponent,
         data: {
           title: 'Listado colegiados',
@@ -25,8 +28,8 @@ const colegiadosRoutes: Routes = [
         }
       },
       {
-        path: 'crear-colegiado',
-        component: CrearColegiadoComponent,
+        path: 'colegiados-create',
+        component: ColegiadosCreateComponent,
         canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Crear colegiado',
@@ -34,16 +37,25 @@ const colegiadosRoutes: Routes = [
         }
       },
       {
-        path: 'editar-colegiado/:id',
-        component: EditarColegiadoComponent,
+        path: 'colegiados-update/:id',
+        component: ColegiadosUpdateComponent,
         canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Editar colegiado',
           rolesPermitidos: []
         }
       },
-      { path: '', redirectTo: 'lista-colegiados'},
-      { path: '**', redirectTo: 'lista-colegiados'}
+      {
+        path: 'colegiados-view/:id',
+        component: ColegiadosViewComponent,
+        canDeactivate: [],
+        data: {
+          title: 'Vista colegiado',
+          rolesPermitidos: []
+        }
+      },
+      { path: '', redirectTo: 'colegiados-list'},
+      { path: '**', redirectTo: 'colegiados-list'}
 
     ]
   }

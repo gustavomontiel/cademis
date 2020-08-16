@@ -17,6 +17,7 @@ export class ColegiadosListComponent implements OnInit {
   displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'persona.apellidos', 'persona.nombres', 'acciones'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('searchText', { static: true }) searchText;
 
   constructor(
     public colegiadosService: ColegiadosService,
@@ -54,6 +55,11 @@ export class ColegiadosListComponent implements OnInit {
             });
             return matchFilter.every(Boolean);
           };
+
+        if ( String( this.searchText.nativeElement.value ).length > 0 ) {
+          this.applyFilter( this.searchText.nativeElement.value );
+        }
+
       });
   }
 
@@ -76,14 +82,21 @@ export class ColegiadosListComponent implements OnInit {
   agregarItem() {
     const url = this.route.url.split('/');
     url.pop();
-    url.push('crear-colegiado');
+    url.push('colegiados-create');
     this.route.navigateByUrl(url.join('/'));
+  }
+
+  verItem(id: string) {
+    const url = this.route.url.split('/');
+    url.pop();
+    url.push('colegiados-view');
+    this.route.navigateByUrl(url.join('/') + '/' + id);
   }
 
   editarItem(id: string) {
     const url = this.route.url.split('/');
     url.pop();
-    url.push('editar-colegiado');
+    url.push('colegiados-update');
     this.route.navigateByUrl(url.join('/') + '/' + id);
   }
 

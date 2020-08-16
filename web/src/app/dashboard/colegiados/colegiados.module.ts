@@ -14,6 +14,9 @@ import { ColegiadosRoutingModule } from './colegiados-routing.module';
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
 import { CrearColegiadoComponent } from './crear-colegiado/crear-colegiado.component';
 import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.component';
+import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create.component';
+import { ColegiadosUpdateComponent } from './colegiados-update/colegiados-update.component';
+import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.component';
 
 
 
@@ -21,7 +24,10 @@ import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.co
   declarations: [
     ColegiadosListComponent,
     CrearColegiadoComponent,
-    EditarColegiadoComponent
+    EditarColegiadoComponent,
+    ColegiadosCreateComponent,
+    ColegiadosUpdateComponent,
+    ColegiadosViewComponent
   ],
   exports: [
     ColegiadosListComponent,
