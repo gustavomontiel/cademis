@@ -1,10 +1,12 @@
-import { PuedeDesactivar } from '../../../shared/services/can-deactivate.guard';
+import { PuedeDesactivar, CanDeactivateGuard } from '../../../shared/services/can-deactivate.guard';
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../usuarios.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from '../../models/usuario.model';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormErrorHandlerService } from 'src/app/shared/services/form-error-handler.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -20,6 +22,7 @@ export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
     public usuariosService: UsuariosService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
+    private formErrorHandlerService: FormErrorHandlerService
   ) { }
 
   ngOnInit() {
@@ -58,6 +61,11 @@ export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
 
   updateItem() {
 
+    if (this.forma.invalid) {
+      this.formErrorHandlerService.fromLocal(this.forma);
+      return;
+    }
+
     Swal.fire({
       title: 'Guardar cambios?',
       text: 'Confirma los cambios?',
@@ -79,13 +87,9 @@ export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
             );
             this.forma.markAsPristine();
           },
-          err => {
-            console.log(err);
-            Swal.fire(
-              'Error!',
-              'Los cambios no fueron guardados.',
-              'error'
-            );
+          error => {
+            // tslint:disable-next-line: no-unused-expression
+            (error instanceof HttpErrorResponse) && this.formErrorHandlerService.fromServer(this.forma, error);
           }
         );
       }
@@ -94,21 +98,7 @@ export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
   }
 
   permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
-
-    if ( this.forma.dirty ) {
-      return Swal.fire({
-        title: 'Salir',
-        text: 'Confirma salir y perder los cambios?',
-        icon: 'question',
-        showCancelButton: true,
-      }).then(( result ) => {
-        console.log('result', result.value);
-        return result.value ? result.value : false;
-      });
-    } else {
-      return true;
-    }
-
+    return CanDeactivateGuard.confirmaSalirDeRuta(this.forma);
   }
 
 }

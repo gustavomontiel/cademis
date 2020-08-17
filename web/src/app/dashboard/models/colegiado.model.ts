@@ -13,15 +13,16 @@ export class Colegiado {
   public legajo: string;
   public circunscripcion: string;
   // tslint:disable-next-line: variable-name
-  public fecha_recibido: Date;
-  public facultad: string;
-  public telefono1: string;
-  public telefono2: string;
-  public telefono3: string;
+  public fecha_recibido?: Date;
+  public facultad?: string;
+  public telefono1?: string;
+  public telefono2?: string;
+  public telefono3?: string;
   public email: string;
   // tslint:disable-next-line: variable-name
   public estado_id: number;
-  public observacion: string;
+  public observacion?: string;
+  public denuncias?: string;
   // tslint:disable-next-line: variable-name
   public created_at?: Date;
   // tslint:disable-next-line: variable-name
@@ -30,6 +31,6 @@ export class Colegiado {
   // tslint:disable-next-line: variable-name
   public domicilio_real?: Direccion;
   // tslint:disable-next-line: variable-name
-  public domicilio_Legal?: Direccion;
+  public domicilio_legal?: Direccion;
 
 }

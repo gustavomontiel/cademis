@@ -1,17 +1,19 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ColegiadosService } from '../colegiados.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { Colegiado } from '../../models/colegiado.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { FormErrorHandlerService } from 'src/app/shared/services/form-error-handler.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
 
 @Component({
   selector: 'app-colegiados-update',
   templateUrl: './colegiados-update.component.html',
   styleUrls: ['./colegiados-update.component.scss']
 })
+
 export class ColegiadosUpdateComponent implements OnInit {
 
   colegiado: Colegiado;
@@ -60,7 +62,7 @@ export class ColegiadosUpdateComponent implements OnInit {
         this.colegiado = resp.data;
         console.log(this.colegiado);
         this.forma.patchValue(this.colegiado);
-        this.imgURL = this.colegiadosService.crudService.getApiUrl() + '/' + this.colegiado.persona.foto;
+        this.imgURL = this.colegiado.persona.foto ? this.colegiadosService.crudService.getApiUrl() + '/' + this.colegiado.persona.foto : null;
       }
     );
   }
@@ -108,7 +110,7 @@ export class ColegiadosUpdateComponent implements OnInit {
 
         this.colegiadosService.updateItemWithPost( formData, this.colegiado.id.toString() ).subscribe(
           resp => {
-
+            this.forma.markAsPristine();
             Swal.fire({
               title: 'Guardado!',
               html: 'Los datos fueron guardados correctamente.',
@@ -117,7 +119,8 @@ export class ColegiadosUpdateComponent implements OnInit {
             }).then(res => {
               const url = this.router.url.split('/');
               url.pop();
-              url.push('editar-usuario');
+              url.pop();
+              url.push('colegiados');
               this.router.navigateByUrl(url.join('/'));
               console.log(url);
             });
@@ -151,21 +154,34 @@ export class ColegiadosUpdateComponent implements OnInit {
   }
 
   permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
+    return CanDeactivateGuard.confirmaSalirDeRuta(this.forma);
+  }
 
-    if ( this.forma.dirty ) {
-      return Swal.fire({
-        title: 'Salir',
-        text: 'Confirma salir y perder los cambios?',
-        icon: 'question',
-        showCancelButton: true,
-      }).then(( result ) => {
-        console.log('result', result.value);
-        return result.value ? result.value : false;
-      });
-    } else {
-      return true;
-    }
+  editarItemMasDatos() {
+    const url = this.router.url.split('/');
+    url.pop();
+    url.pop();
+    url.push('colegiados-mas-datos');
+    const urlFinal = url.join('/') + '/' + this.colegiado.id;
+    this.router.navigateByUrl(urlFinal);
+  }
 
+  editarDirecciones() {
+    const url = this.router.url.split('/');
+    url.pop();
+    url.pop();
+    url.push('colegiados-direcciones');
+    const urlFinal = url.join('/') + '/' + this.colegiado.id;
+    this.router.navigateByUrl(urlFinal);
+  }
+
+  verEstadoCuenta() {
+    const url = this.router.url.split('/');
+    url.pop();
+    url.pop();
+    url.push('colegiados-estado-cuenta');
+    const urlFinal = url.join('/') + '/' + this.colegiado.id;
+    this.router.navigateByUrl(urlFinal);
   }
 
 }

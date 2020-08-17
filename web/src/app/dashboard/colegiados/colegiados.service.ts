@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GenericCrudService } from 'src/app/shared/services/generic-crud.service';
+import Swal from 'sweetalert2';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +38,68 @@ export class ColegiadosService {
   updateItemWithPost(item: any, id: string) {
     return this.crudService.updateItemWithPost( this.urlModel, item, id );
   }
+
+
+  updateMasDatos( item: any ) {
+
+    if ( item.id ) {
+
+      Swal.fire({
+        text: 'Actualizando Datos',
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      const urlApi = this.crudService.getApiUrl() + '/' + this.urlModel + '/datos/' + item.id;
+      console.log('gen-crud antes', item);
+      return this.crudService.http.put( urlApi, item )
+      .pipe(
+        map((resp: any) => {
+          Swal.close();
+          console.log('gen-crud resp', resp);
+          return resp;
+        }),
+        catchError( err => {
+          console.log( 'Error:', err );
+          Swal.close();
+          return throwError( err );
+        })
+      );
+    } else {
+      console.log('no se puede actualizar un objeto sin id');
+    }
+  }
+
+  updateDirecciones( item: any ) {
+
+    if ( item.id ) {
+
+      Swal.fire({
+        text: 'Actualizando Datos',
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      const urlApi = this.crudService.getApiUrl() + '/' + this.urlModel + '/direccion/' + item.id;
+      console.log('gen-crud antes', item);
+      return this.crudService.http.put( urlApi, item )
+      .pipe(
+        map((resp: any) => {
+          Swal.close();
+          console.log('gen-crud resp', resp);
+          return resp;
+        }),
+        catchError( err => {
+          console.log( 'Error:', err );
+          Swal.close();
+          return throwError( err );
+        })
+      );
+    } else {
+      console.log('no se puede actualizar un objeto sin id');
+    }
+  }
+
 }

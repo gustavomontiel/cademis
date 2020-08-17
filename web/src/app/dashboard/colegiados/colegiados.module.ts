@@ -17,6 +17,9 @@ import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.co
 import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create.component';
 import { ColegiadosUpdateComponent } from './colegiados-update/colegiados-update.component';
 import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.component';
+import { ColegiadosMasDatosComponent } from './colegiados-mas-datos/colegiados-mas-datos.component';
+import { ColegiadosDireccionesComponent } from './colegiados-direcciones/colegiados-direcciones.component';
+import { ColegiadosEstadoCuentaComponent } from './colegiados-estado-cuenta/colegiados-estado-cuenta.component';
 
 
 
@@ -27,7 +30,10 @@ import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.compo
     EditarColegiadoComponent,
     ColegiadosCreateComponent,
     ColegiadosUpdateComponent,
-    ColegiadosViewComponent
+    ColegiadosViewComponent,
+    ColegiadosMasDatosComponent,
+    ColegiadosDireccionesComponent,
+    ColegiadosEstadoCuentaComponent
   ],
   exports: [
     ColegiadosListComponent,

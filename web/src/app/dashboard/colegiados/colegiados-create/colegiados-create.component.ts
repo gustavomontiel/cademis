@@ -6,6 +6,7 @@ import { ColegiadosService } from '../colegiados.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormErrorHandlerService } from 'src/app/shared/services/form-error-handler.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
 
 @Component({
   selector: 'app-colegiados-create',
@@ -90,7 +91,7 @@ export class ColegiadosCreateComponent implements OnInit {
 
         this.colegiadosService.createItem(formData).subscribe(
           resp => {
-
+            this.forma.markAsPristine();
             Swal.fire({
               title: 'Guardado!',
               html: 'Los datos fueron guardados correctamente.',
@@ -134,21 +135,7 @@ export class ColegiadosCreateComponent implements OnInit {
   }
 
   permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
-
-    if (this.forma.dirty) {
-      return Swal.fire({
-        title: 'Salir',
-        text: 'Confirma salir y perder los cambios?',
-        icon: 'question',
-        showCancelButton: true,
-      }).then((result) => {
-        console.log('result', result.value);
-        return result.value ? result.value : false;
-      });
-    } else {
-      return true;
-    }
-
+    return CanDeactivateGuard.confirmaSalirDeRuta(this.forma);
   }
 
 }

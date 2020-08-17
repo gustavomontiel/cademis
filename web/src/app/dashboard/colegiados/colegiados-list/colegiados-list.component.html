@@ -28,6 +28,11 @@
       <td mat-cell *matCellDef="let element"><span class="d-none d-sm-block">{{element.persona.nombres}}</span> </td>
     </ng-container>
 
+    <ng-container matColumnDef="persona.numero_doc">
+      <th mat-header-cell *matHeaderCellDef><span class="d-none d-sm-block">DNI</span> </th>
+      <td mat-cell *matCellDef="let element"><span class="d-none d-sm-block">{{element.persona.numero_doc}}</span> </td>
+    </ng-container>
+
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element">
@@ -39,6 +44,18 @@
           <button type="button" class="btn btn-success ml-1" placement="top" ngbTooltip="Editar"
           (click)="editarItem(element.id)">
           <i class="fas fa-edit"></i>
+          </button>
+          <button type="button" class="btn btn-success ml-1" placement="top" ngbTooltip="Editar más datos"
+          (click)="editarItemMasDatos(element.id)">
+          <i class="fas fa-plus"></i>
+          </button>
+          <button type="button" class="btn btn-info ml-1" placement="top" ngbTooltip="Editar Direcciones"
+          (click)="editarDirecciones(element.id)">
+          <i class="fas fa-map-marker-alt"></i>
+          </button>
+          <button type="button" class="btn btn-warning ml-1" placement="top" ngbTooltip="Estado de cuenta"
+          (click)="verEstadoCuenta(element.id)">
+          <i class="fas fa-dollar-sign"></i>
           </button>
           <button type="button" class="btn btn-danger ml-1" placement="top" ngbTooltip="Eliminar" (click)="borrarItem(element)">
             <i class="fas fa-trash-alt"></i>

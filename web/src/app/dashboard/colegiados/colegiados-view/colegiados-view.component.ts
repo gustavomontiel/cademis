@@ -33,7 +33,7 @@ export class ColegiadosViewComponent implements OnInit {
     this.colegiadosService.getItemById(id)
       .subscribe(resp => {
         this.colegiado = resp.data;
-        this.imgURL = this.colegiadosService.crudService.getApiUrl() + '/' + this.colegiado.persona.foto;
+        this.imgURL = this.colegiado.persona.foto ? this.colegiadosService.crudService.getApiUrl() + '/' + this.colegiado.persona.foto : null;
       }
     );
   }

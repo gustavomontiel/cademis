@@ -1,0 +1,156 @@
+<div class="col-12 row">
+  <div class="col-10">
+    <h4 *ngIf="colegiado">Direcciones del Colegiado: {{colegiado.persona.apellidos}}, {{colegiado.persona.nombres}}</h4>
+  </div>
+  <div class="col-2">
+
+    <button type="button" class="btn btn-sm btn-success float-right mt-1" placement="top" ngbTooltip="Editar"
+      (click)="editarItem()">
+      <i class="fas fa-edit"></i>
+    </button>
+
+  </div>
+</div>
+
+<form role="form" ngNativeValidate [formGroup]="forma" (ngSubmit)="updateItem()" action="" method="post">
+
+  <div class="card mt-1 container">
+
+    <div class="card-body">
+
+      <h5 class="">Direcciones legal</h5>
+      <div class="row border-bottom" formGroupName="domicilio_legal">
+
+        <div class="form-group col-md-4">
+          <label for="calle">Calle</label>
+          <input formControlName="calle" name="calle" type="text" class="form-control form-control-sm"
+            placeholder="Calle"
+            [ngClass]="{'is-invalid': forma.get('domicilio_legal').get('calle').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_legal').get('calle').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-1">
+          <label for="numero">Número</label>
+          <input formControlName="numero" name="numero" type="text" class="form-control form-control-sm"
+            placeholder="Número"
+            [ngClass]="{'is-invalid': forma.get('domicilio_legal').get('numero').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_legal').get('numero').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-1">
+          <label for="piso">Piso</label>
+          <input formControlName="piso" name="piso" type="text" class="form-control form-control-sm" placeholder="Piso"
+          [ngClass]="{'is-invalid': forma.get('domicilio_legal').get('piso').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_legal').get('piso').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-1">
+          <label for="departamento">Dpto</label>
+          <input formControlName="departamento" name="departamento" type="text" class="form-control form-control-sm"
+            placeholder="Dpto"
+            [ngClass]="{'is-invalid': forma.get('domicilio_legal').get('departamento').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_legal').get('departamento').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="localidad">Localidad</label>
+          <input formControlName="localidad" name="localidad" type="text" class="form-control form-control-sm"
+            placeholder="Localidad"
+            [ngClass]="{'is-invalid': forma.get('domicilio_legal').get('localidad').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_legal').get('localidad').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="provincia">Provincia</label>
+          <input formControlName="provincia" name="provincia" type="text" class="form-control form-control-sm"
+            placeholder="Provincia"
+            [ngClass]="{'is-invalid': forma.get('domicilio_legal').get('provincia').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_legal').get('provincia').errors?.customMsgError }}
+          </div>
+        </div>
+
+      </div>
+
+      <h5 class="mt-4">Direcciones real</h5>
+      <div class="row border-bottom" formGroupName="domicilio_real">
+
+        <div class="form-group col-4">
+          <label for="calle">Calle</label>
+          <input formControlName="calle" name="calle" type="text" class="form-control form-control-sm"
+            placeholder="Calle"
+            [ngClass]="{'is-invalid': forma.get('domicilio_real').get('calle').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_real').get('calle').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-1">
+          <label for="numero">Número</label>
+          <input formControlName="numero" name="numero" type="text" class="form-control form-control-sm"
+            placeholder="Número"
+            [ngClass]="{'is-invalid': forma.get('domicilio_real').get('numero').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_real').get('numero').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-1">
+          <label for="piso">Piso</label>
+          <input formControlName="piso" name="piso" type="text" class="form-control form-control-sm" placeholder="Piso"
+          [ngClass]="{'is-invalid': forma.get('domicilio_real').get('piso').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_real').get('piso').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-1">
+          <label for="departamento">Dpto</label>
+          <input formControlName="departamento" name="departamento" type="text" class="form-control form-control-sm"
+            placeholder="Dpto"
+            [ngClass]="{'is-invalid': forma.get('domicilio_real').get('departamento').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_real').get('departamento').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="localidad">Localidad</label>
+          <input formControlName="localidad" name="localidad" type="text" class="form-control form-control-sm"
+            placeholder="Localidad"
+            [ngClass]="{'is-invalid': forma.get('domicilio_real').get('localidad').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_real').get('localidad').errors?.customMsgError }}
+          </div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="provincia">Provincia</label>
+          <input formControlName="provincia" name="provincia" type="text" class="form-control form-control-sm"
+            placeholder="Provincia"
+            [ngClass]="{'is-invalid': forma.get('domicilio_real').get('provincia').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('domicilio_real').get('provincia').errors?.customMsgError }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card-footer row justify-content-end">
+      <a routerLink="colegiados" type="button" class="btn btn-secondary mr-2">Cancelar</a>
+      <button [disabled]="forma.pristine" type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
+</form>

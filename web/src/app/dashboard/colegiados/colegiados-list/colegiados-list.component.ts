@@ -14,7 +14,8 @@ export class ColegiadosListComponent implements OnInit {
 
   tableData: Colegiado[];
   dataSource: any;
-  displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'persona.apellidos', 'persona.nombres', 'acciones'];
+  // tslint:disable-next-line: max-line-length
+  displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'persona.apellidos', 'persona.nombres', 'persona.numero_doc', 'acciones'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('searchText', { static: true }) searchText;
@@ -97,6 +98,27 @@ export class ColegiadosListComponent implements OnInit {
     const url = this.route.url.split('/');
     url.pop();
     url.push('colegiados-update');
+    this.route.navigateByUrl(url.join('/') + '/' + id);
+  }
+
+  editarItemMasDatos(id: string) {
+    const url = this.route.url.split('/');
+    url.pop();
+    url.push('colegiados-mas-datos');
+    this.route.navigateByUrl(url.join('/') + '/' + id);
+  }
+
+  editarDirecciones(id: string) {
+    const url = this.route.url.split('/');
+    url.pop();
+    url.push('colegiados-direcciones');
+    this.route.navigateByUrl(url.join('/') + '/' + id);
+  }
+
+  verEstadoCuenta(id: string) {
+    const url = this.route.url.split('/');
+    url.pop();
+    url.push('colegiados-estado-cuenta');
     this.route.navigateByUrl(url.join('/') + '/' + id);
   }
 

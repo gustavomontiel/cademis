@@ -1,3 +1,6 @@
+import { ColegiadosEstadoCuentaComponent } from './colegiados-estado-cuenta/colegiados-estado-cuenta.component';
+import { ColegiadosDireccionesComponent } from './colegiados-direcciones/colegiados-direcciones.component';
+import { ColegiadosMasDatosComponent } from './colegiados-mas-datos/colegiados-mas-datos.component';
 import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.component';
 import { ColegiadosUpdateComponent } from './colegiados-update/colegiados-update.component';
 import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create.component';
@@ -51,6 +54,33 @@ const colegiadosRoutes: Routes = [
         canDeactivate: [],
         data: {
           title: 'Vista colegiado',
+          rolesPermitidos: []
+        }
+      },
+      {
+        path: 'colegiados-mas-datos/:id',
+        component: ColegiadosMasDatosComponent,
+        canDeactivate: [CanDeactivateGuard],
+        data: {
+          title: 'Colegiados más datos',
+          rolesPermitidos: []
+        }
+      },
+      {
+        path: 'colegiados-direcciones/:id',
+        component: ColegiadosDireccionesComponent,
+        canDeactivate: [CanDeactivateGuard],
+        data: {
+          title: 'Colegiado direcciones',
+          rolesPermitidos: []
+        }
+      },
+      {
+        path: 'colegiados-estado-cuenta/:id',
+        component: ColegiadosEstadoCuentaComponent,
+        canDeactivate: [],
+        data: {
+          title: 'Colegiado direcciones',
           rolesPermitidos: []
         }
       },

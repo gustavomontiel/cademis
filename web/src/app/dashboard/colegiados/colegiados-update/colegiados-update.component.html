@@ -1,4 +1,27 @@
-<h4>Editar Colegiado</h4>
+<div class="col-12 row">
+  <div class="col-6">
+    <h4>Editar Colegiado</h4>
+  </div>
+  <div class="col-6">
+
+    <button type="button" class="btn btn-sm btn-warning float-right mt-1 mr-1" placement="top" ngbTooltip="Ver estado de cuenta"
+      (click)="verEstadoCuenta()">
+      <i class="fas fa-dollar-sign"></i>
+    </button>
+
+    <button type="button" class="btn btn-sm btn-info float-right mt-1 mr-1" placement="top" ngbTooltip="Editar direcciones"
+      (click)="editarDirecciones()">
+      <i class="fas fa-map-marker-alt"></i>
+    </button>
+
+    <button type="button" class="btn btn-sm btn-success float-right mt-1 mr-1" placement="top" ngbTooltip="Editar más datos"
+      (click)="editarItemMasDatos()">
+      <i class="fas fa-plus"></i>
+    </button>
+
+  </div>
+</div>
+
 <div class="col-12">
   <div class="card card-primary mt-2 container">
     <!-- form start -->
@@ -143,11 +166,8 @@
 
       <!-- /.card-body -->
       <div class="card-footer row justify-content-end">
-        <a routerLink="usuarios" type="button" class="btn btn-secondary mr-2">Cancelar</a>
-        <!--
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        -->
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a routerLink="colegiados" type="button" class="btn btn-secondary mr-2">Cancelar</a>
+        <button [disabled]="forma.pristine" type="submit" class="btn btn-primary">Guardar</button>
       </div>
 
     </form>

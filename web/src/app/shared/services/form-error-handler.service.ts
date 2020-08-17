@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,17 @@ export class FormErrorHandlerService {
             });
           }
         });
-      } else if ( error.status !== 200 ) {
+      } else if ( error.status !== 200 && error.status !== 201 && error.status !== 204 ) {
         formulario.setErrors({
           customMsgError: error.message
         });
+
+        Swal.fire(
+          'Error interno',
+          error.message,
+          'error'
+        );
+
       }
     }
   }
@@ -61,7 +69,7 @@ export class FormErrorHandlerService {
 
           }
 
-        } else if(formControl instanceof FormGroup) {
+        } else if ( formControl instanceof FormGroup ) {
           this.fromLocal(formControl);
         }
 

@@ -7,16 +7,28 @@
         <div class="form-group col-md-12">
           <label for="nombre">Nombre completo</label>
           <input formControlName="name" name="name" type="text" class="form-control" placeholder="Nombre completo"
-            required>
+            required
+            [ngClass]="{'is-invalid': forma.get('name').errors?.customMsgError}">
+            <div class="invalid-feedback">
+              {{ forma.get('name').errors?.customMsgError }}
+            </div>
         </div>
         <div class="form-group col-md-12">
           <label for="nombre">Nombre de usuario</label>
           <input formControlName="username" name="username" type="text" class="form-control"
-            placeholder="Nombre completo" required>
+            placeholder="Nombre de usuario" required
+            [ngClass]="{'is-invalid': forma.get('username').errors?.customMsgError}">
+            <div class="invalid-feedback">
+              {{ forma.get('username').errors?.customMsgError }}
+            </div>
         </div>
         <div class="form-group col-md-6">
           <label for="email">E-mail</label>
-          <input formControlName="email" name="email" type="email" class="form-control" placeholder="e-mail" required>
+          <input formControlName="email" name="email" type="email" class="form-control" placeholder="e-mail" required
+          [ngClass]="{'is-invalid': forma.get('email').errors?.customMsgError}">
+            <div class="invalid-feedback">
+              {{ forma.get('email').errors?.customMsgError }}
+            </div>
         </div>
         <!--
         <div class="form-group col-md-6">
@@ -31,7 +43,11 @@
         <div class="form-group col-md-6">
           <label for="password">Contraseña</label>
           <input formControlName="password" name="password" type="password" class="form-control"
-            placeholder="Contraseña">
+            placeholder="Contraseña"
+            [ngClass]="{'is-invalid': forma.get('password').errors?.customMsgError}">
+            <div class="invalid-feedback">
+              {{ forma.get('password').errors?.customMsgError }}
+            </div>
         </div>
       </div>
       <!-- /.card-body -->

@@ -1,0 +1,131 @@
+<div class="col-12 row">
+  <div class="col-10">
+    <h4 *ngIf="colegiado">Mas datos del Colegiado: {{colegiado.persona.apellidos}}, {{colegiado.persona.nombres}}</h4>
+  </div>
+  <div class="col-2">
+    <button type="button" class="btn btn-sm btn-success float-right mt-1" placement="top" ngbTooltip="Editar"
+      (click)="editarItem()">
+      <i class="fas fa-edit"></i>
+    </button>
+  </div>
+</div>
+
+<form role="form" ngNativeValidate [formGroup]="forma" (ngSubmit)="updateItem()" action="" method="post">
+  <div class="card mt-1 container">
+    <div class="card-body">
+
+      <!-- datos persona -->
+      <div class="row mt-2" formGroupName="persona">
+        <div class="form-group col-2">
+          <label for="fecha_nac">Fecha Nac.</label>
+          <input formControlName="fecha_nac" name="fecha_nac" type="date" class="form-control form-control-sm"
+            [ngClass]="{'is-invalid': forma.get('persona').get('fecha_nac').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('persona').get('fecha_nac').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="localidadNac">Localidad</label>
+          <input formControlName="localidad_nac" name="localidad_nac" type="text" class="form-control form-control-sm"
+            placeholder="Localidad"
+            [ngClass]="{'is-invalid': forma.get('persona').get('localidad_nac').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('persona').get('localidad_nac').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="provincia_nac">Provincia</label>
+          <input formControlName="provincia_nac" name="provincia_nac" type="text" class="form-control form-control-sm"
+            placeholder="Provincia"
+            [ngClass]="{'is-invalid': forma.get('persona').get('provincia_nac').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('persona').get('provincia_nac').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="pais_nac">Pais</label>
+          <input formControlName="pais_nac" name="pais_nac" type="text" class="form-control form-control-sm"
+            placeholder="Pais" [ngClass]="{'is-invalid': forma.get('persona').get('pais_nac').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('persona').get('pais_nac').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <!-- <label for="nombre" class="col-1">Sexo</label> -->
+          <div class="form-check form-check-inline mt-3">
+            <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="m">
+            <label class="form-check-label" for="inlineRadio1">&nbsp;Masculino</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="gndr" formControlName="sexo" name="sexo" value="f">
+            <label class="form-check-label" for="inlineRadio1">&nbsp;Femenino</label>
+          </div>
+          <div class="invalid-feedback">
+            {{ forma.get('persona').get('sexo').errors?.customMsgError }}
+          </div>
+        </div>
+      </div>
+
+      <!-- datos colegiado -->
+      <div class="row">
+
+        <div class="form-group col-md-3">
+          <label for="telefono1">Telefono 1</label>
+          <input formControlName="telefono1" name="telefono1" type="text" class="form-control form-control-sm"
+            placeholder="Telefono 1" [ngClass]="{'is-invalid': forma.get('telefono1').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('telefono1').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="telefono2">Telefono 2</label>
+          <input formControlName="telefono2" name="telefono2" type="text" class="form-control form-control-sm"
+            placeholder="Telefono 2" [ngClass]="{'is-invalid': forma.get('telefono2').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('telefono2').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="telefono3">Telefono 3</label>
+          <input formControlName="telefono3" name="telefono3" type="text" class="form-control form-control-sm"
+            placeholder="Telefono 3" [ngClass]="{'is-invalid': forma.get('telefono3').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('telefono3').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="email">E-mail</label>
+          <input formControlName="email" name="email" type="text" class="form-control form-control-sm"
+            placeholder="E-mail" [ngClass]="{'is-invalid': forma.get('email').errors?.customMsgError}">
+          <div class="invalid-feedback">
+            {{ forma.get('email').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <label for="observacion">Observaciones</label>
+          <textarea formControlName="observacion" name="observacion" class="form-control" rows="5"
+            [ngClass]="{'is-invalid': forma.get('observacion').errors?.customMsgError}">
+        </textarea>
+          <div class="invalid-feedback">
+            {{ forma.get('observacion').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <label for="denuncias">Denuncias</label>
+          <textarea formControlName="denuncias" name="denuncias" class="form-control" rows="5"
+            [ngClass]="{'is-invalid': forma.get('denuncias').errors?.customMsgError}"></textarea>
+          <div class="invalid-feedback">
+            {{ forma.get('denuncias').errors?.customMsgError }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card-footer row justify-content-end">
+      <a routerLink="colegiados" type="button" class="btn btn-secondary mr-2">Cancelar</a>
+      <button [disabled]="forma.pristine" type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
+</form>
