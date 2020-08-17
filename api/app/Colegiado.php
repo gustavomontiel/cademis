@@ -21,7 +21,8 @@ class Colegiado extends Model
         'telefono3',
         'email',
         'estado_id',
-        'observacion'
+        'observacion',
+        'denuncias'
     ];
 
     /**

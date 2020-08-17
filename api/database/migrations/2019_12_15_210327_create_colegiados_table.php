@@ -38,6 +38,7 @@ class CreateColegiadosTable extends Migration
             $table->string('cargo')->nullable();
             $table->date('fecha_cargo')->nullable();
             $table->string('observacion', 5000)->nullable();
+            $table->string('denuncias', 5000)->nullable();
             $table->timestamps();
         });
     }

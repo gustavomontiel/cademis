@@ -24,7 +24,7 @@ class CreatePersonasTable extends Migration
             $table->string('localidad_nac')->nullable();
             $table->string('provincia_nac')->nullable();
             $table->string('pais_nac')->nullable();
-            $table->string('sexo')->nullable();
+            $table->string('sexo', 1)->nullable();
             $table->string('foto', 100)->nullable();
             $table->bigInteger('colegiado_id')->unsigned();
             $table->timestamps();

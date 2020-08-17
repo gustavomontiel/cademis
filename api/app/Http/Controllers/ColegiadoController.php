@@ -123,12 +123,12 @@ class ColegiadoController extends Controller
         if (is_null($colegiado)) {
             return response()->json(['error' => 'true', 'message' => 'Colegiado no encontrado.']);
         }
-        
+
         $input = $request->all();
 
         $validator = Validator::make($input, [
             'fecha_matricula' => 'date',
-            'num_matricula' => 'unique:colegiados,num_matricula,'.$id,
+            'num_matricula' => 'unique:colegiados,num_matricula,' . $id,
             'libro' => 'string',
             'folio' => 'string',
             'legajo' => 'string',
@@ -147,13 +147,135 @@ class ColegiadoController extends Controller
 
         $persona = $input['persona'];
         unset($input['persona']);
-        
+
         $colegiado->fill($input);
+        $colegiado->save();
 
         $colegiado->persona->fill($persona);
+        $colegiado->persona->save();
 
         $this->uploadFoto($colegiado, $request);
 
+        return response()->json(['error' => 'false', 'data' => $colegiado, 'message' => 'Colegiado actualizado correctamente.']);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function agregarDatos(Request $request, $id)
+    {
+        $colegiado = Colegiado::find($id);
+
+        if (is_null($colegiado)) {
+            return response()->json(['error' => 'true', 'message' => 'Colegiado no encontrado.']);
+        }
+
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'telefono1' => 'string|nullable',
+            'telefono2' => 'string|nullable',
+            'telefono3' => 'string|nullable',
+            'email' => 'email|nullable',
+            'observacion' => 'string|max:5000|nullable',
+            'denuncias' => 'string|max:5000|nullable',
+            'persona.fecha_nac' => 'date|nullable',
+            'persona.localidad_nac' => 'string|nullable',
+            'persona.provincia_nac' => 'string|nullable',
+            'persona.pais_nac' => 'string|nullable',
+            'persona.sexo' => 'string|max:1|nullable'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
+        }
+
+        $persona = $input['persona'];
+        unset($input['persona']);
+
+        $colegiado->fill($input);
+        $colegiado->save();
+
+        $colegiado->persona->fill($persona);
+        $colegiado->persona->save();
+
+        return response()->json(['error' => 'false', 'data' => $colegiado, 'message' => 'Colegiado actualizado correctamente.']);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function agregarDireccion(Request $request, $id)
+    {
+        $colegiado = Colegiado::where('id', $id)->with('persona')->first();
+
+        if (is_null($colegiado)) {
+            return response()->json(['error' => 'true', 'message' => 'Colegiado no encontrado.']);
+        }
+        
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'domicilioReal.calle' => 'string|nullable',
+            'domicilioReal.numero' => 'string|nullable',
+            'domicilioReal.piso' => 'string|nullable',
+            'domicilioReal.departamento' => 'string|nullable',
+            'domicilioReal.localidad' => 'string|nullable',
+            'domicilioReal.provincia' => 'string|nullable',
+            'domicilioLegal.calle' => 'string|nullable',
+            'domicilioLegal.numero' => 'string|nullable',
+            'domicilioLegal.piso' => 'string|nullable',
+            'domicilioLegal.departamento' => 'string|nullable',
+            'domicilioLegal.localidad' => 'string|nullable',
+            'domicilioLegal.provincia' => 'string|nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
+        }
+
+        if (isset($input['domicilio_real'])) {
+            $validator = Validator::make($input['domicilio_real'], [
+                'calle' => 'string|required',
+                'localidad' => 'string|required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
+            }
+            $domicilioReal = $colegiado->domicilioReal()->where('tipo', 'REAL')->first();
+            if ($domicilioReal) {
+                $domicilioReal->fill(['tipo' => 'REALANTERIOR']);
+                $domicilioReal->save();
+            }
+            $domicilioReal = new Direccion($input['domicilio_real']);
+            $colegiado->domicilioReal()->save($domicilioReal);
+        }
+
+        if (isset($input['domicilio_legal'])) {
+            $validator = Validator::make($input['domicilio_legal'], [
+                'calle' => 'string|required',
+                'localidad' => 'string|required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
+            }
+            $domicilioLegal = $colegiado->domicilioLegal()->where('tipo', 'LEGAL')->first();
+            if ($domicilioLegal) {
+                $domicilioLegal->fill(['tipo' => 'LEGALANTERIOR']);
+                $domicilioLegal->save();
+            }
+            $domicilioLegal = new Direccion($input['domicilio_legal']);
+            $colegiado->domicilioLegal()->save($domicilioLegal);
+        }
+        
         return response()->json(['error' => 'false', 'data' => $colegiado, 'message' => 'Colegiado actualizado correctamente.']);
     }
 
@@ -186,7 +308,6 @@ class ColegiadoController extends Controller
     public function uploadFoto(Colegiado $colegiado, Request $request)
     {
 
-
         // IMAGEN PRINCIPAL
         $file = $request->file('persona.foto');
         if ($file) {
@@ -197,11 +318,10 @@ class ColegiadoController extends Controller
             );
             fclose($stream);
             $colegiado->persona['foto'] = 'uploads/persona/' . $colegiado->persona->id . '/foto.' . $file->clientExtension();
+            $colegiado->persona->save();
+
+            return response()->json(['error' => 'false', 'message' => 'Imagenes guardadas correctamente']);
         }
-
-        $colegiado->persona->save();
-
-        return response()->json(['error' => 'false', 'message' => 'Imagenes guardadas correctamente']);
     }
 
     /**
