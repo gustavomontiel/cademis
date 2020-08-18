@@ -20,6 +20,7 @@ import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.compo
 import { ColegiadosMasDatosComponent } from './colegiados-mas-datos/colegiados-mas-datos.component';
 import { ColegiadosDireccionesComponent } from './colegiados-direcciones/colegiados-direcciones.component';
 import { ColegiadosEstadoCuentaComponent } from './colegiados-estado-cuenta/colegiados-estado-cuenta.component';
+import { ColegiadosMovimientosCuentaComponent } from './colegiados-movimientos-cuenta/colegiados-movimientos-cuenta.component';
 
 
 
@@ -33,7 +34,8 @@ import { ColegiadosEstadoCuentaComponent } from './colegiados-estado-cuenta/cole
     ColegiadosViewComponent,
     ColegiadosMasDatosComponent,
     ColegiadosDireccionesComponent,
-    ColegiadosEstadoCuentaComponent
+    ColegiadosEstadoCuentaComponent,
+    ColegiadosMovimientosCuentaComponent
   ],
   exports: [
     ColegiadosListComponent,

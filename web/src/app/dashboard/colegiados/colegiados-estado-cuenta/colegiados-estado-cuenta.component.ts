@@ -8,6 +8,7 @@ import { FormBuilder, FormArray, Validators, FormGroup, FormControl } from '@ang
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { FormErrorHandlerService } from 'src/app/shared/services/form-error-handler.service';
+import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
 
 
 @Component( {
@@ -157,13 +158,17 @@ export class ColegiadosEstadoCuentaComponent implements OnInit {
 
   }
 
-  editarItem() {
+  verMovimientos() {
     const url = this.router.url.split( '/' );
     url.pop();
     url.pop();
-    url.push( 'colegiados-update' );
+    url.push( 'colegiados-movimientos-cuenta' );
     const urlFinal = url.join( '/' ) + '/' + this.cuentaCorriente.colegiado.id;
     this.router.navigateByUrl( urlFinal );
+  }
+
+  permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
+    return CanDeactivateGuard.confirmaSalirDeRuta(this.forma);
   }
 
 }

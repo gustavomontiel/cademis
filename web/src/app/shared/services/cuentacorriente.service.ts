@@ -6,9 +6,9 @@ import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 
-@Injectable({
+@Injectable( {
   providedIn: 'root'
-})
+} )
 export class CuentaCorrienteService {
 
   urlModel = '/cuentascorrientes';
@@ -20,12 +20,12 @@ export class CuentaCorrienteService {
 
   cuentaColegiado( id: string | number ) {
 
-    Swal.fire({
+    Swal.fire( {
       text: 'Buscando Datos',
       onBeforeOpen: () => {
         Swal.showLoading();
       }
-    });
+    } );
 
 
     const urlApi = this.crudService.getApiUrl() + this.urlModel + '/pendientes/' + id;
@@ -34,18 +34,38 @@ export class CuentaCorrienteService {
       map( ( resp: any ) => {
         Swal.close();
         return resp;
-      })
+      } )
     );
   }
 
-  confirmarPago( cuentaCorriente: CuentaCorriente) {
-    console.log('va', cuentaCorriente);
-    Swal.fire({
+  movimiesntosColegiado( id: string | number ) {
+
+    Swal.fire( {
+      text: 'Buscando Datos',
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      }
+    } );
+
+
+    const urlApi = this.crudService.getApiUrl() + this.urlModel + '/colegiado/' + id;
+
+    return this.crudService.http.get( urlApi ).pipe(
+      map( ( resp: any ) => {
+        Swal.close();
+        return resp;
+      } )
+    );
+  }
+
+  confirmarPago( cuentaCorriente: CuentaCorriente ) {
+    console.log( 'va', cuentaCorriente );
+    Swal.fire( {
       text: 'Creando registro',
       onBeforeOpen: () => {
         Swal.showLoading();
       }
-    });
+    } );
 
     const urlApi = this.crudService.getApiUrl() + '/cobro/procesar';
 
@@ -53,14 +73,14 @@ export class CuentaCorrienteService {
       .pipe(
         map( ( resp: any ) => {
           Swal.close();
-          console.log('vuelve', cuentaCorriente);
+          console.log( 'vuelve', cuentaCorriente );
           return resp;
-        }),
+        } ),
         catchError( err => {
           console.log( 'error:', err );
           Swal.close();
           return throwError( err );
-        })
+        } )
       );
 
   }
