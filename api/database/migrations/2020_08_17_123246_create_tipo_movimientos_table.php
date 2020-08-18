@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConceptosTable extends Migration
+class CreateTipoMovimientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateConceptosTable extends Migration
      */
     public function up()
     {
-        Schema::create('conceptos', function (Blueprint $table) {
+        Schema::create('tipos_movimientos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->bigInteger('tipo_movimiento_id');
-            $table->integer('orden')->default(0);
+            $table->string('operacion');
             $table->timestamps();
         });
     }
@@ -29,7 +28,6 @@ class CreateConceptosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conceptos');
+        Schema::dropIfExists('tipos_movimientos');
     }
 }
-

@@ -102,6 +102,16 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'CuentaCorrienteController@show'
     ]);
 
+    $router->get('/cuentascorrientes/colegiado/{idColegiado}', [
+        'as' => 'cuentascorrientes.showByColegiado',
+        'uses' => 'CuentaCorrienteController@showByColegiado'
+    ]);
+
+    $router->get('/cuentascorrientes/pendientes/{idColegiado}', [
+        'as' => 'cuentascorrientes.showPendientesByColegiado',
+        'uses' => 'CuentaCorrienteController@showPendientesByColegiado'
+    ]);
+
     $router->put('/cuentascorrientes/{id}', [
         'as' => 'cuentascorrientes.update',
         'uses' => 'CuentaCorrienteController@update'
@@ -110,6 +120,18 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
     $router->delete('/cuentascorrientes/{id}', [
         'as' => 'cuentascorrientes.destroy',
         'uses' => 'CuentaCorrienteController@destroy'
+    ]);
+
+    /* Matrícula Routes */
+    $router->post('/matricula/generarcuotas', [
+        'as' => 'matricula.generarCuotas',
+        'uses' => 'MatriculaController@generarCuotas'
+    ]);
+
+    /* Cobro Routes */
+    $router->post('/cobro/procesar', [
+        'as' => 'cobro.procesarCobro',
+        'uses' => 'CobroController@procesarCobro'
     ]);
 
     /* Tipos de Matriculados Routes */
@@ -166,9 +188,9 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'ObraSocialController@destroy'
     ]);
 
-     /* Planes Routes */
+    /* Planes Routes */
 
-     $router->get('/planes', [
+    $router->get('/planes', [
         'as' => 'planes.index',
         'uses' => 'PlanController@index'
     ]);
@@ -193,9 +215,9 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'PlanController@destroy'
     ]);
 
-      /* Concepto Routes */
+    /* Concepto Routes */
 
-      $router->get('/conceptos', [
+    $router->get('/conceptos', [
         'as' => 'conceptos.index',
         'uses' => 'ConceptoController@index'
     ]);
@@ -220,9 +242,9 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'ConceptoController@destroy'
     ]);
 
-      /* Tipo de Comprobante Routes */
+    /* Tipo de Comprobante Routes */
 
-      $router->get('/tiposdecomprobantes', [
+    $router->get('/tiposdecomprobantes', [
         'as' => 'tiposdecomprobantes.index',
         'uses' => 'TipoDeComprobanteController@index'
     ]);
@@ -279,8 +301,8 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
             'uses' => 'UserController@destroy'
         ]);
 
-         /* Colegiados Routes */
-         $router->post('/importarcolegiados', [
+        /* Colegiados Routes */
+        $router->post('/importarcolegiados', [
             'as' => 'colegiados.importarcolegiados',
             'uses' => 'ColegiadoController@importarcolegiados'
         ]);

@@ -117,4 +117,43 @@ class CuentaCorrienteController extends Controller
 
         return response()->json(['error' => 'false', 'message' => 'Cuenta corriente eliminada correctamente.']);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByColegiado($idColegiado)
+    {
+        $cuentaCorriente = CuentaCorriente::where('colegiado_id', $idColegiado)->with(['colegiado.persona', 'movimientos'])->first();
+
+        if (is_null($cuentaCorriente)) {
+            return response()->json(['error' => 'true', 'message' => 'Cuenta corriente no encontrada.']);
+        }
+
+        return response()->json(['error' => 'false', 'data' => $cuentaCorriente, 'message' => 'Cuenta corriente enviada correctamente.']);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showPendientesByColegiado($idColegiado)
+    {
+        $cuentaCorriente = CuentaCorriente::where('colegiado_id', $idColegiado)
+                                            ->with(['movimientos' => function ($query) {
+                                                $query->where('estado', '<>', 'CANCELADO');
+                                            }])
+                                            ->with('colegiado.persona')
+                                            ->first();
+
+        if (is_null($cuentaCorriente)) {
+            return response()->json(['error' => 'true', 'message' => 'Cuenta corriente no encontrada.']);
+        }
+
+        return response()->json(['error' => 'false', 'data' => $cuentaCorriente, 'message' => 'Cuenta corriente enviada correctamente.']);
+    }
 }

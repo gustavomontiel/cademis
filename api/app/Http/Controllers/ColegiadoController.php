@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Colegiado;
+use App\CuentaCorriente;
 use App\Direccion;
 use App\Http\Requests\CsvImportRequest;
 use App\Persona;
@@ -62,16 +63,12 @@ class ColegiadoController extends Controller
 
         $persona = new Persona($input['persona']);
         unset($input['persona']);
-        // $domicilioReal = new Direccion($input['domicilio_real']);
-        // unset($input['domicilio_real']);
-        // $domicilioLegal = new Direccion($input['domicilio_legal']);
-        // unset($input['domicilio_legal']);
 
         $colegiado = Colegiado::create($input);
 
         $colegiado->persona()->save($persona);
-        // $colegiado->domicilioReal()->save($domicilioReal);
-        // $colegiado->domicilioLegal()->save($domicilioLegal);
+        $cuentaCorriente = new CuentaCorriente();
+        $colegiado->cuentaCorriente()->save($cuentaCorriente);
 
         $this->uploadFoto($colegiado, $request);
 
@@ -98,7 +95,7 @@ class ColegiadoController extends Controller
                 'domiciliosAnteriores' => function ($query) {
                     $query->where('tipo', 'LEGALANTERIOR')->orWhere('tipo', 'REALANTERIOR');
                 },
-                'estado', 'cuentasCorrientes'
+                'estado', 'cuentaCorriente'
             ])
             ->first();
 
@@ -220,36 +217,24 @@ class ColegiadoController extends Controller
         if (is_null($colegiado)) {
             return response()->json(['error' => 'true', 'message' => 'Colegiado no encontrado.']);
         }
-        
+
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'domicilioReal.calle' => 'string|nullable',
-            'domicilioReal.numero' => 'string|nullable',
-            'domicilioReal.piso' => 'string|nullable',
-            'domicilioReal.departamento' => 'string|nullable',
-            'domicilioReal.localidad' => 'string|nullable',
-            'domicilioReal.provincia' => 'string|nullable',
-            'domicilioLegal.calle' => 'string|nullable',
-            'domicilioLegal.numero' => 'string|nullable',
-            'domicilioLegal.piso' => 'string|nullable',
-            'domicilioLegal.departamento' => 'string|nullable',
-            'domicilioLegal.localidad' => 'string|nullable',
-            'domicilioLegal.provincia' => 'string|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
-        }
-
         if (isset($input['domicilio_real'])) {
-            $validator = Validator::make($input['domicilio_real'], [
-                'calle' => 'string|required',
-                'localidad' => 'string|required',
+            $validator = Validator::make($input, [
+                'domicilio_real.calle' => 'string|required',
+                'domicilio_real.numero' => 'string|nullable',
+                'domicilio_real.piso' => 'string|nullable',
+                'domicilio_real.departamento' => 'string|nullable',
+                'domicilio_real.localidad' => 'string|required',
+                'domicilio_real.provincia' => 'string|nullable',
+                'domicilio_real.pais' => 'string|nullable',
             ]);
+
             if ($validator->fails()) {
                 return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
             }
+
             $domicilioReal = $colegiado->domicilioReal()->where('tipo', 'REAL')->first();
             if ($domicilioReal) {
                 $domicilioReal->fill(['tipo' => 'REALANTERIOR']);
@@ -260,13 +245,20 @@ class ColegiadoController extends Controller
         }
 
         if (isset($input['domicilio_legal'])) {
-            $validator = Validator::make($input['domicilio_legal'], [
-                'calle' => 'string|required',
-                'localidad' => 'string|required',
+            $validator = Validator::make($input, [
+                'domicilio_legal.calle' => 'string|required',
+                'domicilio_legal.numero' => 'string|nullable',
+                'domicilio_legal.piso' => 'string|nullable',
+                'domicilio_legal.departamento' => 'string|nullable',
+                'domicilio_legal.localidad' => 'string|required',
+                'domicilio_legal.provincia' => 'string|nullable',
+                'domicilio_legal.pais' => 'string|nullable',
             ]);
+
             if ($validator->fails()) {
                 return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
             }
+
             $domicilioLegal = $colegiado->domicilioLegal()->where('tipo', 'LEGAL')->first();
             if ($domicilioLegal) {
                 $domicilioLegal->fill(['tipo' => 'LEGALANTERIOR']);
@@ -275,7 +267,7 @@ class ColegiadoController extends Controller
             $domicilioLegal = new Direccion($input['domicilio_legal']);
             $colegiado->domicilioLegal()->save($domicilioLegal);
         }
-        
+
         return response()->json(['error' => 'false', 'data' => $colegiado, 'message' => 'Colegiado actualizado correctamente.']);
     }
 
@@ -606,6 +598,8 @@ class ColegiadoController extends Controller
             $colegiado->domicilioReal()->save($domicilioReal);
             $colegiado->domicilioLegal()->save($domicilioLegal);
             $colegiado->domiciliosAnteriores()->save($domicilioLegalAnterior);
+            $cuentaCorriente = new CuentaCorriente();
+            $colegiado->cuentaCorriente()->save($cuentaCorriente);
             // return response()->json(['error' => 'false', 'colegiado' => $colegiado, 'persona' => $persona, 'domicilioReal' => $domicilioReal, 'domicilioLegal' => $domicilioLegal, 'domicilioLegalAnterior' => $domicilioLegalAnterior]);
         }
         return response()->json(['error' => 'false', 'message' => 'Colegiados importados correctamente']);

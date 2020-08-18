@@ -17,5 +17,11 @@ class TipoDeComprobante extends Model
         'nombre'
     ];
 
- 
+    /**
+     * Obtener los comprobantes asociados al Tipo de Comprobante
+     */
+    public function comprobantes()
+    {
+        return $this->hasMany('App\Comprobante');
+    }
 }

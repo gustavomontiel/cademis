@@ -13,7 +13,7 @@ class EstadosSeeder extends Seeder
     public function run()
     {
         Estado::create(['codigo' => 'A', 'nombre' => 'Activo']);
-        Estado::create(['codigo' => 'S', 'nombre' => 'Suspendiodo por Morosidad']);
+        Estado::create(['codigo' => 'S', 'nombre' => 'Suspendido por Morosidad']);
         Estado::create(['codigo' => 'V', 'nombre' => 'Suspendido Voluntariamente']);
         Estado::create(['codigo' => 'D', 'nombre' => 'Sanción Disciplinaria']);
         Estado::create(['codigo' => 'I', 'nombre' => 'Incompatibilidad']);

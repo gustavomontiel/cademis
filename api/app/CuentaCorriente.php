@@ -40,4 +40,12 @@ class CuentaCorriente extends Model
     {
         return $this->belongsTo('App\Colegiado');
     }
+
+    /**
+     * Obtener los movimientos de la cuenta corriente
+     */
+    public function movimientos()
+    {
+        return $this->hasMany('App\Movimiento');
+    }
 }

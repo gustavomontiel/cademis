@@ -66,10 +66,10 @@ class Colegiado extends Model
     }
 
     /**
-     * Obtener las cuentas corrientes asociadas al Colegiado
+     * Obtener la cuenta corriente asociada al Colegiado
      */
-    public function cuentasCorrientes()
+    public function cuentaCorriente()
     {
-        return $this->hasMany('App\CuentaCorriente');
+        return $this->hasOne('App\CuentaCorriente');
     }
 }
