@@ -1,6 +1,6 @@
 <div class="col-12 row">
   <div class="col-10">
-    <h4 *ngIf="colegiado">Cuenta del Colegiado: {{colegiado.persona.apellidos}}, {{colegiado.persona.nombres}}</h4>
+    <h4 *ngIf="cuentaCorriente">Cuenta del Colegiado: {{cuentaCorriente.colegiado.persona.apellidos}}, {{cuentaCorriente.colegiado.persona.nombres}}</h4>
   </div>
   <div class="col-2">
 
@@ -12,24 +12,52 @@
   </div>
 </div>
 
-<table class="table table-striped">
+<form [formGroup]="forma" novalidate (ngSubmit)="confirmarPago()">
+<table class="table table-striped mt-2">
   <thead>
   <tr>
-    <th scope="col">#</th>
-    <th scope="col">Country</th>
-    <th scope="col">Area</th>
-    <th scope="col">Population</th>
+    <th scope="col">Descripcion</th>
+    <th scope="col">Vto</th>
+    <th scope="col">Importe</th>
+    <th scope="col">Saldo</th>
+    <th scope="col">Pagar</th>
   </tr>
   </thead>
-  <tbody>
-  <tr *ngFor="let country of countries; index as i">
-    <th scope="row">{{ i + 1 }}</th>
+  <tbody *ngIf="cuentaCorriente" formArrayName="movimientos">
+  <!-- <tr *ngFor="let movimiento of cuentaCorriente.movimientos; index as i"> -->
+    <tr *ngFor="let mov of forma.get('movimientos')['controls']; let i = index;" [formGroupName]="i">
+    <th scope="row">
+      {{ mov.controls.descripcion.value }}
+    </th>
     <td>
-      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-      {{ country.name }}
+      {{ mov.controls.fecha_vencimiento.value }}
     </td>
-    <td>{{ country.area | number }}</td>
-    <td>{{ country.population | number }}</td>
+    <td>
+      {{ mov.controls.importe.value | number }}</td>
+    <th>
+      {{ mov.controls.saldo.value| number }}
+    </th>
+    <td>
+      <input (change)="cambioPagar()" type="number" formControlName="importe_pagado" [ngStyle]="{'pointer-events': mov.controls.pagar.value ? '' : 'none'}">
+      <input (change)="cambioPagar()" class="form-check-input" type="checkbox" formControlName="pagar">
+    </td>
   </tr>
-  </tbody>
+</tbody>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th scope="col">Pago a cuenta</th>
+    <th scope="col"><input (change)="cambioPagar()" type="number" formControlName="pago_a_cuenta"></th>
+  </tr>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th scope="col">Total pagado</th>
+    <th scope="col"><input type="number" formControlName="importe_pagado" readonly></th>
+  </tr>
+
 </table>
+<button type="submit" class="btn btn-primary">Confirmar</button>
+</form>

@@ -14,5 +14,4 @@ export class Direccion {
   // tslint:disable-next-line: variable-name
   public updated_at?: Date;
   public id?: number;
-
 }
