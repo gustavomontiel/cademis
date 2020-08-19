@@ -2,6 +2,7 @@ import { Colegiado } from './colegiado.model';
 import { Movimiento } from './movimiento.model';
 
 export class CuentaCorriente {
+
   public colegiado: Colegiado;
   public movimientos: Movimiento[];
   // tslint:disable-next-line: variable-name
@@ -21,25 +22,31 @@ export class CuentaCorriente {
   // tslint:disable-next-line: variable-name
   public pago_a_cuenta?: number;
 
-  fromJson( ctaCte ) {
-    const newObj = new CuentaCorriente(ctaCte);
-    return newObj;
+
+  constructor() {
   }
-  constructor( ctaCte ) {
 
-    this.colegiado = ctaCte;
-    this.colegiado_id = ctaCte.colegiado_id;
+  static ctacteFromJson( ctaCte: any ) {
 
-    this.saldo_matricula = ctaCte.saldo_matricula;
+    const newObj = new CuentaCorriente();
+    newObj.colegiado = ctaCte.colegiado;
+    newObj.colegiado_id = ctaCte.colegiado_id;
+    newObj.saldo_matricula = ctaCte.saldo_matricula;
+    newObj.saldo_obra_social = ctaCte.saldo_obra_social;
+    newObj.saldo = ctaCte.saldo;
+    newObj.created_at = ctaCte.created_at;
+    newObj.updated_at = ctaCte.updated_at;
+    newObj.id = ctaCte.id;
+    newObj.importe_pagado = ctaCte.importe_pagado;
+    newObj.pago_a_cuenta = ctaCte.pago_a_cuenta;
+    newObj.movimientos = [];
 
-    this.saldo_obra_social = ctaCte.saldo_obra_social;
-    this.saldo = ctaCte.saldo;
-    this.created_at = ctaCte.created_at;
-    this.updated_at = ctaCte.updated_at;
-    this.id = ctaCte.id;
+    ctaCte.movimientos.forEach( mov => {
+      const obj = Movimiento.movFromJson( mov );
+      newObj.movimientos.push( obj );
+    } );
 
-    this.importe_pagado = ctaCte.importe_pagado;
-    this.pago_a_cuenta = ctaCte.pago_a_cuenta;
+    return newObj;
 
   }
 

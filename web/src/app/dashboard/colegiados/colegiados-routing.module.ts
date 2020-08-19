@@ -88,7 +88,7 @@ const colegiadosRoutes: Routes = [
       {
         path: 'colegiados-movimientos-cuenta/:id',
         component: ColegiadosMovimientosCuentaComponent,
-        canDeactivate: [CanDeactivateGuard],
+        canDeactivate: [],
         data: {
           title: 'Colegiado direcciones',
           rolesPermitidos: []

@@ -1,3 +1,4 @@
+import { Movimiento } from './../../models/movimiento.model';
 import { Component, OnInit } from '@angular/core';
 import { Colegiado } from '../../models/colegiado.model';
 import { ColegiadosService } from '../colegiados.service';
@@ -56,13 +57,14 @@ export class ColegiadosEstadoCuentaComponent implements OnInit {
   agregarFormArrayMovimientos() {
     this.cuentaCorriente.movimientos.forEach(
       mov => {
+        const objMov = Movimiento.movFromJson( mov );
         const movimientoFormGroup = this.formBuilder.group( {
           id: [ mov.id, Validators.required ],
           descripcion: [ mov.descripcion, Validators.required ],
           fecha_vencimiento: [ mov.fecha_vencimiento, Validators.required ],
-          importe: [ mov.importe, Validators.required ],
-          saldoOriginal: [ mov.importe, Validators.required ],
-          saldo: [ mov.saldo, Validators.required ],
+          importe: [ objMov.importe_a_mostrar, Validators.required ],
+          saldoOriginal: [ objMov.saldo_a_mostrar, Validators.required ],
+          saldo: [ objMov.saldo_a_mostrar, Validators.required ],
           importe_pagado: [ 0, Validators.required ],
           pagar: [ 0 ]
         } );
@@ -72,6 +74,18 @@ export class ColegiadosEstadoCuentaComponent implements OnInit {
   }
 
   confirmarPago() {
+
+    if ( this.cuentaCorriente.importe_pagado <= 0 || !this.cuentaCorriente.importe_pagado  ) {
+
+      Swal.fire( {
+        title: 'Error',
+        text: 'El importe a pagar tiene que ser mayor a cero',
+        icon: 'error',
+      } ).then( ( result ) => {
+        return;
+      } );
+      return;
+    }
 
     Swal.fire( {
       title: 'Guardar datos?',
@@ -92,10 +106,10 @@ export class ColegiadosEstadoCuentaComponent implements OnInit {
               icon: 'success',
               timer: 2000
             } ).then( res => {
-              const url = this.router.url.split('/');
+              const url = this.router.url.split( '/' );
               url.pop();
               url.pop();
-              this.router.navigateByUrl(url.join('/'));
+              this.router.navigateByUrl( url.join( '/' ) );
             } );
           },
           error => {
@@ -167,8 +181,8 @@ export class ColegiadosEstadoCuentaComponent implements OnInit {
     this.router.navigateByUrl( urlFinal );
   }
 
-  permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
-    return CanDeactivateGuard.confirmaSalirDeRuta(this.forma);
+  permitirSalirDeRuta(): boolean | import( 'rxjs' ).Observable<boolean> | Promise<boolean> {
+    return CanDeactivateGuard.confirmaSalirDeRuta( this.forma );
   }
 
 }
