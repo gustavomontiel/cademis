@@ -33,6 +33,13 @@
       <td mat-cell *matCellDef="let element"><span class="d-none d-sm-block">{{element.persona.numero_doc}}</span> </td>
     </ng-container>
 
+    <ng-container matColumnDef="estado.nombre">
+      <th mat-header-cell *matHeaderCellDef><span class="d-none d-sm-block">Estado</span> </th>
+      <td mat-cell *matCellDef="let element"><span class="d-none d-sm-block">{{element.estado.nombre}}</span> </td>
+    </ng-container>
+
+
+
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element">

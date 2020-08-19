@@ -15,7 +15,7 @@ export class ColegiadosListComponent implements OnInit {
   tableData: Colegiado[];
   dataSource: any;
   // tslint:disable-next-line: max-line-length
-  displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'persona.apellidos', 'persona.nombres', 'persona.numero_doc', 'acciones'];
+  displayedColumns: string[] = ['num_matricula', 'circunscripcion', 'persona.apellidos', 'persona.nombres', 'persona.numero_doc', 'estado.nombre', 'acciones'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('searchText', { static: true }) searchText;
