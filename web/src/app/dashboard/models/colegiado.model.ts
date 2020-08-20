@@ -1,3 +1,4 @@
+import { Estado } from './estado.model';
 import { Direccion } from './direccion.model';
 import { Persona } from './persona.model';
 
@@ -20,7 +21,9 @@ export class Colegiado {
   public telefono3?: string;
   public email: string;
   // tslint:disable-next-line: variable-name
-  public estado_id: number;
+  public estado_id?: number;
+
+
   public observacion?: string;
   public denuncias?: string;
   // tslint:disable-next-line: variable-name
@@ -32,5 +35,17 @@ export class Colegiado {
   public domicilio_real?: Direccion;
   // tslint:disable-next-line: variable-name
   public domicilio_legal?: Direccion;
+
+
+  public estado?: Estado;
+  // tslint:disable-next-line: variable-name
+  public num_mat_fed?: string;
+  // tslint:disable-next-line: variable-name
+  public fecha_mat_fed?: string;
+  // tslint:disable-next-line: variable-name
+  public libro_mat_fed?: string;
+  // tslint:disable-next-line: variable-name
+  public folio_mat_fed?: string;
+
 
 }

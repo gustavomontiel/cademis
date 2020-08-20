@@ -11,17 +11,17 @@
 
       <div class="card">
         <div class="card-header">
-          <b>{{ colegiado.persona.apellidos }}, {{ colegiado.persona.nombres }}</b> 
+          <b>{{ colegiado.persona.apellidos }}, {{ colegiado.persona.nombres }}</b>
         </div>
         <div class="card-body">
           <h5 class="card-title"></h5>
-          <p class="card-text"><b>Matrícula </b> Nº: <span class="badge badge-light">{{ colegiado.num_matricula }}</span> Fecha: <span class="badge badge-light"> {{ colegiado.fecha_matricula }} </span>  Folio: <span class="badge badge-light">{{ colegiado.folio }}</span>  Libro: <span class="badge badge-light">{{ colegiado.libro }}</span> Legajo: <span class="badge badge-light">{{ colegiado.legajo }}</span> Circunscripción: <span class="badge badge-light">{{ colegiado.circunscripcion }}</span></p> 
+          <p class="card-text"><b>Matrícula </b> Nº: <span class="badge badge-light">{{ colegiado.num_matricula }}</span> Fecha: <span class="badge badge-light"> {{ colegiado.fecha_matricula }} </span>  Folio: <span class="badge badge-light">{{ colegiado.folio }}</span>  Libro: <span class="badge badge-light">{{ colegiado.libro }}</span> Legajo: <span class="badge badge-light">{{ colegiado.legajo }}</span> Circunscripción: <span class="badge badge-light">{{ colegiado.circunscripcion }}</span></p>
           <p class="card-text">Documento: <span class="badge badge-light">{{ colegiado.persona.tipo_doc }} {{ colegiado.persona.numero_doc }}</span> CUIT / CUIL: <span class="badge badge-light">{{ colegiado.persona.cuit_cuil }}</span> Sexo: <span class="badge badge-light">{{ colegiado.persona.sexo }}</span></p>
           <p class="card-text"><b>Nacimiento</b> Fecha: <span class="badge badge-light">{{ colegiado.persona.fecha_nac }}</span>   Localidad: <span class="badge badge-light"> {{ colegiado.persona.localidad_nac }} </span>  Provincia: <span class="badge badge-light">{{ colegiado.persona.provincia_nac }}</span>  País: <span class="badge badge-light">{{ colegiado.persona.pais_nac }}</span> </p>
           <p class="card-text"><b>Matrícula Federal</b> Nº: <span class="badge badge-light">{{ colegiado.num_mat_fed }}</span>   Fecha: <span class="badge badge-light"> {{ colegiado.fecha_mat_fed }} </span>  Libro: <span class="badge badge-light">{{ colegiado.libro_mat_fed }}</span>  Folio: <span class="badge badge-light">{{ colegiado.folio_mat_fed }}</span> </p>
         </div>
       </div>
-        
+
     </div>
 
   </div>
@@ -32,7 +32,7 @@
 <div class="container" *ngIf="colegiado">
 
     <div class="card-deck">
-    
+
       <div class="card bg-secondary">
         <div class="card-header"><i class="fas fa-map-marked-alt"></i>  Domicilio Legal</div>
         <div class="card-body">
@@ -42,7 +42,7 @@
           <p class="card-text">Piso: {{ colegiado.domicilio_legal.piso }} </p>
           <p class="card-text">Departamento: {{ colegiado.domicilio_legal.departamento }} </p>
           <p class="card-text">Localidad: {{ colegiado.domicilio_legal.localidad }} </p>
-          <p class="card-text">Provincia: {{ colegiado.domicilio_legal.Provincia }} </p>
+          <p class="card-text">Provincia: {{ colegiado.domicilio_legal.provincia }} </p>
         </div>
       </div>
 
@@ -55,10 +55,10 @@
           <p class="card-text">Piso: {{ colegiado.domicilio_real.piso }} </p>
           <p class="card-text">Departamento: {{ colegiado.domicilio_real.departamento }} </p>
           <p class="card-text">Localidad: {{ colegiado.domicilio_real.localidad }} </p>
-          <p class="card-text">Provincia: {{ colegiado.domicilio_real.Provincia }} </p>
+          <p class="card-text">Provincia: {{ colegiado.domicilio_real.provincia }} </p>
         </div>
       </div>
-    
+
       <div class="card bg-secondary">
         <div class="card-header"><i class="fas fa-id-card"></i> Contacto</div>
         <div class="card-body">
@@ -68,7 +68,7 @@
           <p class="card-text"><i class="fas fa-mobile-alt"></i> Teléfono: {{ colegiado.telefono3 }}</p>
         </div>
       </div>
-    
+
       <div class="card bg-secondary">
         <div class="card-body text-center">
           <h4 class="card-title"><i class="fas fa-edit"></i> Observación</h4>
@@ -81,7 +81,7 @@
           <p class="card-text">{{ colegiado.observacion }}</p>
         </div>
       </div>
-    
-  
+
+
   </div>
 </div>
