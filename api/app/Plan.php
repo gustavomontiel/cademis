@@ -14,9 +14,7 @@ class Plan extends Model
     protected $table = 'planes';
 
     protected $fillable = [
-        'nombre',
-        'obra_social_id',
-        'estado_id'
+        'nombre'
     ];
 
     /**

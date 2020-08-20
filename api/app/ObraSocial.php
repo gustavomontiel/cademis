@@ -15,8 +15,7 @@ class ObraSocial extends Model
 
     protected $fillable = [
         'nombre',
-        'sigla',
-        'estado_id'
+        'sigla'
     ];
 
     /**

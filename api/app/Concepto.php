@@ -15,14 +15,14 @@ class Concepto extends Model
 
     protected $fillable = [
         'nombre',
-        'tipo_de_comprobante_id'
+        'orden'
     ];
 
     /**
-     * Obtener el estado de la obra social
+     * Obtener el estado del tipo de movimiento
      */
-    public function tipoDeComprobante()
+    public function tipoDeMovimiento()
     {
-        return $this->belongsTo('App\TipoDeComprobante');
+        return $this->belongsTo('App\TipoMovimiento');
     }
 }

@@ -269,6 +269,60 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'TipoDeComprobanteController@destroy'
     ]);
 
+     /* Caja Routes */
+
+     $router->get('/cajas', [
+        'as' => 'cajas.index',
+        'uses' => 'CajaController@index'
+    ]);
+
+    $router->post('/cajas', [
+        'as' => 'cajas.store',
+        'uses' => 'CajaController@store'
+    ]);
+
+    $router->get('/cajas/{id}', [
+        'as' => 'cajas.show',
+        'uses' => 'CajaController@show'
+    ]);
+
+    $router->put('/cajas/{id}', [
+        'as' => 'cajas.update',
+        'uses' => 'CajaController@update'
+    ]);
+
+    $router->delete('/cajas/{id}', [
+        'as' => 'cajas.destroy',
+        'uses' => 'CajaController@destroy'
+    ]);
+    
+    /* Movimiento de Caja Routes */
+
+    $router->get('/movimientocaja', [
+       'as' => 'movimientocaja.index',
+       'uses' => 'MovimientoCajaController@index'
+   ]);
+
+   $router->post('/movimientocaja', [
+       'as' => 'movimientocaja.store',
+       'uses' => 'MovimientoCajaController@store'
+   ]);
+
+   $router->get('/movimientocaja/{id}', [
+       'as' => 'movimientocaja.show',
+       'uses' => 'MovimientoCajaController@show'
+   ]);
+
+   $router->put('/movimientocaja/{id}', [
+       'as' => 'movimientocaja.update',
+       'uses' => 'MovimientoCajaController@update'
+   ]);
+
+   $router->delete('/movimientocaja/{id}', [
+       'as' => 'movimientocaja.destroy',
+       'uses' => 'MovimientoCajaController@destroy'
+   ]);
+
     $router->group(['middleware' => 'role:administrador'], function (Router $router) {
 
         $router->get('/admin', function () {

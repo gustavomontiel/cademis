@@ -36,7 +36,7 @@ class ConceptoController extends Controller
 
         $validator = Validator::make($input, [
             'nombre' => 'required|string|unique:conceptos,nombre',
-            'tipo_de_comprobante_id' => 'numeric'
+            'tipo_movimiento_id' => 'numeric'
         ]);
 
         if ($validator->fails()) {
@@ -83,7 +83,7 @@ class ConceptoController extends Controller
 
         $validator = Validator::make($input, [
             'nombre' => 'required|string|unique:conceptos,nombre',
-            'tipo_de_comprobante_id' => 'numeric'
+            'tipo_movimiento_id' => 'numeric'
         ]);
 
         if ($validator->fails()) {
@@ -91,7 +91,7 @@ class ConceptoController extends Controller
         }
 
         if (isset($input['nombre'])) $concepto->nombre = $input['nombre'];
-        if (isset($input['tipo_de_comprobante_id'])) $concepto->tipo_de_comprobante_id = $input['tipo_de_comprobante_id'];
+        if (isset($input['tipo_movimiento_id'])) $concepto->tipo_movimiento_id = $input['tipo_movimiento_id'];
 
 
         $concepto->save();

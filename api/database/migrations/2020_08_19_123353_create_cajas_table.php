@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConceptosTable extends Migration
+class CreateCajasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateConceptosTable extends Migration
      */
     public function up()
     {
-        Schema::create('conceptos', function (Blueprint $table) {
+        Schema::create('cajas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->bigInteger('tipo_movimiento_id')->nullable();
-            $table->integer('orden')->default(0);
+            $table->date('fecha_apertura');
+            $table->date('fecha_cierre');
+            $table->bigInteger('usuario_id')->nullable();
+            $table->decimal('saldo', 11, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -29,7 +30,6 @@ class CreateConceptosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conceptos');
+        Schema::dropIfExists('cajas');
     }
 }
-

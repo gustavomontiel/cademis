@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateComprobantesTable extends Migration
+class CreateMovimientoCajasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateComprobantesTable extends Migration
      */
     public function up()
     {
-        Schema::create('comprobantes', function (Blueprint $table) {
+        Schema::create('movimientos_cajas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('fecha');
-            $table->decimal('subtotal', 11, 2)->default(0);
-            $table->decimal('iva', 11, 2)->default(0);
-            $table->decimal('iibb', 11, 2)->default(0);
-            $table->decimal('total', 11, 2)->default(0);
-            $table->bigInteger('tipo_de_comprobante_id')->nullable();
+            $table->string('observacion');
+            $table->string('concepto');
+            $table->string('tipo');
+            $table->bigInteger('usuario_id')->nullable();
+            $table->bigInteger('comprobante_id')->nullable();
+            $table->decimal('importe', 11, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateComprobantesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comprobantes');
+        Schema::dropIfExists('movimientos_cajas');
     }
 }
