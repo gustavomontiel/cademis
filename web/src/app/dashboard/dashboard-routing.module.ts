@@ -36,6 +36,13 @@ const dashboardRoutes: Routes = [
         },
         loadChildren: () => import('./colegiados/colegiados.module').then(m => m.ColegiadosdModule ),
       },
+      {
+        path: 'cajas',
+        data: {
+          title: ''
+        },
+        loadChildren: () => import('./cajas/cajas.module').then(m => m.CajasModule ),
+      },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ]

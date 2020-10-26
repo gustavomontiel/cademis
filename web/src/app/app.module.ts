@@ -12,12 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 // componentes
 import { AppComponent } from './app.component';
 import { TokenInterceptor } from './shared/services/token.interceptor';
+import { ToastComponent } from './dashboard/toasts/toast.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { TokenInterceptor } from './shared/services/token.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

@@ -14,7 +14,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { LayoutModule } from './layout/layout.module';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { ToastComponent } from './toasts/toast.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../shared/services/token.interceptor';
 
@@ -25,7 +24,6 @@ import { TokenInterceptor } from '../shared/services/token.interceptor';
   declarations: [
     DashboardComponent,
     HomeComponent,
-    ToastComponent,
   ],
   exports: [
   ],

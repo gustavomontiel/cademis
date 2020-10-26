@@ -1,3 +1,6 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
 import { ColegiadosMovimientosCuentaComponent } from './colegiados-movimientos-cuenta/colegiados-movimientos-cuenta.component';
 import { ColegiadosEstadoCuentaComponent } from './colegiados-estado-cuenta/colegiados-estado-cuenta.component';
 import { ColegiadosDireccionesComponent } from './colegiados-direcciones/colegiados-direcciones.component';
@@ -5,14 +8,8 @@ import { ColegiadosMasDatosComponent } from './colegiados-mas-datos/colegiados-m
 import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.component';
 import { ColegiadosUpdateComponent } from './colegiados-update/colegiados-update.component';
 import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create.component';
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
-import { CrearColegiadoComponent } from './crear-colegiado/crear-colegiado.component';
-import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.component';
 import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
-
 
 
 const colegiadosRoutes: Routes = [
