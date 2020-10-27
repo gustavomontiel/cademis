@@ -12,7 +12,7 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
     </mat-form-field>
   
-    <button type="button" (click)="agregarItem()" class="btn btn-primary float-right col-3" [ngClass]="{'disabled': caja.fecha_cierre}">Agregar movimiento</button>
+    <button type="button" (click)="agregarItem()" class="btn btn-primary float-right col-3" [disabled]="!!caja.fecha_cierre">Agregar movimiento</button>
   
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
@@ -47,7 +47,7 @@
             <button type="button" class="btn btn-success" placement="top" ngbTooltip="Editar" (click)="verItem(element.id)">
                 <i class="fas fa-eye"></i>
             </button>
-            <button type="button" class="btn btn-danger ml-1" [ngClass]="{'disabled': caja.fecha_cierre}" placement="top" ngbTooltip="Eliminar" (click)="borrarItem(element)">
+            <button type="button" class="btn btn-danger ml-1" placement="top" ngbTooltip="Eliminar" (click)="borrarItem(element)" [disabled]="!!caja.fecha_cierre">
               <i class="fas fa-trash-alt"></i>
             </button>
             

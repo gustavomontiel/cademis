@@ -36,7 +36,7 @@ export class CajasService {
 
   // Movimientos
   getMovimientoById(id: string) {
-    return this.crudService.getItemById( this.urlModel, id );
+    return this.crudService.getItemById( this.urlMovimiento, id );
   }
 
   createMovimiento(item: any) {

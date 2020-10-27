@@ -1,1 +1,52 @@
-<p>cajas-movimientos-view works!</p>
+<h3>Crear Caja</h3>
+<div class="col-12">
+  <div class="card card-primary mt-2 container">
+    <!-- form start -->
+    <form role="form" ngNativeValidate [formGroup]="forma">
+      <div class="card-body form-row">
+        <div class="form-group col-md-12">
+          <label for="nombre">Fecha</label>
+          <input formControlName="fecha" name="fecha" type="date" class="form-control" placeholder="Fecha" required
+            [ngClass]="{'is-invalid': forma.get('fecha').errors?.customMsgError}" disabled>
+          <div class="invalid-feedback">
+            {{ forma.get('fecha').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="tipo_doc">Tipo</label>
+          <select class="form-control" formControlName="tipo_movimiento_caja_id" name="tipo_movimiento_caja_id"
+            [ngClass]="{'is-invalid': forma.get('tipo_movimiento_caja_id').errors?.customMsgError}">
+            <option value="1">Ingreso</option>
+            <option value="2">Salida</option>
+          </select>
+          <div class="invalid-feedback">
+            {{ forma.get('tipo_movimiento_caja_id').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="nombre">Observaciones</label>
+          <input formControlName="observacion" name="observacion" type="text" class="form-control"
+            placeholder="observacion" required required
+            [ngClass]="{'is-invalid': forma.get('observacion').errors?.customMsgError}" disabled> 
+          <div class="invalid-feedback">
+            {{ forma.get('observacion').errors?.customMsgError }}
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="nombre">importe</label>
+          <input formControlName="importe" name="importe" type="number" class="form-control" placeholder="importe"
+            required required [ngClass]="{'is-invalid': forma.get('importe').errors?.customMsgError}" disabled>
+          <div class="invalid-feedback">
+            {{ forma.get('importe').errors?.customMsgError }}
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer row justify-content-end">
+        <!-- <a routerLink="usuarios" type="button" class="btn btn-secondary mr-2">Cancelar</a> -->
+        <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
+        <button type="button" (click)="volver()" class="btn btn-primary">Volver</button>
+      </div>
+    </form>
+  </div>
+</div>

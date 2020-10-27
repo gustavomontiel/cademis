@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
-import { FormErrorHandlerService } from 'src/app/shared/services/form-error-handler.service';
 import { MovimientoCaja } from '../../models/movimiento-caja.model';
 import { CajasService } from '../cajas.service';
 
@@ -19,8 +18,7 @@ export class CajasMovimientosViewComponent implements OnInit {
   constructor(
     public cajasService: CajasService,
     public router: Router,
-    public activatedRoute: ActivatedRoute,
-    private formErrorHandlerService: FormErrorHandlerService
+    public activatedRoute: ActivatedRoute
   ) { }
 
   
@@ -58,6 +56,15 @@ export class CajasMovimientosViewComponent implements OnInit {
 
   permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
     return CanDeactivateGuard.confirmaSalirDeRuta(this.forma);
+  }
+
+  volver() {
+    console.log('volver');
+    const url = this.router.url.split('/');
+    url.pop();
+    url.pop();
+    url.push('movimientos');
+    this.router.navigateByUrl(url.join('/'));
   }
 
 }
