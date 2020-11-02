@@ -9,37 +9,37 @@
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Nro </th>
+        <th mat-header-cell *matHeaderCellDef class="text-left"><b>Nro</b></th>
         <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
       </ng-container>
   
       <ng-container matColumnDef="fecha_apertura">
-        <th mat-header-cell *matHeaderCellDef> Fecha apertura</th>
+        <th mat-header-cell *matHeaderCellDef><b>Fecha apertura</b></th>
         <td mat-cell *matCellDef="let element"> {{ element.fecha_apertura | date:"dd/MM/yyyy" }} </td>
       </ng-container>
       
       <ng-container matColumnDef="fecha_cierre">
-        <th mat-header-cell *matHeaderCellDef> Fecha cierre </th>
+        <th mat-header-cell *matHeaderCellDef><b>Fecha cierre</b></th>
         <td mat-cell *matCellDef="let element"> {{ element.fecha_cierre | date:"dd/MM/yyyy" }} </td>
       </ng-container>
 
       <ng-container matColumnDef="saldo">
-        <th mat-header-cell *matHeaderCellDef> Saldo </th>
+        <th mat-header-cell *matHeaderCellDef class="text-center"><b>Saldo</b></th>
         <td mat-cell *matCellDef="let element"> 
           <span class="col-8 float-left text-right">
-            {{element.saldo | number : '1.2-2' }} 
+            $ {{element.saldo | number : '1.2-2' }} 
           </span>          
         </td>
       </ng-container>
     
       <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <th mat-header-cell *matHeaderCellDef><b>Acciones</b></th>
         <td mat-cell *matCellDef="let element">
           <div class="btn">
-            <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Editar" (click)="editarItem(element.id)">
-              <i class="fas fa-pencil-alt"></i>
+            <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Cerrar" (click)="editarItem(element.id)"  [disabled]="!!element.fecha_cierre">
+              <i class="fas fa-check-square"></i>
             </button>
-            <button type="button" class="btn btn-danger ml-1" placement="top" ngbTooltip="Eliminar" (click)="borrarItem(element)">
+            <button type="button" class="btn btn-danger ml-1" placement="top" ngbTooltip="Eliminar" (click)="borrarItem(element)"  [disabled]="!!element.fecha_cierre">
               <i class="fas fa-trash-alt"></i>
             </button>
             <button *ngIf="!element.fecha_cierre" type="button" class="btn btn-success ml-1" placement="top" ngbTooltip="Movimientos" (click)="verMovimientos(element.id)">
