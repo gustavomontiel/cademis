@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <h3>Tasas</h3>
+    <mat-form-field class="col-9">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+  
+    <button type="button" (click)="agregarItem()" class="btn btn-primary float-right col-3">Agregar tasa</button>
+  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> <b>Nro</b> </th>
+        <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+      </ng-container>
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef> <b>Fecha</b> </th>
+        <td mat-cell *matCellDef="let element"> {{ element.fecha }} </td>
+      </ng-container>
+      <ng-container matColumnDef="tasa">
+        <th mat-header-cell *matHeaderCellDef> <b>Tasa</b> </th>
+        <td mat-cell *matCellDef="let element">  {{ element.tasa }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> <b>Acciones</b> </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="btn">
+            <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Editar"
+            (click)="editarItem(element.id)">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button type="button" class="btn btn-danger ml-1" placement="top" ngbTooltip="Eliminar"><i
+              class="fas fa-trash-alt" (click)="borrarItem(element)">
+            </i></button>
+          </div>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  
