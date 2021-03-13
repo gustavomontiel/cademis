@@ -1,7 +1,9 @@
 import { ColegiadosService } from './../colegiados.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Colegiado } from '../../models/colegiado.model';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
