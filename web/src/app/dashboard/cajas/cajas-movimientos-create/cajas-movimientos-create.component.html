@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div class="col-12"><h3>Crear Caja</h3></div>
+<div class="col-12"><h3>Crear movimiento de caja</h3></div>
 <div class="col-12">
     <div class="card card-primary mt-2 container">
         <!-- form start -->
@@ -18,8 +18,10 @@
                     <select class="form-control" formControlName="tipo_movimiento_caja_id"
                         name="tipo_movimiento_caja_id"
                         [ngClass]="{'is-invalid': forma.get('tipo_movimiento_caja_id').errors?.customMsgError}">
-                        <option value="1">Ingreso</option>
-                        <option value="2">Salida</option>
+                        <option value="2">Ingreso</option>
+                        <option value="3">Salida</option>
+                        <option value="5">Venta de tasa de justicia</option>
+                        <option value="6">Cobro de obra social</option>
                     </select>
                     <div class="invalid-feedback">
                         {{ forma.get('tipo_movimiento_caja_id').errors?.customMsgError }}

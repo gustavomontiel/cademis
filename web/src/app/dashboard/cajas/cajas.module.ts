@@ -7,7 +7,7 @@ import { CajasCreateComponent } from './cajas-create/cajas-create.component';
 import { CajasUpdateComponent } from './cajas-update/cajas-update.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CajasMovimientosComponent } from './cajas-movimientos/cajas-movimientos.component';
 import { CajasMovimientosCreateComponent } from './cajas-movimientos-create/cajas-movimientos-create.component';
 import { CajasMovimientosViewComponent } from './cajas-movimientos-view/cajas-movimientos-view.component';
@@ -19,14 +19,15 @@ import { CajasMovimientosViewComponent } from './cajas-movimientos-view/cajas-mo
     CajasCreateComponent, 
     CajasUpdateComponent, 
     CajasMovimientosComponent, 
-    CajasMovimientosCreateComponent, CajasMovimientosViewComponent
+    CajasMovimientosCreateComponent, 
+    CajasMovimientosViewComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     NgbModule,
+    FormsModule,
     ReactiveFormsModule ,
-    CommonModule,
     CajasRoutingModule
   ]
 })
