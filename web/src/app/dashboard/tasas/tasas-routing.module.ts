@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RoleGuard } from 'src/app/auth/services/role.guard';
 import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
 
 import { TasasCreateComponent } from './tasas-create/tasas-create.component';
@@ -17,27 +18,30 @@ const tasasRoutes: Routes = [
       {
         path: 'tasas-list',
         component: TasasListComponent,
+        canActivate: [RoleGuard],
         data: {
           title: 'Listado de Tasas',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrativo', 'directivo']
         }
       },
       {
         path: 'tasas-create',
         component: TasasCreateComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Crear tasa',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrativo']
         }
       },
       {
         path: 'tasas-update/:id',
         component: TasasUpdateComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Editar tasa',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrativo']
         }
       },
       { path: '', redirectTo: 'tasas-list'},

@@ -11,6 +11,7 @@ import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
 import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
 import { ColegiadosDeleteComponent } from './colegiados-delete/colegiados-delete.component';
+import { RoleGuard } from 'src/app/auth/services/role.guard';
 
 
 const colegiadosRoutes: Routes = [
@@ -33,18 +34,20 @@ const colegiadosRoutes: Routes = [
         path: 'colegiados-create',
         component: ColegiadosCreateComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Crear colegiado',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrativo']
         }
       },
       {
         path: 'colegiados-update/:id',
         component: ColegiadosUpdateComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Editar colegiado',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrativo']
         }
       },
       {
@@ -60,45 +63,50 @@ const colegiadosRoutes: Routes = [
         path: 'colegiados-mas-datos/:id',
         component: ColegiadosMasDatosComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Colegiados más datos',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrativo']
         }
       },
       {
         path: 'colegiados-direcciones/:id',
         component: ColegiadosDireccionesComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Colegiado direcciones',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrativo']
         }
       },
       {
         path: 'colegiados-estado-cuenta/:id',
         component: ColegiadosEstadoCuentaComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Colegiado direcciones',
-          rolesPermitidos: []
+          rolesPermitidos: ['cajero']
         }
       },
       {
         path: 'colegiados-movimientos-cuenta/:id',
         component: ColegiadosMovimientosCuentaComponent,
         canDeactivate: [],
+        canActivate: [RoleGuard],
         data: {
           title: 'Colegiado direcciones',
-          rolesPermitidos: []
+          rolesPermitidos: ['cajero']
         }
       },
       {
         path: 'colegiados-delete/:id',
         component: ColegiadosDeleteComponent,
         canDeactivate: [],
+        canActivate: [RoleGuard],
         data: {
           title: 'Eliminar colegiado',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrador']
         }
       },
       { path: '', redirectTo: 'colegiados-list'},

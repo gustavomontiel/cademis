@@ -39,9 +39,9 @@ export class TokenInterceptor implements HttpInterceptor {
     const tiempoObservable = source.subscribe( ( val ) => {
       tiempoEspera += 1;
       if ( navigator.onLine ) {
-        tiempoEspera === 6 && this.mostrarMsgDemora( 'Estamos teniendo demoras en la respuesta del servidor ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
-        tiempoEspera === 12 && this.mostrarMsgDemora( 'La demora es más alta de la esperada ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
-        tiempoEspera === 18 && this.mostrarMsgDemora( 'Por favor aguarde ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
+        tiempoEspera === 10 && this.mostrarMsgDemora( 'Estamos teniendo demoras en la respuesta del servidor ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
+        tiempoEspera === 20 && this.mostrarMsgDemora( 'La demora es más alta de la esperada ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
+        tiempoEspera === 30 && this.mostrarMsgDemora( 'Por favor aguarde ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
       }
     } );
 

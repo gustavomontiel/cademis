@@ -8,6 +8,7 @@ import { CajasMovimientosComponent } from './cajas-movimientos/cajas-movimientos
 import { CajasMovimientosCreateComponent } from './cajas-movimientos-create/cajas-movimientos-create.component';
 import { CajasMovimientosViewComponent } from './cajas-movimientos-view/cajas-movimientos-view.component';
 import { CajasDeleteComponent } from './cajas-delete/cajas-delete.component';
+import { RoleGuard } from 'src/app/auth/services/role.guard';
 
 const cajasRoutes: Routes = [
   {
@@ -31,49 +32,54 @@ const cajasRoutes: Routes = [
         canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Crear caja',
-          rolesPermitidos: []
+          rolesPermitidos: ['cajero']
         }
       },
       {
         path: 'cajas-update/:id',
         component: CajasUpdateComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
         data: {
           title: 'Editar caja',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrador']
         }
       },
       {
         path: 'cajas-delete/:id',
         component: CajasDeleteComponent,
-        canDeactivate: [],
+        canDeactivate: ['cajero'],
+        canActivate: [RoleGuard],
         data: {
           title: 'Eliminar caja',
-          rolesPermitidos: []
+          rolesPermitidos: ['administrador']
         }
       },
       {
         path: 'cajas/:id/movimientos',
         component: CajasMovimientosComponent,
+        canActivate: [RoleGuard],
         data: {
           title: 'Movimientos caja',
-          rolesPermitidos: []
+          rolesPermitidos: ['cajero']
         }
       },
       {
         path: 'cajas/:id/movimientos-create',
         component: CajasMovimientosCreateComponent,
+        canActivate: [RoleGuard],
         data: {
           title: 'Nuevo movimiento de caja',
-          rolesPermitidos: []
+          rolesPermitidos: ['cajero']
         }
       },
       {
         path: 'cajas/:idCaja/movimientos-view/:id',
         component: CajasMovimientosViewComponent,
+        canActivate: [RoleGuard],
         data: {
           title: 'Vista de movimiento de caja',
-          rolesPermitidos: []
+          rolesPermitidos: ['cajero']
         }
       },
       { path: '', redirectTo: 'cajas-list'},

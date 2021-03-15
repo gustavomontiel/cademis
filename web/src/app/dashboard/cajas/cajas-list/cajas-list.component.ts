@@ -36,6 +36,7 @@ export class CajasListComponent implements OnInit {
     this.cajasService.getItems()
       .subscribe(resp => {
         this.tableData = resp.data;
+        /*
         this.tableData.sort( (a, b) => {
           if (a.id > b.id) {
             return -1;
@@ -45,6 +46,7 @@ export class CajasListComponent implements OnInit {
           }
           return 0;
         });
+        */
         this.dataSource = new MatTableDataSource(this.tableData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
