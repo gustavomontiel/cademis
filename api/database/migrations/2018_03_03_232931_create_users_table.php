@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->boolean('verified')->default(true);
             $table->string('verification_token')->nullable();
+            $table->bigInteger('sede_id')->nullable();
             $table->timestamps();
         });
     }

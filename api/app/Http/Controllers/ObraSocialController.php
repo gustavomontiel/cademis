@@ -85,7 +85,7 @@ class ObraSocialController extends Controller
         }
 
         $validator = Validator::make($input, [
-            'nombre' => 'required|string|unique:obras_sociales,nombre',
+            'nombre' => 'required|string|unique:obras_sociales,nombre,' . $id,
             'sigla' => 'required|string',
             'estado_id'=> 'numeric'
         ]);

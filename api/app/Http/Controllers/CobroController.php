@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\AfectacionMovimiento;
+use App\Caja;
 use App\Colegiado;
 use App\Comprobante;
 use App\ComprobanteLinea;
 use App\CuentaCorriente;
 use App\Movimiento;
+use App\MovimientoCaja;
 use App\TipoDeComprobante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CobroController extends Controller
 {
@@ -22,6 +25,8 @@ class CobroController extends Controller
     public function procesarCobro(Request $request)
     {
         $input = $request->all();
+
+        // CONTROLAR QUE EL USUARIO HAYA ABIERTO UNA CAJA
 
         $cuentaCorriente = CuentaCorriente::find($input['id']);
 
@@ -76,11 +81,30 @@ class CobroController extends Controller
             $afectacion = new AfectacionMovimiento();
             $afectacion->afectador = $movimientoCredito->id;
             $afectacion->afectado = $movimiento['id'];
-            $afectacion->importe = $movimiento['importe_pagado'];
+            $afectacion->importe = $movimiento['importe_pagado'] - $movimiento['intereses'];
             $afectacion->save();
 
+            if ($movimiento['intereses'] > 0) {
+                $movimientoIntereses = new Movimiento();
+                $movimientoIntereses->cuenta_corriente_id = $cuentaCorriente->id;
+                $movimientoIntereses->comprobante_id = $comprobante->id;
+                $movimientoIntereses->anio = date('Y');
+                $movimientoIntereses->descripcion = 'COBRO DE INTERESES';
+                $movimientoIntereses->fecha_vencimiento = date('Y-m-d');
+                $movimientoIntereses->importe = $movimiento['intereses'];
+                $movimientoIntereses->tipo_movimiento_id = 2;
+                $movimientoIntereses->estado = 'CANCELADO';
+                $movimientoIntereses->save();
+
+                $afectacion = new AfectacionMovimiento();
+                $afectacion->afectador = $movimientoIntereses->id;
+                $afectacion->afectado = $movimiento['id'];
+                $afectacion->importe = $movimiento['intereses'];
+                $afectacion->save();
+            }
+
             $debito = Movimiento::find($movimiento['id']);
-            $debito->saldo = $debito->saldo - $movimiento['importe_pagado'];
+            $debito->saldo = $debito->saldo - $movimiento['importe_pagado'] - $movimiento['intereses'];
             if ($debito->saldo <= 0) {
                 $debito->estado = 'CANCELADO';
             } else {
@@ -104,6 +128,19 @@ class CobroController extends Controller
         $cuentaCorriente->saldo = $cuentaCorriente->saldo - $input['importe_pagado'];
         $cuentaCorriente->save();
 
+        // CREAR UN MOVIMIENTO DE CAJA POR EL COBRO DE LA MATRICULA
+        $usuario_id = Auth::user()->id;
+        $caja = Caja::where('usuario_id', $usuario_id)->whereNull('fecha_cierre')->first();
+        $movimientoCaja = new MovimientoCaja();
+        $movimientoCaja->fecha = date('Y-m-d');
+        $movimientoCaja->tipo_movimiento_caja_id = 4;
+        $movimientoCaja->caja_id = $caja->id;
+        $movimientoCaja->usuario_id = $usuario_id;
+        $movimientoCaja->comprobante_id = $comprobante->id;
+        $movimientoCaja->importe = $input['importe_pagado'];
+        $movimientoCaja->save();
+        $caja->saldo += $input['importe_pagado'];
+        $caja->save();
 
         return response()->json(['error' => 'false', 'data' => $comprobante, 'message' => 'Cobro procesado correctamente.']);
     }

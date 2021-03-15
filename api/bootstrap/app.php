@@ -35,6 +35,7 @@ $app->alias('cache', 'Illuminate\Cache\CacheManager');
 | Lumen uses a simpler way to load config variables.
 |
 */
+$app->configure('database');
 $app->configure('mail');
 $app->configure('permission');
 $app->configure('constants');

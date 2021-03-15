@@ -14,6 +14,7 @@ class Caja extends Model
     protected $table = 'cajas';
 
     protected $fillable = [
+        'usuario_id',
         'fecha_apertura',
         'fecha_cierre',
         'saldo'
@@ -22,8 +23,16 @@ class Caja extends Model
     /**
      * Obtener el usuario de la caja
      */
-    public function Usuario()
+    public function usuario()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Obtener los movimientos de la caja
+     */
+    public function movimientos()
+    {
+        return $this->hasMany('App\MovimientoCaja');
     }
 }

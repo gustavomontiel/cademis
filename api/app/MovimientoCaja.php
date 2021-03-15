@@ -18,7 +18,10 @@ class MovimientoCaja extends Model
         'tipo',
         'concepto',
         'observacion',
-        'importe'
+        'importe',
+        'caja_id',
+        'tipo_movimiento_caja_id',
+        'usuario_id'
     ];
 
     /**
@@ -27,5 +30,29 @@ class MovimientoCaja extends Model
     public function comprobante()
     {
         return $this->belongsTo('App\Comprobante');
+    }
+
+    /**
+     * Obtener la caja asociada
+     */
+    public function caja()
+    {
+        return $this->belongsTo('App\Caja');
+    }
+
+    /**
+     * Obtener el tipo de movimiento de caja asociado
+     */
+    public function tipoMovimientoCaja()
+    {
+        return $this->belongsTo('App\TipoMovimientoCaja');
+    }
+
+    /**
+     * Obtener el usuario asociado al movimiento
+     */
+    public function usuario()
+    {
+        return $this->belongsTo('App\User');
     }
 }

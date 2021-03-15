@@ -269,9 +269,9 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'TipoDeComprobanteController@destroy'
     ]);
 
-     /* Caja Routes */
+    /* Caja Routes */
 
-     $router->get('/cajas', [
+    $router->get('/cajas', [
         'as' => 'cajas.index',
         'uses' => 'CajaController@index'
     ]);
@@ -286,42 +286,74 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         'uses' => 'CajaController@show'
     ]);
 
-    $router->put('/cajas/{id}', [
-        'as' => 'cajas.update',
-        'uses' => 'CajaController@update'
+    // $router->put('/cajas/{id}', [
+    //     'as' => 'cajas.update',
+    //     'uses' => 'CajaController@update'
+    // ]);
+
+    // $router->delete('/cajas/{id}', [
+    //     'as' => 'cajas.destroy',
+    //     'uses' => 'CajaController@destroy'
+    // ]);
+
+    $router->post('/cerrarcaja/{id}', [
+        'as' => 'cajas.cerrarCaja',
+        'uses' => 'CajaController@cerrarCaja'
     ]);
 
-    $router->delete('/cajas/{id}', [
-        'as' => 'cajas.destroy',
-        'uses' => 'CajaController@destroy'
-    ]);
-    
     /* Movimiento de Caja Routes */
 
     $router->get('/movimientocaja', [
-       'as' => 'movimientocaja.index',
-       'uses' => 'MovimientoCajaController@index'
-   ]);
+        'as' => 'movimientocaja.index',
+        'uses' => 'MovimientoCajaController@index'
+    ]);
 
-   $router->post('/movimientocaja', [
-       'as' => 'movimientocaja.store',
-       'uses' => 'MovimientoCajaController@store'
-   ]);
+    $router->post('/movimientocaja', [
+        'as' => 'movimientocaja.store',
+        'uses' => 'MovimientoCajaController@store'
+    ]);
 
-   $router->get('/movimientocaja/{id}', [
-       'as' => 'movimientocaja.show',
-       'uses' => 'MovimientoCajaController@show'
-   ]);
+    $router->get('/movimientocaja/{id}', [
+        'as' => 'movimientocaja.show',
+        'uses' => 'MovimientoCajaController@show'
+    ]);
 
-   $router->put('/movimientocaja/{id}', [
-       'as' => 'movimientocaja.update',
-       'uses' => 'MovimientoCajaController@update'
-   ]);
+    //    $router->put('/movimientocaja/{id}', [
+    //        'as' => 'movimientocaja.update',
+    //        'uses' => 'MovimientoCajaController@update'
+    //    ]);
 
-   $router->delete('/movimientocaja/{id}', [
-       'as' => 'movimientocaja.destroy',
-       'uses' => 'MovimientoCajaController@destroy'
-   ]);
+    $router->delete('/movimientocaja/{id}', [
+        'as' => 'movimientocaja.destroy',
+        'uses' => 'MovimientoCajaController@destroy'
+    ]);
+
+    /* Tasas por día Routes */
+
+    $router->get('/tasas', [
+        'as' => 'tasas.index',
+        'uses' => 'TasaPorDiaController@index'
+    ]);
+
+    $router->post('/tasas', [
+        'as' => 'tasas.store',
+        'uses' => 'TasaPorDiaController@store'
+    ]);
+
+    $router->get('/tasas/{id}', [
+        'as' => 'tasas.show',
+        'uses' => 'TasaPorDiaController@show'
+    ]);
+
+    $router->put('/tasas/{id}', [
+        'as' => 'tasas.update',
+        'uses' => 'TasaPorDiaController@update'
+    ]);
+
+    $router->delete('/tasas/{id}', [
+        'as' => 'tasas.destroy',
+        'uses' => 'TasaPorDiaController@destroy'
+    ]);
 
     $router->group(['middleware' => 'role:administrador'], function (Router $router) {
 
@@ -359,6 +391,12 @@ $router->group(['middleware' => 'auth'], function (Router $router) {
         $router->post('/importarcolegiados', [
             'as' => 'colegiados.importarcolegiados',
             'uses' => 'ColegiadoController@importarcolegiados'
+        ]);
+
+        /* Colegiados Routes */
+        $router->post('/importarcuentascorrientes', [
+            'as' => 'cuentascorrientes.importarcuentascorrientes',
+            'uses' => 'CuentaCorrienteController@importarcuentascorrientes'
         ]);
     });
 });

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCajasTable extends Migration
+class CreateSedesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCajasTable extends Migration
      */
     public function up()
     {
-        Schema::create('cajas', function (Blueprint $table) {
+        Schema::create('sedes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('fecha_apertura');
-            $table->date('fecha_cierre')->nullable();
-            $table->bigInteger('usuario_id');
-            $table->decimal('saldo', 11, 2)->default(0);
+            $table->string("nombre");
+            $table->string("tipo");
+            $table->string("direccion")->nullable();
+            $table->string("municipio");
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCajasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cajas');
+        Schema::dropIfExists('sedes');
     }
 }

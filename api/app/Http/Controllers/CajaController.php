@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Caja;
+use App\MovimientoCaja;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CajaController extends Controller
 {
@@ -15,7 +18,7 @@ class CajaController extends Controller
      */
     public function index()
     {
-        $cajas = Caja::all();
+        $cajas = Caja::with('Usuario')->get();
 
         if (count($cajas) == 0) {
             return response()->json(['error' => 'true', 'message' => 'No existen cajas cargadas en el sistema.']);
@@ -36,16 +39,36 @@ class CajaController extends Controller
 
         $validator = Validator::make($input, [
             'fecha_apertura' => 'date',
-            'fecha_cierre' => 'date',
             'saldo' => 'numeric',
-            'usuario_id' => 'numeric'
+            'usuario_id' => 'numeric|exists:users,id'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => 'true', 'data' => $validator->errors(), 'message' => 'Error en la validación de datos.'], 400);
         }
 
+        if (empty($input['fecha_apertura'])) $input['fecha_apertura'] = Carbon::now()->toDateString();
+        if (empty($input['usuario_id'])) $input['usuario_id'] = Auth::user()->id;
+
+        $cajas = Caja::where('usuario_id', $input['usuario_id'])->whereNull('fecha_cierre')->get();
+
+        if (count($cajas) > 0) {
+            return response()->json(['error' => 'true', 'message' => 'Ya existe una caja abierta para ese usuario.'], 400);
+        }
+
+        // Si el saldo inicial es != 0 crear un movimiento por ese monto.
         $caja = Caja::create($input);
+
+        if ($caja->saldo != 0) {
+            $movimiento = new MovimientoCaja();
+            $movimiento->caja_id = $caja->id;
+            $movimiento->fecha = Carbon::now()->toDateString();
+            $movimiento->usuario_id = $input['usuario_id'];
+            $movimiento->importe = $input['saldo'];
+            $movimiento->tipo_movimiento_caja_id = 1;
+            $movimiento->observacion = 'Saldo inicial de la caja';
+            $movimiento->save();
+        }
 
         return response()->json(['error' => 'false', 'data' => $caja, 'message' => 'Caja ' . $caja->id . ' creada correctamente.']);
     }
@@ -63,6 +86,8 @@ class CajaController extends Controller
         if (is_null($caja)) {
             return response()->json(['error' => 'true', 'message' => 'Caja no encontrada.']);
         }
+
+        $caja->load(['usuario', 'movimientos.tipoMovimientoCaja']);
 
         return response()->json(['error' => 'false', 'data' => $caja, 'message' => 'Caja enviada correctamente.']);
     }
@@ -85,7 +110,7 @@ class CajaController extends Controller
 
         $validator = Validator::make($input, [
             'fecha_apertura' => 'date',
-            'fecha_apertura' => 'date',
+            'fecha_cierre' => 'date',
             'saldo' => 'numeric',
             'usuario_id' => 'numeric'
         ]);
@@ -122,5 +147,30 @@ class CajaController extends Controller
         $caja->delete();
 
         return response()->json(['error' => 'false', 'message' => 'Caja eliminada correctamente.']);
+    }
+
+    /**
+     * Cerrar una caja.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cerrarCaja($id)
+    {
+        $caja = Caja::find($id);
+
+        if (is_null($caja)) {
+            return response()->json(['error' => 'true', 'message' => 'Caja no encontrada.'], 404);
+        }
+
+        if (!is_null($caja->fecha_cierre)) {
+            return response()->json(['error' => 'true', 'message' => 'La caja ya se encuentra cerrada.'], 400);
+        }
+
+        $caja->fecha_cierre = Carbon::now()->toDateString();
+
+        $caja->save();
+
+        return response()->json(['error' => 'false', 'message' => 'Caja cerrada correctamente.']);
     }
 }
