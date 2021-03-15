@@ -7,6 +7,7 @@ import { CajasUpdateComponent } from './cajas-update/cajas-update.component';
 import { CajasMovimientosComponent } from './cajas-movimientos/cajas-movimientos.component';
 import { CajasMovimientosCreateComponent } from './cajas-movimientos-create/cajas-movimientos-create.component';
 import { CajasMovimientosViewComponent } from './cajas-movimientos-view/cajas-movimientos-view.component';
+import { CajasDeleteComponent } from './cajas-delete/cajas-delete.component';
 
 const cajasRoutes: Routes = [
   {
@@ -39,6 +40,15 @@ const cajasRoutes: Routes = [
         canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Editar caja',
+          rolesPermitidos: []
+        }
+      },
+      {
+        path: 'cajas-delete/:id',
+        component: CajasDeleteComponent,
+        canDeactivate: [],
+        data: {
+          title: 'Eliminar caja',
           rolesPermitidos: []
         }
       },

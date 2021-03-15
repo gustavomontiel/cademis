@@ -10,6 +10,7 @@ import { ColegiadosUpdateComponent } from './colegiados-update/colegiados-update
 import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create.component';
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
 import { CanDeactivateGuard } from 'src/app/shared/services/can-deactivate.guard';
+import { ColegiadosDeleteComponent } from './colegiados-delete/colegiados-delete.component';
 
 
 const colegiadosRoutes: Routes = [
@@ -88,6 +89,15 @@ const colegiadosRoutes: Routes = [
         canDeactivate: [],
         data: {
           title: 'Colegiado direcciones',
+          rolesPermitidos: []
+        }
+      },
+      {
+        path: 'colegiados-delete/:id',
+        component: ColegiadosDeleteComponent,
+        canDeactivate: [],
+        data: {
+          title: 'Eliminar colegiado',
           rolesPermitidos: []
         }
       },

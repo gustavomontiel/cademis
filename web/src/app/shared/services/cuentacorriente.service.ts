@@ -59,7 +59,6 @@ export class CuentaCorrienteService {
   }
 
   confirmarPago( cuentaCorriente: CuentaCorriente ) {
-    console.log( 'va', cuentaCorriente );
     Swal.fire( {
       text: 'Creando registro',
       onBeforeOpen: () => {
@@ -73,7 +72,6 @@ export class CuentaCorrienteService {
       .pipe(
         map( ( resp: any ) => {
           Swal.close();
-          console.log( 'vuelve', cuentaCorriente );
           return resp;
         } ),
         catchError( err => {

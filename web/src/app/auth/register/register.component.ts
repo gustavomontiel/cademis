@@ -53,8 +53,7 @@ export class RegisterComponent implements OnInit {
     this.mensaje = null;
 
     if (this.forma.invalid) {
-      console.log('error');
-      console.log(this.forma);
+      console.log('error', this.forma);
       return;
     }
 
@@ -68,7 +67,6 @@ export class RegisterComponent implements OnInit {
     this.authService.registrarUsuario(usuario)
       .subscribe(
         correcto => {
-          console.log(correcto);
           this.router.navigate(['/auth/login']);
         },
         error => {

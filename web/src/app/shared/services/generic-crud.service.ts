@@ -49,7 +49,6 @@ export class GenericCrudService {
     return this.http.get( urlApi ).pipe(
       map( ( resp: any ) => {
         Swal.close();
-        console.log('gen-crud',resp);
         return resp;
       })
     );
@@ -92,12 +91,10 @@ export class GenericCrudService {
       });
 
       const urlApi = environment.urlApiServices + url + '/' + item.id;
-      console.log('gen-crud antes', item);
       return this.http.put( urlApi, item )
       .pipe(
         map((resp: any) => {
           Swal.close();
-          console.log('gen-crud resp', resp);
           return resp;
         }),
         catchError( err => {

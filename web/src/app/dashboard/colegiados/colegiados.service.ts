@@ -52,12 +52,10 @@ export class ColegiadosService {
       });
 
       const urlApi = this.crudService.getApiUrl() + '/' + this.urlModel + '/datos/' + item.id;
-      console.log('gen-crud antes', item);
       return this.crudService.http.put( urlApi, item )
       .pipe(
         map((resp: any) => {
           Swal.close();
-          console.log('gen-crud resp', resp);
           return resp;
         }),
         catchError( err => {
@@ -83,12 +81,10 @@ export class ColegiadosService {
       });
 
       const urlApi = this.crudService.getApiUrl() + '/' + this.urlModel + '/direccion/' + item.id;
-      console.log('gen-crud antes', item);
       return this.crudService.http.put( urlApi, item )
       .pipe(
         map((resp: any) => {
           Swal.close();
-          console.log('gen-crud resp', resp);
           return resp;
         }),
         catchError( err => {

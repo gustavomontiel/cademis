@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
 
   canActivate() {
     if ( this.authService.estaLogueado() ) {
-      console.log( 'PASO EL LoginGuard');
       return true;
     } else {
       console.log( 'Bloqueado por LoginGuard' );

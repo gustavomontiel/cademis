@@ -45,7 +45,6 @@ export class TasasUpdateComponent implements OnInit {
     this.tasaService.getItemById(id)
       .subscribe(resp => {
         this.tasa = resp.data;
-        console.log(this.tasa);
         this.forma.setValue({
           fecha: this.tasa.fecha,
           tasa: this.tasa.tasa,

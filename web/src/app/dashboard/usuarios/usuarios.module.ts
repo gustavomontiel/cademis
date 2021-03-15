@@ -15,6 +15,7 @@ import { UsuariosListComponent } from './usuarios-list/usuarios-list.component';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosDeleteComponent } from './usuarios-delete/usuarios-delete.component';
 
 
 
@@ -23,7 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     UsuariosListComponent,
     CrearUsuarioComponent,
     EditarUsuarioComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsuariosDeleteComponent
   ],
   exports: [
     UsuariosListComponent,

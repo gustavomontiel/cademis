@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CajasMovimientosComponent } from './cajas-movimientos/cajas-movimientos.component';
 import { CajasMovimientosCreateComponent } from './cajas-movimientos-create/cajas-movimientos-create.component';
 import { CajasMovimientosViewComponent } from './cajas-movimientos-view/cajas-movimientos-view.component';
+import { CajasDeleteComponent } from './cajas-delete/cajas-delete.component';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { CajasMovimientosViewComponent } from './cajas-movimientos-view/cajas-mo
     CajasUpdateComponent, 
     CajasMovimientosComponent, 
     CajasMovimientosCreateComponent, 
-    CajasMovimientosViewComponent,
+    CajasMovimientosViewComponent, CajasDeleteComponent,
   ],
   imports: [
     CommonModule,

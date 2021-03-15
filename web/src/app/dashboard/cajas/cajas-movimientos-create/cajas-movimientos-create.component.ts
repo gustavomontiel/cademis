@@ -36,7 +36,6 @@ export class CajasMovimientosCreateComponent implements OnInit {
       tipo_movimiento_caja_id: new FormControl(1, Validators.required),
       importe: new FormControl(null, Validators.required),
     });
-    console.log(this.forma);
     
     this.activatedRoute.params.subscribe(params => {
       this.caja_id = params.id;
@@ -51,7 +50,6 @@ export class CajasMovimientosCreateComponent implements OnInit {
 
 
   volver() {
-    console.log('volver');
     const url = this.router.url.split('/');
     url.pop();
     url.push('movimientos');
@@ -78,7 +76,6 @@ export class CajasMovimientosCreateComponent implements OnInit {
         const item = { ... this.forma.value };
         item.usuario_id = this.authService.usuario.id;
         item.caja_id = this.caja_id;
-        console.log(item);
 
         this.cajasService.createMovimiento(item).subscribe(
           resp => {

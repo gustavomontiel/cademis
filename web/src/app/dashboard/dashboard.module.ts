@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+// import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // Angular Material
 import { MaterialModule } from '../shared/material.module';
@@ -33,7 +33,7 @@ import { TokenInterceptor } from '../shared/services/token.interceptor';
     ReactiveFormsModule,
     RouterModule,
     NgbModule,
-    SweetAlert2Module,
+    // SweetAlert2Module,
     MaterialModule,
     DashboardRoutingModule,
     LayoutModule,

@@ -47,8 +47,7 @@ export class LoginComponent implements OnInit {
     this.mensaje = null;
 
     if (this.forma.invalid) {
-      console.log('error');
-      console.log(this.forma);
+      console.log('error', this.forma);
       return;
     }
 
@@ -67,7 +66,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         correcto => {
           this.cargando = false;
-          console.log(correcto);
           this.navegar();
         },
         error => {

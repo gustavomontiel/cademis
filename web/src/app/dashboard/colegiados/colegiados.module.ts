@@ -12,8 +12,6 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { ColegiadosRoutingModule } from './colegiados-routing.module';
 
 import { ColegiadosListComponent } from './colegiados-list/colegiados-list.component';
-import { CrearColegiadoComponent } from './crear-colegiado/crear-colegiado.component';
-import { EditarColegiadoComponent } from './editar-colegiado/editar-colegiado.component';
 import { ColegiadosCreateComponent } from './colegiados-create/colegiados-create.component';
 import { ColegiadosUpdateComponent } from './colegiados-update/colegiados-update.component';
 import { ColegiadosViewComponent } from './colegiados-view/colegiados-view.component';
@@ -21,31 +19,29 @@ import { ColegiadosMasDatosComponent } from './colegiados-mas-datos/colegiados-m
 import { ColegiadosDireccionesComponent } from './colegiados-direcciones/colegiados-direcciones.component';
 import { ColegiadosEstadoCuentaComponent } from './colegiados-estado-cuenta/colegiados-estado-cuenta.component';
 import { ColegiadosMovimientosCuentaComponent } from './colegiados-movimientos-cuenta/colegiados-movimientos-cuenta.component';
+import { ColegiadosDeleteComponent } from './colegiados-delete/colegiados-delete.component';
 
 
 
 @NgModule({
   declarations: [
     ColegiadosListComponent,
-    CrearColegiadoComponent,
-    EditarColegiadoComponent,
     ColegiadosCreateComponent,
     ColegiadosUpdateComponent,
     ColegiadosViewComponent,
     ColegiadosMasDatosComponent,
     ColegiadosDireccionesComponent,
     ColegiadosEstadoCuentaComponent,
-    ColegiadosMovimientosCuentaComponent
+    ColegiadosMovimientosCuentaComponent,
+    ColegiadosDeleteComponent
   ],
   exports: [
     ColegiadosListComponent,
-    CrearColegiadoComponent,
-    EditarColegiadoComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    NgbModule,
+    // NgbModule,
     ReactiveFormsModule ,
     ColegiadosRoutingModule
   ],

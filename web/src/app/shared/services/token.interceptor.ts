@@ -10,8 +10,6 @@ import { ToastService } from 'src/app/dashboard/toasts/toast.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  // private onlineChanges$ = fromEvent( window, 'online' ).pipe( mapTo( true ) );
-  // private toast;
   private recibiendo;
 
   constructor(
@@ -33,19 +31,17 @@ export class TokenInterceptor implements HttpInterceptor {
       } );
     }
 
-    // this.toast = null;
+
+    // tiempoEspera en segundos
     let tiempoEspera = 1;
 
     const source = interval( 1000 );
     const tiempoObservable = source.subscribe( ( val ) => {
       tiempoEspera += 1;
       if ( navigator.onLine ) {
-        // tslint:disable-next-line: no-unused-expression tslint:disable-next-line: max-line-length
-        tiempoEspera === 3 && this.mostrarMsgDemora( 'Estamos teniendo demoras en la respuesta del servidor ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
-        // tslint:disable-next-line: no-unused-expression tslint:disable-next-line: max-line-length
-        tiempoEspera === 9 && this.mostrarMsgDemora( 'La demora es más alta de la esperada ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
-        // tslint:disable-next-line: no-unused-expression tslint:disable-next-line: max-line-length
-        tiempoEspera === 15 && this.mostrarMsgDemora( 'Por favor aguarde ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
+        tiempoEspera === 6 && this.mostrarMsgDemora( 'Estamos teniendo demoras en la respuesta del servidor ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
+        tiempoEspera === 12 && this.mostrarMsgDemora( 'La demora es más alta de la esperada ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
+        tiempoEspera === 18 && this.mostrarMsgDemora( 'Por favor aguarde ' + ( this.recibiendo ? '[Recibiendo]' : '[Sin respuetas]' ) );
       }
     } );
 
@@ -130,23 +126,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
   mostrarMsgDemora( msg: string ) {
 
-    // this.toast = Swal.mixin( {
-    //   toast: true,
-    //   // position: 'top-end',
-    //   showConfirmButton: false,
-    //   timer: 5000,
-    //   timerProgressBar: true,
-    //   // tslint:disable-next-line: no-shadowed-variable
-    //   onOpen: ( toast ) => {
-    //     toast.addEventListener( 'mouseenter', Swal.stopTimer );
-    //     toast.addEventListener( 'mouseleave', Swal.resumeTimer );
-    //   }
-    // } );
-
-    // this.toast.fire( {
-    //   icon: 'warning',
-    //   title: msg
-    // } );
     this.toastService.show( msg, {
       classname: 'bg-warning text-light',
       delay: 3000,

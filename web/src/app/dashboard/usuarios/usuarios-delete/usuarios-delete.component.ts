@@ -8,12 +8,13 @@ import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormErrorHandlerService } from 'src/app/shared/services/form-error-handler.service';
 
+
 @Component({
-  selector: 'app-editar-usuario',
-  templateUrl: './editar-usuario.component.html',
-  styleUrls: ['./editar-usuario.component.scss']
+  selector: 'app-usuarios-delete',
+  templateUrl: './usuarios-delete.component.html',
+  styleUrls: ['./usuarios-delete.component.scss']
 })
-export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
+export class UsuariosDeleteComponent implements OnInit {
 
   usuario: Usuario;
   forma: FormGroup;
@@ -47,6 +48,7 @@ export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
     this.usuariosService.getItemById(id)
       .subscribe(resp => {
         this.usuario = resp.data;
+
         this.forma.setValue({
           name: this.usuario.name,
           username: this.usuario.username,
@@ -58,42 +60,42 @@ export class EditarUsuarioComponent implements OnInit, PuedeDesactivar {
       );
   }
 
-  updateItem() {
-
-    if (this.forma.invalid) {
-      this.formErrorHandlerService.fromLocal(this.forma);
-      return;
-    }
+  deleteItem() {
 
     Swal.fire({
-      title: 'Guardar cambios?',
-      text: 'Confirma los cambios?',
-      icon: 'question',
+      title: "Confirmación?",
+      text: "Confirma eliminar el registro?",
+      icon: "warning",
       showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "Cancelar",
     }).then((result) => {
-
       if (result.value) {
-
-        const item = { ... this.forma.value, id: this.usuario.id } as Usuario;
-        item.password = item.password.length < 3 ? null : item.password;
-
-        this.usuariosService.updateItem(item).subscribe(
-          resp => {
-            Swal.fire(
-              'Guardado!',
-              'Los cambios fueron guardados correctamente.',
-              'success'
-            );
-            this.forma.markAsPristine();
+        this.usuariosService.deleteItem(this.usuario).subscribe(
+          (resp) => {
+            Swal.fire({
+              icon: "success",
+              title: "Eliminado!",
+              text: "La operación ha sido realizada.",
+              timer: 2000,
+            }).then(() => {
+              const url = this.router.url.split('/');
+              url.pop();
+              url.pop();
+              url.push('usuarios-list');
+              this.router.navigateByUrl( url.join('/') );
+            });
           },
-          error => {
-            (error instanceof HttpErrorResponse) && this.formErrorHandlerService.fromServer(this.forma, error);
+          (err) => {
+            Swal.fire("Error!", "La operación no pudo realizarse.", "error");
           }
         );
       }
     });
 
   }
+
+  
 
   permitirSalirDeRuta(): boolean | import('rxjs').Observable<boolean> | Promise<boolean> {
     return CanDeactivateGuard.confirmaSalirDeRuta(this.forma);

@@ -6,6 +6,7 @@ import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CanDeactivateGuard } from '../../shared/services/can-deactivate.guard';
+import { UsuariosDeleteComponent } from './usuarios-delete/usuarios-delete.component';
 
 
 const usuariosRoutes: Routes = [
@@ -17,7 +18,7 @@ const usuariosRoutes: Routes = [
     },
     children: [
       {
-        path: 'lista-usuarios',
+        path: 'usuarios-list',
         component: UsuariosListComponent,
         data: {
           title: 'Listado usuario',
@@ -25,7 +26,7 @@ const usuariosRoutes: Routes = [
         }
       },
       {
-        path: 'crear-usuario',
+        path: 'usuarios-create',
         component: CrearUsuarioComponent,
         canDeactivate: [CanDeactivateGuard],
         data: {
@@ -34,11 +35,20 @@ const usuariosRoutes: Routes = [
         }
       },
       {
-        path: 'editar-usuario/:id',
+        path: 'usuarios-update/:id',
         component: EditarUsuarioComponent,
         canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Editar usuario',
+          rolesPermitidos: []
+        }
+      },
+      {
+        path: 'usuarios-delete/:id',
+        component: UsuariosDeleteComponent,
+        canDeactivate: [],
+        data: {
+          title: 'Eliminar usuario',
           rolesPermitidos: []
         }
       },
@@ -50,8 +60,8 @@ const usuariosRoutes: Routes = [
           rolesPermitidos: []
         }
       },
-      { path: '', redirectTo: 'lista-usuarios'},
-      { path: '**', redirectTo: 'lista-usuarios'}
+      { path: '', redirectTo: 'usuarios-list'},
+      { path: '**', redirectTo: 'usuarios-list'}
 
     ]
   },

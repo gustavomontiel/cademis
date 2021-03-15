@@ -49,7 +49,6 @@ export class CajasCreateComponent implements OnInit {
       if (result.value) {
         const item = { ... this.forma.value };
         item.usuario_id = 1;
-        console.log(item);
 
         this.cajasService.createItem(item).subscribe(
           resp => {

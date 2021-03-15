@@ -33,8 +33,6 @@ export class ColegiadosViewComponent implements OnInit {
     this.colegiadosService.getItemById(id)
       .subscribe(resp => {
         this.colegiado = resp.data;
-        console.log(this.colegiado);
-        // tslint:disable-next-line: max-line-length
         this.imgURL = this.colegiado.persona.foto ? this.colegiadosService.crudService.getApiUrl() + '/' + this.colegiado.persona.foto : null;
       }
     );

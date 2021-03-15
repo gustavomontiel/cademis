@@ -34,7 +34,6 @@ export class TasasListComponent implements OnInit {
   getTableData() {
     this.tasasService.getItems()
       .subscribe(resp => {
-        console.log(resp);
         this.tableData = resp.data;
         this.dataSource = new MatTableDataSource(this.tableData);
         this.dataSource.paginator = this.paginator;

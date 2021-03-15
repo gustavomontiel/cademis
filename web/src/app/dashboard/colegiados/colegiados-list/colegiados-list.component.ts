@@ -34,7 +34,7 @@ export class ColegiadosListComponent implements OnInit {
   getTableData() {
     this.colegiadosService.getItems()
       .subscribe(resp => {
-        console.log(resp);
+
         this.tableData = resp.data;
         this.dataSource = new MatTableDataSource(this.tableData);
         this.dataSource.paginator = this.paginator;
@@ -126,38 +126,42 @@ export class ColegiadosListComponent implements OnInit {
 
   borrarItem(item) {
 
-    Swal.fire({
+    const url = this.route.url.split('/');
+    url.pop();
+    url.push('colegiados-delete');
+    this.route.navigateByUrl(url.join('/') + '/' + item.id);
 
-      title: 'Confirmación?',
-      text: 'Confirma eliminar el registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si',
-      cancelButtonText: 'Cancelar'
+    // Swal.fire({
+    //   title: 'Confirmación?',
+    //   text: 'Confirma eliminar el registro?',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Si',
+    //   cancelButtonText: 'Cancelar'
 
-    }).then((result) => {
+    // }).then((result) => {
 
-      if (result.value) {
-        this.colegiadosService.deleteItem(item)
-          .subscribe(
-            resp => {
-              Swal.fire(
-                'Eliminado!',
-                'La operación ha sido realizada.',
-                'success'
-              );
-              this.getTableData();
-            },
-            err => {
-              Swal.fire(
-                'Error!',
-                'La operación no pudo realizarse.',
-                'error'
-              );
-            }
-          );
-      }
-    });
+    //   if (result.value) {
+    //     this.colegiadosService.deleteItem(item)
+    //       .subscribe(
+    //         resp => {
+    //           Swal.fire(
+    //             'Eliminado!',
+    //             'La operación ha sido realizada.',
+    //             'success'
+    //           );
+    //           this.getTableData();
+    //         },
+    //         err => {
+    //           Swal.fire(
+    //             'Error!',
+    //             'La operación no pudo realizarse.',
+    //             'error'
+    //           );
+    //         }
+    //       );
+    //   }
+    // });
   }
 
 }

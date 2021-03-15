@@ -59,7 +59,6 @@ export class ColegiadosMasDatosComponent implements OnInit {
     this.colegiadosService.getItemById(id)
       .subscribe(resp => {
         this.colegiado = resp.data;
-        console.log(this.colegiado);
         this.forma.patchValue(this.colegiado);
       }
       );
@@ -82,7 +81,7 @@ export class ColegiadosMasDatosComponent implements OnInit {
       if (result.value) {
 
         const item = { ... this.forma.value };
-        console.log('item', item);
+
         this.colegiadosService.updateMasDatos(item).subscribe(
           resp => {
             Swal.fire(

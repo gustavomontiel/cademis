@@ -59,7 +59,6 @@ export class CajasMovimientosViewComponent implements OnInit {
   }
 
   volver() {
-    console.log('volver');
     const url = this.router.url.split('/');
     url.pop();
     url.pop();

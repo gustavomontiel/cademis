@@ -49,7 +49,6 @@ export class TasasCreateComponent implements OnInit {
 
       if (result.value) {
         const user = { ... this.forma.value };
-        console.log(user);
 
         this.tasaService.createItem(user).subscribe(
           resp => {
@@ -65,7 +64,6 @@ export class TasasCreateComponent implements OnInit {
               url.pop();
               url.push('tasas-update');
               this.router.navigateByUrl(url.join('/'));
-              console.log(url);
             });
           },
           error => {

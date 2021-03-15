@@ -63,7 +63,6 @@ export class CajasListComponent implements OnInit {
   }
 
   agregarItem() {
-    console.log('agregarItem');
     const url = this.route.url.split('/');
     url.pop();
     url.push('cajas-create');
@@ -81,38 +80,43 @@ export class CajasListComponent implements OnInit {
   
   borrarItem(item) {
 
-    Swal.fire({
+    const url = this.route.url.split('/');
+    url.pop();
+    url.push('cajas-delete');
+    this.route.navigateByUrl( url.join('/') + '/' + item.id );
 
-      title: 'Confirmación?',
-      text: 'Confirma eliminar el registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si',
-      cancelButtonText: 'Cancelar'
+    // Swal.fire({
 
-    }).then((result) => {
+    //   title: 'Confirmación?',
+    //   text: 'Confirma eliminar el registro?',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Si',
+    //   cancelButtonText: 'Cancelar'
 
-      if (result.value) {
-        this.cajasService.deleteItem(item)
-          .subscribe(
-            resp => {
-              Swal.fire(
-                'Eliminado!',
-                'La operación ha sido realizada.',
-                'success'
-              );
-              this.getTableData();
-            },
-            err => {
-              Swal.fire(
-                'Error!',
-                'La operación no pudo realizarse.',
-                'error'
-              );
-            }
-          );
-      }
-    });
+    // }).then((result) => {
+
+    //   if (result.value) {
+    //     this.cajasService.deleteItem(item)
+    //       .subscribe(
+    //         resp => {
+    //           Swal.fire(
+    //             'Eliminado!',
+    //             'La operación ha sido realizada.',
+    //             'success'
+    //           );
+    //           this.getTableData();
+    //         },
+    //         err => {
+    //           Swal.fire(
+    //             'Error!',
+    //             'La operación no pudo realizarse.',
+    //             'error'
+    //           );
+    //         }
+    //       );
+    //   }
+    // });
   }
 
   verMovimientos(id: string) {

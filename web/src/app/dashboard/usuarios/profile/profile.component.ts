@@ -49,10 +49,9 @@ export class ProfileComponent implements OnInit {
   }
 
   cambiarPassword() {
-    console.log('cambiarPassword()');
+
     if (this.formPassword.invalid) {
-      console.log('error');
-      console.log(this.formDatos);
+      console.log('error', this.formDatos);
       return;
     }
     const usuario = {
@@ -66,8 +65,7 @@ export class ProfileComponent implements OnInit {
     this.mensaje = null;
 
     if (this.formDatos.invalid) {
-      console.log('error');
-      console.log(this.formDatos);
+      console.log('error', this.formDatos);
       return;
     }
 

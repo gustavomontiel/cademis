@@ -37,7 +37,6 @@ export class AuthService {
     const url = environment.urlApiServices + '/auth/register';
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
-        console.log(resp);
         return true;
       }),
       catchError(err => {
@@ -53,7 +52,6 @@ export class AuthService {
     const url = environment.urlApiServices + '/auth/passrecovery';
     return this.http.post(url, email).pipe(
       map((resp: any) => {
-        console.log(resp);
         return resp;
       }),
       catchError(err => {
@@ -70,7 +68,6 @@ export class AuthService {
 
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
-        console.log('login', resp);
         sessionStorage.setItem('token', resp.data.token);
         localStorage.setItem('usuario', JSON.stringify(resp.data.user));
         this.inicializar();

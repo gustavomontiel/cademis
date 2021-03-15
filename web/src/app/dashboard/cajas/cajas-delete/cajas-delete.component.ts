@@ -8,12 +8,14 @@ import { Caja } from "../../models/caja.model";
 import { MovimientoCaja } from '../../models/movimiento-caja.model';
 import { CajasService } from "../cajas.service";
 
+
 @Component({
-  selector: "app-cajas-movimientos",
-  templateUrl: "./cajas-movimientos.component.html",
-  styleUrls: ["./cajas-movimientos.component.scss"],
+  selector: 'app-cajas-delete',
+  templateUrl: './cajas-delete.component.html',
+  styleUrls: ['./cajas-delete.component.scss']
 })
-export class CajasMovimientosComponent implements OnInit {
+export class CajasDeleteComponent implements OnInit {
+
   caja: Caja;
 
   tableData: MovimientoCaja[];
@@ -122,5 +124,38 @@ export class CajasMovimientosComponent implements OnInit {
     });
   }
 
+  deleteItem() {
+
+      Swal.fire({
+        title: "Confirmación?",
+        text: "Confirma eliminar el registro?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.value) {
+          this.cajasService.deleteItem(this.caja).subscribe(
+            (resp) => {
+              Swal.fire({
+                icon: "success",
+                title: "Eliminado!",
+                text: "La operación ha sido realizada.",
+                timer: 2000,
+              }).then(() => {
+                const url = this.router.url.split('/');
+                url.pop();
+                url.push('cajas-list');
+                this.router.navigateByUrl( url.join('/') );
+              });
+            },
+            (err) => {
+              Swal.fire("Error!", "La operación no pudo realizarse.", "error");
+            }
+          );
+        }
+      });
+
+  }
 
 }

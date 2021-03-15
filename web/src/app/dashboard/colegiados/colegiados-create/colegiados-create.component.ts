@@ -47,9 +47,6 @@ export class ColegiadosCreateComponent implements OnInit {
       estado_id: new FormControl(1),
     });
 
-    this.forma.valueChanges.subscribe(() => {
-      console.log(this.forma);
-    });
   }
 
   createItem() {
@@ -87,8 +84,6 @@ export class ColegiadosCreateComponent implements OnInit {
         formData.append(`persona[cuit_cuil]`, this.forma.get('persona.cuit_cuil').value);
         formData.append(`persona[foto]`, this.forma.get('persona.foto').value);
 
-        console.log('formData', JSON.stringify(formData));
-
         this.colegiadosService.createItem(formData).subscribe(
           resp => {
             this.forma.markAsPristine();
@@ -102,7 +97,6 @@ export class ColegiadosCreateComponent implements OnInit {
               url.pop();
               url.push('editar-usuario');
               this.router.navigateByUrl(url.join('/'));
-              console.log(url);
             });
           },
           error => {
@@ -119,7 +113,6 @@ export class ColegiadosCreateComponent implements OnInit {
 
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(event);
       this.forma.get(field).setValue(file);
 
       const fileReader = new FileReader();

@@ -48,7 +48,6 @@ export class ColegiadosEstadoCuentaComponent implements OnInit {
     this.cuentaCorrienteService.cuentaColegiado( id )
       .subscribe( resp => {
         this.cuentaCorriente = resp.data;
-        console.log( this.cuentaCorriente );
         this.agregarFormArrayMovimientos();
       }
       );

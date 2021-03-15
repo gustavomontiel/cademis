@@ -60,7 +60,6 @@ export class ColegiadosUpdateComponent implements OnInit {
     this.colegiadosService.getItemById(id)
       .subscribe(resp => {
         this.colegiado = resp.data;
-        console.log(this.colegiado);
         this.forma.patchValue(this.colegiado);
         this.imgURL = this.colegiado.persona.foto ? this.colegiadosService.crudService.getApiUrl() + '/' + this.colegiado.persona.foto : null;
       }
@@ -122,7 +121,6 @@ export class ColegiadosUpdateComponent implements OnInit {
               url.pop();
               url.push('colegiados');
               this.router.navigateByUrl(url.join('/'));
-              console.log(url);
             });
           },
           error => {

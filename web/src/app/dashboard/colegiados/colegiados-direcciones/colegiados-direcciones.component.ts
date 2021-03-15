@@ -62,11 +62,8 @@ export class ColegiadosDireccionesComponent implements OnInit {
     this.colegiadosService.getItemById(id)
       .subscribe(resp => {
         this.colegiado = resp.data;
-        console.log(this.colegiado);
         this.forma.patchValue({ id: this.colegiado.id });
-        // tslint:disable-next-line: no-unused-expression
         this.colegiado.domicilio_legal && this.forma.patchValue({ domicilio_legal: this.colegiado.domicilio_legal });
-        // tslint:disable-next-line: no-unused-expression
         this.colegiado.domicilio_real && this.forma.patchValue({ domicilio_real: this.colegiado.domicilio_real });
       }
       );
@@ -143,8 +140,6 @@ export class ColegiadosDireccionesComponent implements OnInit {
 
     // tslint:disable-next-line: no-unused-expression
     this.cambioDomicilioReal() && (item.domicilio_real = this.forma.get('domicilio_real').value);
-
-    console.log('updateItem', item);
 
     if (this.forma.invalid || !(this.forma.dirty && (this.cambioDomicilioReal() || this.cambioDomicilioLegal()))) {
       this.formErrorHandlerService.fromLocal(this.forma);
