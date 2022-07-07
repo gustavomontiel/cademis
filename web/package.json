@@ -32,7 +32,7 @@
     "jquery": "^3.5.1",
     "jquery-ui-dist": "^1.12.1",
     "knob": "^1.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "rxjs": "~6.6.6",
     "summernote": "^0.8.12",
     "sweetalert2": "^9.17.2",
